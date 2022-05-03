@@ -6,7 +6,6 @@
 | --- | --- |
 | Sebastian Bailey | sbailey9@utas.edu.au |
 | Yang Feng | yfeng10@utas.edu.au |
-| Jourdan Haines | jourdan.haines@utas.edu.au |
 | Villagracia Jyle Rhon | jylev@utas.edu.au |
 
 ## Client Details

@@ -17,9 +17,6 @@ class _SecLoginState extends State<SecLogin> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          'Email',
-        ),
         SizedBox(height: 10.0),
         Container(
           alignment: Alignment.center,
@@ -28,11 +25,8 @@ class _SecLoginState extends State<SecLogin> {
             keyboardType: TextInputType.emailAddress,
             onChanged: (value) => email = value,
             decoration: InputDecoration(
-              border: InputBorder.none,
-              focusedBorder:
-                  OutlineInputBorder(borderRadius: BorderRadius.horizontal()),
-              contentPadding: EdgeInsets.only(top: 14.0),
               hintText: 'Enter your Email',
+              prefixIcon: Icon(Icons.email),
             ),
           ),
         )
@@ -44,9 +38,6 @@ class _SecLoginState extends State<SecLogin> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          'Password',
-        ),
         SizedBox(height: 10.0),
         Container(
           alignment: Alignment.center,
@@ -55,11 +46,8 @@ class _SecLoginState extends State<SecLogin> {
             obscureText: true,
             onChanged: (value) => password = value,
             decoration: InputDecoration(
-              border: InputBorder.none,
-              focusedBorder:
-                  OutlineInputBorder(borderRadius: BorderRadius.horizontal()),
-              contentPadding: EdgeInsets.only(top: 14.0),
               hintText: 'Enter your Password',
+              prefixIcon: Icon(Icons.password),
             ),
           ),
         )
@@ -138,7 +126,9 @@ class _SecLoginState extends State<SecLogin> {
                       Text(
                         'Security Guard',
                         style: TextStyle(
+                          color: Colors.blue,
                           fontSize: 30.0,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                       SizedBox(height: 30.0),

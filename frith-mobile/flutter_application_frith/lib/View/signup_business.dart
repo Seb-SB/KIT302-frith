@@ -68,7 +68,7 @@ class _SignUpBusinessState extends State<SignUpBusiness> {
               child: Container(
                 child: TextField(
                     decoration: InputDecoration(
-                  hintText: 'Fist name of Manager',
+                  hintText: 'First name of Manager',
                   prefixIcon: Icon(Icons.person),
                 )),
               ),

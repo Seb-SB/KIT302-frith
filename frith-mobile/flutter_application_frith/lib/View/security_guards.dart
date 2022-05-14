@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/src/material/bottom_navigation_bar.dart';
+import 'package:flutter_application_frith/ui/View/phone_page.dart';
+import 'package:flutter_application_frith/ui/notepad/notepad_homepage.dart';
+import 'package:flutter_application_frith/ui/torch/flashlight_page.dart';
+import '../emergency/emergencyphone.dart';
 
-
-class SecurityGuards extends StatefulWidget {
-  const SecurityGuards({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<SecurityGuards> createState() => _SecurityGuardsState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _SecurityGuardsState extends State<SecurityGuards> {
+class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
@@ -128,56 +131,83 @@ class _SecurityGuardsState extends State<SecurityGuards> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                    color: Colors.blueAccent,
-                    width: 150,
-                    height: 100,
-                    child: Text("Flashlight",
-                      style: TextStyle(
-                          fontSize: 26,
-                          color: Colors.white,
-                          textBaseline: TextBaseline.ideographic,
-                          fontWeight: FontWeight.bold,),
-                    )),
-                Container(
-                    color: Colors.blueAccent,
-                    width: 150,
-                    height: 100,
-                    child: Text("Notepad",
-                      style: TextStyle(
-                          fontSize: 26,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,),
-                    )),
+                GestureDetector(
+                  onTap: (){
+                    //
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const FlashLghtPage()));
+                  },
+                  child: Container(
+                      color: Colors.blueAccent,
+                      width: 150,
+                      height: 100,
+                      child: Icon(
+                        Icons.lightbulb,
+                        color: Colors.white,
+                        size: 80,
+                      )
+                      )),
+
+                GestureDetector(
+                  onTap: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const NotepadPage(title: '',)));
+                  },
+                  child: Container(
+                      color: Colors.blueAccent,
+                      width: 150,
+                      height: 100,
+                      child: Icon(
+                        Icons.event_note_rounded,
+                        color: Colors.white,
+                        size: 80,
+                      ))
+
+                ),
               ],
             ),
             SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                  //alignment: Alignment.centerLeft,
-                    color: Colors.blueAccent,
-                    width: 150,
-                    height: 100,
-                    child: Text("Incident Report",
-                      style:TextStyle(
-                          fontSize: 26,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const EmergencyPhone(phone: '000',)));
+                  },
+                  child: Container(
+                    //alignment: Alignment.centerLeft,
+                      color: Colors.blueAccent,
+                      width: 150,
+                      height: 100,
+                      child: Icon(
+                          Icons.warning_amber_outlined,
                           color: Colors.white,
-                          fontWeight: FontWeight.bold,),
-                    )),
-                Container(
-                  // alignment: Alignment.centerRight,
+                          size: 80,
+                      )),
+                ),
+                GestureDetector(
+                  onTap: (){
 
-                    width: 150,
-                    height: 100,
-                    color: Colors.blueAccent,
-                    child: Text("Request Backup",
-                      style: TextStyle(
-                          fontSize: 26,
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const PhonePage()));
+                  },
+                  child: Container(
+                    // alignment: Alignment.centerRight,
+
+                      width: 150,
+                      height: 100,
+                      color: Colors.blueAccent,
+                      child:Icon(
+                          Icons.time_to_leave_outlined, //request back up
                           color: Colors.white,
-                        fontWeight: FontWeight.bold,),
-                    )),
+                          size: 80,
+                      )),
+                ),
               ],
             ),
             SizedBox(height: 30),
@@ -189,24 +219,21 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                     color: Colors.blueAccent,
                     width: 150,
                     height: 100,
-                    child: Text("Information Pool",
-                      style: TextStyle(
-                          fontSize: 26,
-                          color: Colors.white,
-                        fontWeight: FontWeight.bold,),
-                    )),
+                    child: Icon(
+                      Icons.note,
+                      color: Colors.white,
+                      size: 80, )//"Incident Report"
+                    ),
                 Container(
                   //alignment: Alignment.centerRight,
 
                     width: 150,
                     height: 100,
                     color: Colors.blueAccent,
-                    child: Text("Start/end Shift",
-                      style: TextStyle(
-                          fontSize: 26,
-                          color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: Icon(
+                      Icons.access_time_outlined, //start/end/shift
+                      color: Colors.white,
+                      size: 80,
                     )),
               ],
             ),

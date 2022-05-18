@@ -39,27 +39,6 @@ class _NewNoteState extends State<NewNote> {
               child: Container(
                 child: TextField(
                     decoration: InputDecoration(
-                      hintText: 'First name',
-                      // ignore: prefer_const_constructors
-                      prefixIcon: Icon(Icons.person),
-                    )),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Container(
-                child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Last name',
-                      prefixIcon: Icon(Icons.person),
-                    )),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Container(
-                child: TextField(
-                    decoration: InputDecoration(
                       hintText: 'Title',
                       prefixIcon: Icon(Icons.title),
                     )),
@@ -79,14 +58,13 @@ class _NewNoteState extends State<NewNote> {
               padding: const EdgeInsets.all(5.0),
               child: Container(
                 child: TextField(
-                    obscureText: true,
+                    //obscureText: true,
                     decoration: InputDecoration(
                       hintText: 'Details',
                       prefixIcon: Icon(Icons.details),
                     )),
               ),
             ),
-
 
             Container(
               child: Row(
@@ -108,4 +86,5 @@ class _NewNoteState extends State<NewNote> {
     );
   }
 }
+
 

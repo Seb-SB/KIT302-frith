@@ -9,7 +9,7 @@ class FlashLghtPage extends StatefulWidget {
 }
 
 class _FlashLghtPageState extends State<FlashLghtPage> {
-  bool light = false;
+  bool light = true;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class _FlashLghtPageState extends State<FlashLghtPage> {
                   setState(() {
                     light = !light;
                     //TODO turn on flashlight
-                    FlashMode.torch;
+                    // FlashMode.torch;
 
                   });
                 },

@@ -15,114 +15,20 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
         title: Text("Security Guards"),
         actions: [
-          IconButton(
-              onPressed: () {
-                //
-                print("button is pressed!");
-              },
-              icon: Icon(Icons.camera_alt_sharp)),
+          _popupMenuButton(context)
 
-          IconButton(
-              onPressed: () {
-                //
-                print("button is pressed!");
-              },
-              icon: Icon(Icons.more_horiz)),
+
         ],
       ),
-      drawer: Drawer(
-            child: Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    //crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
-    Column(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-      IconButton(
-          onPressed: () {
-            //
-            print("button is pressed!");
-          },
-          icon: Icon(Icons.person)),
-    Container(
-    color: Colors.blueAccent,
-    width: 300,
-    height: 50,
-    child: Text("Home",
-    style: TextStyle(
-    fontSize: 15,
-    color: Colors.white,
-    fontWeight: FontWeight.bold,),
-    )),
-      SizedBox(height: 30),
-    Container(
-    color: Colors.blueAccent,
-    width: 300,
-    height: 50,
-    child: Text("Profile",
-    style: TextStyle(
-    fontSize: 15,
-    color: Colors.white,
-    fontWeight: FontWeight.bold,),
-    )),
-      SizedBox(height: 30),
-      Container(
-          color: Colors.blueAccent,
-          width: 300,
-          height: 50,
-          child: Text("Settings",
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,),
-          )),
-      SizedBox(height: 30),
-      Container(
-          color: Colors.blueAccent,
-          width: 300,
-          height: 50,
-          child: Text("Feedback",
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,),
-          )),
-      SizedBox(height: 30),
-      Container(
-          color: Colors.blueAccent,
-          width: 300,
-          height: 50,
-          child: Text("Share",
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,),
-          )),
-      SizedBox(height: 30),
-      Container(
-          color: Colors.blueAccent,
-          width: 300,
-          height: 50,
-          child: Text("Logout",
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,),
-          )),
-    ],
-    ),
-    ],
-    ),
-    ),
 
-
-        //bottomNavigationBar: BottomNavigationBar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -245,4 +151,59 @@ class _HomePageState extends State<HomePage> {
 
   }
 
+  PopupMenuButton _popupMenuButton(BuildContext context) {
+    return    PopupMenuButton(
+
+
+      itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+        PopupMenuItem(
+          onTap: (){
+            //
+            print("Logout");
+
+
+          },
+          child:  Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              GestureDetector(
+                  onTap:(){
+                    showDialog(context: context, builder: (context) {
+                      return   AlertDialog(
+                        title: Text("Notice"),
+                        content: Text("Are you sure you would like to Logout?"),
+                        actions: <Widget>[
+                          TextButton(
+
+                            child: Text("No"),
+                            onPressed: () => Navigator.of(context).pop(), //关闭对话框SecLogin
+                            // onPressed: () {
+                            //   // Navigator.push(
+                            //   //    context,
+                            //   //  MaterialPageRoute(builder: (context) => const (HomePage))); //go back to security login page SecLogin
+                            // },
+                          ),
+                          TextButton(
+                            child: Text("Yes"),
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                 MaterialPageRoute(builder: (context) =>SecLogin())); //go back to security login page SecLogin
+                            },
+                          ),
+                        ],
+                      );
+                    });
+                  },
+                  child: new Text('Logout')),
+            ],
+
+          ),
+          //value: 'logout',
+
+        ),
+      ],
+    );
+  }
 }
+

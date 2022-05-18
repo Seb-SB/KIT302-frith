@@ -13,7 +13,7 @@ class EmergencyPhone extends StatefulWidget {
 
 class _EmergencyPhoneState extends State<EmergencyPhone> {
   String get phone => '000';
-  //电话
+  //call 000
   String url  = "tel:000";
 
   @override
@@ -24,11 +24,28 @@ class _EmergencyPhoneState extends State<EmergencyPhone> {
           ),
       body: Container(
           child: GestureDetector(
-              onTap: () {
-                //拨打电话
-              launch(url);
-              },
-              child: Text("Call Emergency..."))),
+              child: AlertDialog(
+                title: Text("Notice"),
+                content: Text("Are you sure you would like to call Emergency?"),
+                actions: <Widget>[
+                  TextButton(
+
+                    child: Text("No"),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                  TextButton(
+                    child: Text("Yes"),
+                    onPressed: () {
+                      launch(url);
+                      //Navigator.push(
+                      //   context,
+                      //    MaterialPageRoute(builder: (context) => const (SecLogin))); //go back to security login page SecLogin
+                   },
+                  ),
+                ],
+              ), // This trailing comma makes auto-formatting nicer for build methods.
+            ),
+          ),
     );
   }
 }

@@ -87,9 +87,6 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                   GestureDetector(
                     onTap: () {
                       launch('tel:000');
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(builder: (context) => const EmergencyPhone(phone: '000',)));
                     },
                     child: Container(
                         //alignment: Alignment.centerLeft,
@@ -181,11 +178,6 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                                 child: Text("No"),
                                 onPressed: () =>
                                     Navigator.of(context).pop(), 
-                                // onPressed: () {
-                                //   // Navigator.push(
-                                //   //    context,
-                                //   //  MaterialPageRoute(builder: (context) => const (HomePage))); //go back to security login page SecLogin
-                                // },
                               ),
                               TextButton(
                                 child: Text("Yes"),

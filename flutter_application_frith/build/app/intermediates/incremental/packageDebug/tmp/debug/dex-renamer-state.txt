@@ -1,0 +1,4 @@
+#Fri May 20 13:58:33 AEST 2022
+base.0=D\:\\KIT301-frith-db\\KIT301-Frith\\frith-mobile\\flutter_application_frith\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

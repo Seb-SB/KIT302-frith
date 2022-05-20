@@ -38,7 +38,10 @@ dependencies:
   dio: ^4.0.6
   url_launcher: ^6.1.2
   provider: ^6.0.2
-
+  #If provider: ^6.0.2 not work, try provider: any
+  #provider: any 
+  torch_light: ^0.4.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

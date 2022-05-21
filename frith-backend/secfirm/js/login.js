@@ -12,14 +12,14 @@ $(document).ready(function () {
 
         $.ajax({
             type: "post",
-            url: "../api/v1/dispatcher.php/sysadmin/login",
+            url: "../api/v1/dispatcher.php/secfirm/login", //change from sysadmin to secfirm
             data: "json=" + encodeURIComponent(JSON.stringify(dataObj)),
             success: function (data) {
                 if (data !== "false") {
                     $.ajax({
                         type: "post",
                         url: "../session_engine.php",
-                        data: { "action": "login", "id": data.AdministratorID, "email": dataObj["email"] },
+                        data: { "action": "login", "id": data.FirmID, "email": dataObj["email"] },
                         success: function (data) {
                             window.location = "index.php";
                         },

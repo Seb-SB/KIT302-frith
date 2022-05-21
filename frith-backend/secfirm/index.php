@@ -1,5 +1,9 @@
 <?php
+    include("../session.php");
 
+    if($_SESSION["email"] === "") {
+        header("location:login.php");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -8,6 +12,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home | Security Guard</title>
 
         <!--Google Fonts-->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,15 +32,11 @@
 
         <link rel="stylesheet" href="css/style.css">
 
-        <title>Frith</title>
+        <script src="js/index.js"></script>
     </head>
+
     <body>
-    <main class="d-flex align-items-center vh-100">
-            <div class="container text-center w-25">
-                <h2 class="font-weight-bold">Project Frith</h2>
-                <div class="d-flex justify-content-center text-danger mb-1" id="results"></div>
-                <a href="http://localhost/frith/secfirm/login.php" class="btn btn-primary">Security Firm</a>
-            </div>
-        </main>
+        <p>Welcome, <b><?php echo $_SESSION["email"] ?></b>.</p>
+        <a role="button" class="btn btn-primary" data-action="logout">Logout</button>
     </body>
 </html>

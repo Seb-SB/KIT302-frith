@@ -5,6 +5,7 @@ import 'package:flutter_application_frith/View/security_login.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../emergency/emergencyphone.dart';
 import '../notepad/notepad_homepage.dart';
+import 'package:torch_light/torch_light.dart';
 
 class SecurityGuards extends StatefulWidget {
   const SecurityGuards({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class _SecurityGuardsState extends State<SecurityGuards> {
           title: Text("Security Guards"),
           actions: [_popupMenuButton(context)],
         ),
-        body: Center(
+               body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             //crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,13 +35,12 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                   //flashlight function
                   GestureDetector(
                       onTap: () {
-                        setState(() {
-                          light = !light;
-                        });
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => const FlashLghtPage()));
+                          setState(() {
+                            light = !light;
+                              //TODO turn on flashlight
+                            TorchLight.enableTorch;
+
+                          });
                       },
                       child: Container(
                         color: Colors.blueAccent,
@@ -87,9 +87,6 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                   GestureDetector(
                     onTap: () {
                       launch('tel:000');
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(builder: (context) => const EmergencyPhone(phone: '000',)));
                     },
                     child: Container(
                         //alignment: Alignment.centerLeft,
@@ -104,12 +101,10 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      /*
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>  PhonePage()));
-                              */
+                              builder: (context) => const PhonePage()));
                     },
                     child: Container(
                         // alignment: Alignment.centerRight,
@@ -182,12 +177,7 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                               TextButton(
                                 child: Text("No"),
                                 onPressed: () =>
-                                    Navigator.of(context).pop(), //SecLogin
-                                // onPressed: () {
-                                //   // Navigator.push(
-                                //   //    context,
-                                //   //  MaterialPageRoute(builder: (context) => const (HomePage))); //go back to security login page SecLogin
-                                // },
+                                    Navigator.of(context).pop(), 
                               ),
                               TextButton(
                                 child: Text("Yes"),
@@ -211,188 +201,4 @@ class _SecurityGuardsState extends State<SecurityGuards> {
       ],
     );
   }
-}
-
-Widget build(BuildContext context) {
-  return Scaffold(
-      appBar: AppBar(
-        title: Text("Security Guards"),
-        actions: [_popupMenuButton(context)],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          //crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                GestureDetector(
-                    onTap: () {
-                      /*
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const FlashLghtPage()));
-                        */
-                    },
-                    child: Container(
-                        color: Colors.blueAccent,
-                        width: 150,
-                        height: 100,
-                        child: Icon(
-                          Icons.lightbulb,
-                          color: Colors.white,
-                          size: 80,
-                        ))),
-                GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const NotepadPage(
-                                    title: '',
-                                  )));
-                    },
-                    child: Container(
-                        color: Colors.blueAccent,
-                        width: 150,
-                        height: 100,
-                        child: Icon(
-                          Icons.event_note_rounded,
-                          color: Colors.white,
-                          size: 80,
-                        ))),
-              ],
-            ),
-            SizedBox(height: 30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const EmergencyPhone(
-                                  phone: '000',
-                                )));
-                  },
-                  child: Container(
-                      //alignment: Alignment.centerLeft,
-                      color: Colors.blueAccent,
-                      width: 150,
-                      height: 100,
-                      child: Icon(
-                        Icons.warning_amber_outlined,
-                        color: Colors.white,
-                        size: 80,
-                      )),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    /*
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const PhonePage()));
-                        */
-                  },
-                  child: Container(
-                      // alignment: Alignment.centerRight,
-
-                      width: 150,
-                      height: 100,
-                      color: Colors.blueAccent,
-                      child: Icon(
-                        Icons.time_to_leave_outlined, //request back up
-                        color: Colors.white,
-                        size: 80,
-                      )),
-                ),
-              ],
-            ),
-            SizedBox(height: 30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                    // alignment: Alignment.centerLeft,
-                    color: Colors.blueAccent,
-                    width: 150,
-                    height: 100,
-                    child: Icon(
-                      Icons.note,
-                      color: Colors.white,
-                      size: 80,
-                    ) //"Incident Report"
-                    ),
-                Container(
-                    //alignment: Alignment.centerRight,
-
-                    width: 150,
-                    height: 100,
-                    color: Colors.blueAccent,
-                    child: Icon(
-                      Icons.access_time_outlined, //start/end/shift
-                      color: Colors.white,
-                      size: 80,
-                    )),
-              ],
-            ),
-          ],
-        ),
-      ));
-}
-
-PopupMenuButton _popupMenuButton(BuildContext context) {
-  return PopupMenuButton(
-    itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-      PopupMenuItem(
-        onTap: () {
-          //
-          print("Logout");
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            GestureDetector(
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: Text("Notice"),
-                          content:
-                              Text("Are you sure you would like to Logout?"),
-                          actions: <Widget>[
-                            TextButton(
-                              child: Text("No"),
-                              onPressed: () =>
-                                  Navigator.of(context).pop(), //关闭对话框SecLogin
-                              // onPressed: () {
-                              //   // Navigator.push(
-                              //   //    context,
-                              //   //  MaterialPageRoute(builder: (context) => const (HomePage))); //go back to security login page SecLogin
-                              // },
-                            ),
-                            TextButton(
-                              child: Text("Yes"),
-                              onPressed: () {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            SecLogin())); //go back to security login page SecLogin
-                              },
-                            ),
-                          ],
-                        );
-                      });
-                },
-                child: new Text('Logout')),
-          ],
-        ),
-        //value: 'logout',
-      ),
-    ],
-  );
 }

@@ -13,9 +13,7 @@ import 'notepad_details.dart';
 //}
 
 class NotepadPage extends StatefulWidget {
-  const NotepadPage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const NotepadPage({Key? key}) : super(key: key);
 
   @override
   _NotepadPageState createState() => _NotepadPageState();

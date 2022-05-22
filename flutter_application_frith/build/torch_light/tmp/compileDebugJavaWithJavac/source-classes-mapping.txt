@@ -1,0 +1,2 @@
+com/svprdga/torchlight/BuildConfig.java
+ com.svprdga.torchlight.BuildConfig

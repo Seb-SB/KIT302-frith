@@ -12,15 +12,15 @@
 12         to allow setting breakpoints, to provide hot reload, etc.
 13    -->
 14    <uses-permission android:name="android.permission.INTERNET" />
-14-->D:\Frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:3:4-65
-14-->D:\Frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:3:21-63
+14-->D:\KIT301-frith-db\KIT301-Frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:3:4-65
+14-->D:\KIT301-frith-db\KIT301-Frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:3:21-63
 15    <uses-permission android:name="android.permission.FLASHLIGHT" />
-15-->D:\Frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:4:4-68
-15-->D:\Frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:4:21-65
+15-->D:\KIT301-frith-db\KIT301-Frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:4:4-68
+15-->D:\KIT301-frith-db\KIT301-Frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:4:21-65
 16
 17    <uses-feature android:name="android.hardware.camera.flash" />
-17-->D:\Frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:5:4-65
-17-->D:\Frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:5:18-62
+17-->D:\KIT301-frith-db\KIT301-Frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:5:4-65
+17-->D:\KIT301-frith-db\KIT301-Frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:5:18-62
 18
 19    <application
 20        android:name="android.app.Application"
@@ -64,13 +64,13 @@
 57            android:value="2" />
 58
 59        <activity
-59-->[:url_launcher_android] D:\Frith\flutter_application_frith\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-11:74
+59-->[:url_launcher_android] D:\KIT301-frith-db\KIT301-Frith\flutter_application_frith\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-11:74
 60            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
-60-->[:url_launcher_android] D:\Frith\flutter_application_frith\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-74
+60-->[:url_launcher_android] D:\KIT301-frith-db\KIT301-Frith\flutter_application_frith\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-74
 61            android:exported="false"
-61-->[:url_launcher_android] D:\Frith\flutter_application_frith\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-37
+61-->[:url_launcher_android] D:\KIT301-frith-db\KIT301-Frith\flutter_application_frith\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-37
 62            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-62-->[:url_launcher_android] D:\Frith\flutter_application_frith\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-71
+62-->[:url_launcher_android] D:\KIT301-frith-db\KIT301-Frith\flutter_application_frith\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-71
 63
 64        <uses-library
 64-->[androidx.window:window:1.0.0-beta04] C:\Users\User\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40

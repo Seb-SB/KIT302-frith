@@ -64,7 +64,7 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                           light = !light;
 
                           if (light) {
-                            _turnOffLight();
+                            _turnOnLight();
                           } else {
                             _turnOffLight();
                           }

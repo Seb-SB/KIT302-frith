@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_frith/View/home_page.dart';
 import 'package:flutter_application_frith/View/security_login.dart';
 import 'package:flutter_application_frith/View/business_login.dart';
-import 'package:flutter_application_frith/notepad/notepad.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -17,14 +14,35 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => NotepadModel(),
-      child: MaterialApp(
-        title: 'Frith',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('Frith'),
+      ),
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(
+              child: const Text('Security Guard'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SecLogin()),
+                );
+              },
+            ),
+            ElevatedButton(
+              child: const Text('Business Owner'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const BusLogin()),
+                );
+              },
+            ),
+          ],
         ),
-        home: HomePage(),
       ),
     );
   }

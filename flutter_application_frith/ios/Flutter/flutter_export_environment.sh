@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
 export "FLUTTER_ROOT=C:\Users\User\flutter"
-export "FLUTTER_APPLICATION_PATH=D:\KIT301-frith-db\KIT301-Frith\flutter_application_frith"
+export "FLUTTER_APPLICATION_PATH=D:\KIT301-frith-db\KIT301-Frith\frith-mobile\flutter_application_frith"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_TARGET=lib\main.dart"
 export "FLUTTER_BUILD_DIR=build"

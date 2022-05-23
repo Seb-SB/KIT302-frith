@@ -66,6 +66,9 @@ class _NotepadDetailsState extends State<NotepadDetails> {
                                   onPressed: () {
                                     if (_formKey.currentState?.validate() ??
                                         false) {
+                                      //TODO: save the movie
+
+                                      //update the movie object
                                       notepad.title = titleController.text;
                                       notepad.date = int.parse(dateController
                                           .text); //good code would validate these

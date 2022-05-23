@@ -17,6 +17,31 @@ class SecurityGuards extends StatefulWidget {
 class _SecurityGuardsState extends State<SecurityGuards> {
   bool light = false;
 
+  Future<bool> _checkIfLightExists() async {
+    try {
+      final isTorchAvailable = await TorchLight.isTorchAvailable();
+      return Future.value(isTorchAvailable);
+    } on Exception catch (_) {
+      return Future.value(false);
+    }
+  }
+
+  Future<void> _turnOnLight() async {
+    try {
+      await TorchLight.enableTorch();
+    } on Exception catch (_) {
+      print("unable to turn on light");
+    }
+  }
+
+  Future<void> _turnOffLight() async {
+    try {
+      await TorchLight.disableTorch();
+    } on Exception catch (_) {
+      print("unable to turn off light");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +49,7 @@ class _SecurityGuardsState extends State<SecurityGuards> {
           title: Text("Security Guards"),
           actions: [_popupMenuButton(context)],
         ),
-               body: Center(
+        body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             //crossAxisAlignment: CrossAxisAlignment.center,
@@ -35,12 +60,16 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                   //flashlight function
                   GestureDetector(
                       onTap: () {
-                          setState(() {
-                            light = !light;
-                              //TODO turn on flashlight
-                            TorchLight.enableTorch;
+                        setState(() {
+                          light = !light;
 
-                          });
+                          if (light) {
+                            _turnOnLight();
+                          } else {
+                            _turnOffLight();
+                          }
+                          //TODO turn on flashlight
+                        });
                       },
                       child: Container(
                         color: Colors.blueAccent,
@@ -65,7 +94,8 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const NotepadPage(
-                                      title: '',
+
+                                    ///title: '',
                                     )));
                       },
                       child: Container(
@@ -101,10 +131,11 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                   ),
                   GestureDetector(
                     onTap: () {
+                      /*
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const PhonePage()));
+                              builder: (context) => const PhonePage()));*/
                     },
                     child: Container(
                         // alignment: Alignment.centerRight,
@@ -176,8 +207,7 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                             actions: <Widget>[
                               TextButton(
                                 child: Text("No"),
-                                onPressed: () =>
-                                    Navigator.of(context).pop(), 
+                                onPressed: () => Navigator.of(context).pop(),
                               ),
                               TextButton(
                                 child: Text("Yes"),

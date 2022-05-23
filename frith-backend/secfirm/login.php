@@ -37,6 +37,11 @@
                 <h2 class="font-weight-bold">Project Frith</h2>
                 <h4 class="font-weight-bold mb-3">Security Firm</h4>
                 <div class="d-flex justify-content-center text-danger mb-1" id="results"></div> 
+                <?php
+                    if(isset($_GET['error']) == true) {
+                        echo '<p align="center" style="color:red">Username/Password is invalid</p>';
+                    }
+                ?>
                 <form id="loginForm" action="login_process.php" method="post">
                     <div class="form-group">
                         <input type="email" class="form-control form-control-lg mb-3" name="email" placeholder="Email address" required>

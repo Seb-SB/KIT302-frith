@@ -19,7 +19,7 @@ if ($row['EmailAddress'] == $email && $row['Password'] == $password) {
 
     
 }else {
-    $error = "Invalid Email or Password, Please try again";
+    header("Location: login.php?error=1");
 }
 
 ?>

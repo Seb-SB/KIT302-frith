@@ -1,11 +1,8 @@
-<?php
-    include("../session.php");
+<?php 
 
-    if($_SESSION["email"] !== "") {
-        header("location:index.php");
-    }
+
+
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -32,7 +29,6 @@
 
         <link rel="stylesheet" href="css/style.css">
 
-        <script src="js/login.js"></script>
     </head>
 
     <body>
@@ -40,17 +36,18 @@
             <div class="container text-center w-25">
                 <h2 class="font-weight-bold">Project Frith</h2>
                 <h4 class="font-weight-bold mb-3">Security Firm</h4>
-                <div class="d-flex justify-content-center text-danger mb-1" id="results"></div>
-                <form id="loginForm">
+                <div class="d-flex justify-content-center text-danger mb-1" id="results"></div> 
+                <form id="loginForm" action="login_process.php" method="post">
                     <div class="form-group">
                         <input type="email" class="form-control form-control-lg mb-3" name="email" placeholder="Email address" required>
                         <input type="password" class="form-control form-control-lg mb-3" name="password" placeholder="Password" required>
 
-                        <button type="submit" class="btn btn-lg btn-block btn-success">Login</button>
+                        <button type="submit" id="login-btn" class="btn btn-lg btn-block btn-success">Login</button>
                     </div>
                 </form>
                 <p>Need an account? <a href="register.php">Register for an account</a></p>
             </div>
         </main>
     </body>
+
 </html>

@@ -1,27 +1,29 @@
+<?php 
+    include("../session.php");
+
+    if($_SESSION["email"] !== "") {
+        header("location:index.php");
+    }
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
 <title>Security Firm Dashboard</title>
+<link rel="stylesheet" href="css/homepage.css">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<style>
-    /* we mainly bootstrap for major style, follwing style is used for rows color and hovering */
-    table tr:hover td { cursor:pointer; background:#ccc }
-    .table thead tr {
-            background-color: #009879;
-            color: #ffffff;
-            text-align: left;
-            font-weight: bold;
-     }
-
-    .table tbody tr:nth-of-type(even) {
-             background-color: #f3f3f3;
-    }
-    .hide { position:absolute; top:-1px; left:-1px; width:1px; height:1px; }
-</style>
 </head>
 <body >
+<div class="topnav">
+    <div class="topnav-right">
+        <a href="logout.php">Logout</a>
+    </div>
+  </div>
+</div>
 <div class="container">
    <br />
    <!-- this starts the body for Security Key list -->

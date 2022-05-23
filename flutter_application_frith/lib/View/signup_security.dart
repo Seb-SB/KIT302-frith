@@ -275,7 +275,11 @@ class _SignUpState extends State<SignUp> {
               final snackbar = SnackBar(
                   behavior: SnackBarBehavior.floating,
                   content: Text(errorMessage));
-              ScaffoldMessenger.of(context).showSnackBar(snackbar);
+
+              if (errorMessage.isNotEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(snackbar);
+              }
+
               setState(() {
                 _isLoading = true;
               });

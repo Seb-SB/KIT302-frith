@@ -11,10 +11,10 @@ $json["errmsg"] = "";
 $json["errmsg1"] = "";
 $json["errmsg2"] = "";
 
-$val = isset($POST_["Email"]) && isset($POST_["Password"]);
+//$val = isset($POST_["Email"]) && isset($POST_["Password"]);
 $json1 = file_get_contents('php://input');
 
-echo $json1;
+//echo $json1;
 
 $equals = "=";
 $amp = "&";
@@ -22,16 +22,16 @@ $firstEqualsLocation = stripos($json1, $equals) + 1;
 $secondEqualsLocation = strrpos($json1, $equals) + 1;
 $firstAmpLocation = stripos($json1, $amp);
 
-$sub1 = substr($json1, $firstEqualsLocation, $firstAmpLocation);
+//$sub1 = substr($json1, $firstEqualsLocation, $firstAmpLocation);
 $sub1 = substr($json1, $firstEqualsLocation, ($firstAmpLocation-$firstEqualsLocation));
 $sub2 = substr($json1, $secondEqualsLocation);
 
 
-echo $sub1;
-echo $sub2;
+//echo $sub1;
+//echo $sub2;
 
-$json["email"] = $sub1;
-$json["password"] = $sub2;
+///$json["email"] = $sub1;
+///$json["password"] = $sub2;
 
 if (empty($sub1)) {
     $json["errmsg1"] = "Did not get email";
@@ -66,8 +66,8 @@ if (!isset($POST_["password"]))
 
 if($receieved) {
 
-    $email = mysqli_escape_string($conn, $email);
-    $password = mysqli_escape_string($conn, $password);
+    //$email = mysqli_escape_string($conn, $email);
+    //$password = mysqli_escape_string($conn, $password);
     
     $sql = "SELECT * FROM `accountsecurityguard` WHERE `EmailAddress`='$email' AND `Password`='$password';";
     $res = mysqli_query($conn, $sql);

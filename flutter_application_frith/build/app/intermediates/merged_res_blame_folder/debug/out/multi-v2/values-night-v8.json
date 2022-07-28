@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\KIT301-frith-db\\KIT301-Frith\\flutter_application_frith\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
+            "outputFile": "M:\\Utas\\KIT302\\KIT302-frith\\flutter_application_frith\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
             "map": [
                 {
-                    "source": "D:\\KIT301-frith-db\\KIT301-Frith\\flutter_application_frith\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "M:\\Utas\\KIT302\\KIT302-frith\\flutter_application_frith\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

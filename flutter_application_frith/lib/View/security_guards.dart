@@ -87,7 +87,8 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                                 size: 80,
                               ),
                       )),
-
+                  //End of Flashlight
+                  //NotePad
                   GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -107,12 +108,33 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                             color: Colors.white,
                             size: 80,
                           ))),
+                  //End of Notepad
                 ],
               ),
               SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  GestureDetector(
+                    onTap: () {
+                      /*
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PhonePage()));*/
+                    },
+                    child: Container(
+                      // alignment: Alignment.centerRight,
+
+                        width: 150,
+                        height: 100,
+                        color: Colors.blueAccent,
+                        child: Icon(
+                          Icons.time_to_leave_outlined, //request back up
+                          color: Colors.white,
+                          size: 80,
+                        )),
+                  ),
                   //emergency function
                   GestureDetector(
                     onTap: () {
@@ -125,26 +147,6 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                         height: 100,
                         child: Icon(
                           Icons.warning_amber_outlined,
-                          color: Colors.white,
-                          size: 80,
-                        )),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      /*
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const PhonePage()));*/
-                    },
-                    child: Container(
-                        // alignment: Alignment.centerRight,
-
-                        width: 150,
-                        height: 100,
-                        color: Colors.blueAccent,
-                        child: Icon(
-                          Icons.time_to_leave_outlined, //request back up
                           color: Colors.white,
                           size: 80,
                         )),

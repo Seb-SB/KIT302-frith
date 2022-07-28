@@ -1,26 +1,26 @@
 [
     {
-        "merged": "D:\\KIT301-frith-db\\KIT301-Frith\\flutter_application_frith\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "D:\\KIT301-frith-db\\KIT301-Frith\\flutter_application_frith\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+        "merged": "M:\\Utas\\KIT302\\KIT302-frith\\flutter_application_frith\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "M:\\Utas\\KIT302\\KIT302-frith\\flutter_application_frith\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
     },
     {
-        "merged": "D:\\KIT301-frith-db\\KIT301-Frith\\flutter_application_frith\\build\\app\\intermediates\\res\\merged\\debug\\drawable-v21_launch_background.xml.flat",
-        "source": "D:\\KIT301-frith-db\\KIT301-Frith\\flutter_application_frith\\android\\app\\src\\main\\res\\drawable-v21\\launch_background.xml"
+        "merged": "M:\\Utas\\KIT302\\KIT302-frith\\flutter_application_frith\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "M:\\Utas\\KIT302\\KIT302-frith\\flutter_application_frith\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
     },
     {
-        "merged": "D:\\KIT301-frith-db\\KIT301-Frith\\flutter_application_frith\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
-        "source": "D:\\KIT301-frith-db\\KIT301-Frith\\flutter_application_frith\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+        "merged": "M:\\Utas\\KIT302\\KIT302-frith\\flutter_application_frith\\build\\app\\intermediates\\res\\merged\\debug\\drawable-v21_launch_background.xml.flat",
+        "source": "M:\\Utas\\KIT302\\KIT302-frith\\flutter_application_frith\\android\\app\\src\\main\\res\\drawable-v21\\launch_background.xml"
     },
     {
-        "merged": "D:\\KIT301-frith-db\\KIT301-Frith\\flutter_application_frith\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "D:\\KIT301-frith-db\\KIT301-Frith\\flutter_application_frith\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+        "merged": "M:\\Utas\\KIT302\\KIT302-frith\\flutter_application_frith\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "M:\\Utas\\KIT302\\KIT302-frith\\flutter_application_frith\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     },
     {
-        "merged": "D:\\KIT301-frith-db\\KIT301-Frith\\flutter_application_frith\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "D:\\KIT301-frith-db\\KIT301-Frith\\flutter_application_frith\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+        "merged": "M:\\Utas\\KIT302\\KIT302-frith\\flutter_application_frith\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "M:\\Utas\\KIT302\\KIT302-frith\\flutter_application_frith\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
     },
     {
-        "merged": "D:\\KIT301-frith-db\\KIT301-Frith\\flutter_application_frith\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
-        "source": "D:\\KIT301-frith-db\\KIT301-Frith\\flutter_application_frith\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+        "merged": "M:\\Utas\\KIT302\\KIT302-frith\\flutter_application_frith\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "M:\\Utas\\KIT302\\KIT302-frith\\flutter_application_frith\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
     }
 ]

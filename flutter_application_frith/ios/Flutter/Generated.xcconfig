@@ -1,6 +1,6 @@
 // This is a generated file; do not edit or check into version control.
-FLUTTER_ROOT=C:\Users\User\flutter
-FLUTTER_APPLICATION_PATH=D:\KIT301-frith-db\KIT301-Frith\flutter_application_frith
+FLUTTER_ROOT=M:\PCPrograms\Flutter\flutter
+FLUTTER_APPLICATION_PATH=C:\Users\tedkr\Documents\GitHub\KIT302-frith\flutter_application_frith
 COCOAPODS_PARALLEL_CODE_SIGN=true
 FLUTTER_TARGET=lib\main.dart
 FLUTTER_BUILD_DIR=build

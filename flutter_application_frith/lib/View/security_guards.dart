@@ -73,8 +73,8 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                       },
                       child: Container(
                         color: Colors.blueAccent,
-                        width: 150,
-                        height: 100,
+                        width: 140,
+                        height: 90,
                         child: light
                             ? Icon(
                                 Icons.lightbulb,
@@ -101,17 +101,18 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                       },
                       child: Container(
                           color: Colors.blueAccent,
-                          width: 150,
-                          height: 100,
+                          width: 140,
+                          height: 90,
                           child: Icon(
-                            Icons.event_note_rounded,
+                            //change notepad icon
+                            Icons.edit_note,
                             color: Colors.white,
                             size: 80,
                           ))),
                   //End of Notepad
                 ],
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 60),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -126,8 +127,8 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                     child: Container(
                       // alignment: Alignment.centerRight,
 
-                        width: 150,
-                        height: 100,
+                        width: 140,
+                        height: 90,
                         color: Colors.blueAccent,
                         child: Icon(
                           Icons.time_to_leave_outlined, //request back up
@@ -143,8 +144,8 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                     child: Container(
                         //alignment: Alignment.centerLeft,
                         color: Colors.blueAccent,
-                        width: 150,
-                        height: 100,
+                        width: 140,
+                        height: 90,
                         child: Icon(
                           Icons.warning_amber_outlined,
                           color: Colors.white,
@@ -153,15 +154,15 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                   ),
                 ],
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 60),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
                       // alignment: Alignment.centerLeft,
                       color: Colors.blueAccent,
-                      width: 150,
-                      height: 100,
+                      width: 140,
+                      height: 90,
                       child: Icon(
                         Icons.note,
                         color: Colors.white,
@@ -171,8 +172,8 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                   Container(
                       //alignment: Alignment.centerRight,
 
-                      width: 150,
-                      height: 100,
+                      width: 140,
+                      height: 90,
                       color: Colors.blueAccent,
                       child: Icon(
                         Icons.access_time_outlined, //start/end/shift

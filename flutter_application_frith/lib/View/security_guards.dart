@@ -7,6 +7,8 @@ import '../emergency/emergencyphone.dart';
 import '../notepad/notepad_homepage.dart';
 import 'package:torch_light/torch_light.dart';
 
+import '../report/reportpad_homepage.dart';
+
 class SecurityGuards extends StatefulWidget {
   const SecurityGuards({Key? key}) : super(key: key);
 
@@ -87,6 +89,7 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                                 size: 80,
                               ),
                       )),
+
                   //End of Flashlight
                   //NotePad
                   GestureDetector(
@@ -125,7 +128,7 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                               builder: (context) => const PhonePage()));*/
                     },
                     child: Container(
-                      // alignment: Alignment.centerRight,
+                        // alignment: Alignment.centerRight,
 
                         width: 140,
                         height: 90,
@@ -158,7 +161,17 @@ class _SecurityGuardsState extends State<SecurityGuards> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Container(
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ReportpadPage(
+
+                                ///title: '',
+                              )));
+                    },
+                    child: Container(
                       // alignment: Alignment.centerLeft,
                       color: Colors.blueAccent,
                       width: 140,
@@ -168,7 +181,7 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                         color: Colors.white,
                         size: 80,
                       ) //"Incident Report"
-                      ),
+                      )),
                   Container(
                       //alignment: Alignment.centerRight,
 

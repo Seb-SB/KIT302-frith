@@ -3,7 +3,9 @@ import 'package:flutter_application_frith/View/home_page.dart';
 import 'package:flutter_application_frith/View/security_login.dart';
 import 'package:flutter_application_frith/View/business_login.dart';
 import 'package:flutter_application_frith/notepad/notepad.dart';
+import 'package:flutter_application_frith/report/reportpad.dart';
 import 'package:provider/provider.dart';
+
 
 void main() {
   runApp(const MaterialApp(

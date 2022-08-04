@@ -25,7 +25,8 @@ class _NotepadPageState extends State<NotepadPage> {
     return Consumer<NotepadModel>(builder: buildScaffold);
   }
 
-  Scaffold buildScaffold(BuildContext context, NotepadModel notepadModel, _) {
+  Scaffold buildScaffold(
+      BuildContext context, NotepadModel notepadModel, _) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Notepad'),

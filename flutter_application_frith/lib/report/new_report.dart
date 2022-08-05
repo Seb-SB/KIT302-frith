@@ -6,6 +6,8 @@ import 'package:flutter_application_frith/report/reportpad.dart';
 import 'package:flutter_application_frith/report/reportpad_homepage.dart';
 import 'package:provider/provider.dart';
 
+import '../View/security_guards.dart';
+
 class NewReport extends StatefulWidget {
   const NewReport({Key? key}) : super(key: key);
 
@@ -17,17 +19,18 @@ class _NewReportState extends State<NewReport> {
   TextEditingController locationOfReport = TextEditingController();
   TextEditingController dateOfReport = TextEditingController();
   TextEditingController timeOfReport = TextEditingController();
-  TextEditingController typeOfReport = TextEditingController();
+  TextEditingController severityOfReport = TextEditingController();
   TextEditingController descriptionOfReport = TextEditingController();
   TextEditingController partiesOfReport = TextEditingController();
   TextEditingController statusOfReport = TextEditingController();
-
-
+  final statusItems = ['Danger', 'High', 'Informative', 'low', 'medium'];
+  String dropdownValue = 'None';
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
   Widget _buildlocationOfReportTextField() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         const SizedBox(height: 10.0),
         Container(
@@ -45,8 +48,8 @@ class _NewReportState extends State<NewReport> {
             decoration: const InputDecoration(
               contentPadding: EdgeInsets.symmetric(vertical: 15),
               border: InputBorder.none,
-              hintText: 'Location',
-              prefixIcon: Icon(Icons.title),
+              hintText: 'Location:',
+              prefixIcon: Icon(Icons.location_on),
             ),
           ),
         )
@@ -56,7 +59,7 @@ class _NewReportState extends State<NewReport> {
 
   Widget _buildDateOfReportTextField() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         const SizedBox(height: 10.0),
         Container(
@@ -74,7 +77,7 @@ class _NewReportState extends State<NewReport> {
             decoration: const InputDecoration(
               contentPadding: EdgeInsets.symmetric(vertical: 15),
               border: InputBorder.none,
-              hintText: 'Date',
+              hintText: 'Date:',
               prefixIcon: Icon(Icons.date_range),
             ),
           ),
@@ -82,10 +85,9 @@ class _NewReportState extends State<NewReport> {
       ],
     );
   }
-
   Widget _buildtimeOfReportTextField() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         const SizedBox(height: 10.0),
         Container(
@@ -96,34 +98,6 @@ class _NewReportState extends State<NewReport> {
             keyboardType: TextInputType.text,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return "Please enter a Time";
-              }
-              return null;
-            },
-            decoration: const InputDecoration(
-              contentPadding: EdgeInsets.symmetric(vertical: 15),
-              border: InputBorder.none,
-              hintText: 'Time',
-              prefixIcon: Icon(Icons.title),
-            ),
-          ),
-        )
-      ],
-    );
-  }
-  Widget _buildtypeOfReportTextField() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const SizedBox(height: 10.0),
-        Container(
-          alignment: Alignment.center,
-          height: 60.0,
-          child: TextFormField(
-            controller: typeOfReport,
-            keyboardType: TextInputType.number,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
                 return "Please enter a type";
               }
               return null;
@@ -131,17 +105,66 @@ class _NewReportState extends State<NewReport> {
             decoration: const InputDecoration(
               contentPadding: EdgeInsets.symmetric(vertical: 15),
               border: InputBorder.none,
-              hintText: 'type',
-              prefixIcon: Icon(Icons.title),
+              hintText: 'Time:',
+              prefixIcon: Icon(Icons.timer),
             ),
           ),
         )
       ],
     );
   }
-  Widget _buildDetailsOfReportTextField() {
+  Widget _buildseverityOfReportTextField() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        const SizedBox(height: 10.0),
+        Row(
+          children: [
+            Container(
+              alignment: Alignment.center,
+              height: 60.0,
+              child: Text("Enter severity Level:   "),
+            ),
+            SizedBox(width: 20),
+            Container(
+              alignment: Alignment.center,
+              height: 60.0,
+              child: DropdownButton<String>(
+                value: dropdownValue,
+                icon: const Icon(Icons.arrow_upward),
+                elevation: 16,
+                style: const TextStyle(color: Colors.deepPurple),
+                underline: Container(
+                  height: 2,
+                  color: Colors.deepPurpleAccent,
+                ),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    dropdownValue = newValue!;
+                    severityOfReport.text = dropdownValue;
+                  });
+                },
+                items: <String>['Danger', 'High', 'Informative', 'Low', 'Medium', 'None']
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
+            ),
+          ],
+        )
+
+      ],
+      
+      
+    );
+  }
+
+  Widget _builddescriptionOfReportTextField() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         const SizedBox(height: 10.0),
         Container(
@@ -159,8 +182,8 @@ class _NewReportState extends State<NewReport> {
             decoration: const InputDecoration(
               contentPadding: EdgeInsets.symmetric(vertical: 15),
               border: InputBorder.none,
-              hintText: 'Details',
-              prefixIcon: Icon(Icons.details),
+              hintText: 'Details of incident:',
+              prefixIcon: Icon(Icons.title),
             ),
           ),
         )
@@ -169,7 +192,7 @@ class _NewReportState extends State<NewReport> {
   }
   Widget _buildPartiesOfReportTextField() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         const SizedBox(height: 10.0),
         Container(
@@ -180,14 +203,14 @@ class _NewReportState extends State<NewReport> {
             keyboardType: TextInputType.text,
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return "Please enter a people involved";
+                return "Please enter people involved";
               }
               return null;
             },
             decoration: const InputDecoration(
               contentPadding: EdgeInsets.symmetric(vertical: 15),
               border: InputBorder.none,
-              hintText: 'people',
+              hintText: 'Details of parties Involved:',
               prefixIcon: Icon(Icons.title),
             ),
           ),
@@ -197,77 +220,103 @@ class _NewReportState extends State<NewReport> {
   }
   Widget _buildstatusOfReportTextField() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         const SizedBox(height: 10.0),
-        Container(
-          alignment: Alignment.center,
-          height: 60.0,
-          child: TextFormField(
-            controller: statusOfReport,
-            keyboardType: TextInputType.number,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "Please enter police status";
-              }
-              return null;
-            },
-            decoration: const InputDecoration(
-              contentPadding: EdgeInsets.symmetric(vertical: 15),
-              border: InputBorder.none,
-              hintText: 'status',
-              prefixIcon: Icon(Icons.title),
+        Row(
+          children: [
+            Container(
+              alignment: Alignment.center,
+              height: 60.0,
+              child: Text("Police Status:   "),
             ),
-          ),
+            SizedBox(width: 60),
+            Container(
+              alignment: Alignment.center,
+              height: 60.0,
+              child: DropdownButton<String>(
+                value: dropdownValue,
+                icon: const Icon(Icons.arrow_upward),
+                elevation: 16,
+                style: const TextStyle(color: Colors.deepPurple),
+                underline: Container(
+                  height: 2,
+                  color: Colors.deepPurpleAccent,
+                ),
+                onChanged: (String? newValue) {
+                  setState(() {
+                    dropdownValue = newValue!;
+                    statusOfReport.text = dropdownValue;
+                  });
+                },
+                items: <String>['Reported', 'Under Investigation', 'Solved', 'Closed', 'None']
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
+            )
+          ],
         )
       ],
+
+
     );
   }
   Widget _onSubmit(BuildContext context, List<Reportpad> reportpads) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: Colors.blue,
-              onPrimary: Colors.white,
-            ),
-            onPressed: () {
-              print("pressed");
-              if (!formkey.currentState!.validate()) {
-                print("invalid entry");
-              } else {
-                _addToList(locationOfReport.text, dateOfReport.text, timeOfReport.text, int.parse(typeOfReport.text),
-                    descriptionOfReport.text, partiesOfReport.text,int.parse(statusOfReport.text),  context, reportpads);
-                Provider.of<ReportpadModel>(context, listen: false).update();
-                Navigator.pop(context);
-              }
-            },
-            child: const Text('Submit')),
-        ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: Colors.blue,
-              onPrimary: Colors.white,
-            ),
-            onPressed: () {
-                _addToList(locationOfReport.text, dateOfReport.text, timeOfReport.text, int.parse(typeOfReport.text),
-                    descriptionOfReport.text, partiesOfReport.text,int.parse(statusOfReport.text),  context, reportpads);
-                Provider.of<ReportpadModel>(context, listen: false).update();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ReportpadPage()),
-                );
-              
-            },
-            child: const Text('Load Draft')),
+        Row(
+          children: [
+            SizedBox(width: 50),
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  onPrimary: Colors.white,
+                ),
+                onPressed: () {
+                  print("pressed");
+                  print(severityOfReport.text);
+                  if (!formkey.currentState!.validate()) {
+                    print("invalid entry");
+                  } else {
+                    _addToList(locationOfReport.text, dateOfReport.text, timeOfReport.text, severityOfReport.text,
+                        descriptionOfReport.text, partiesOfReport.text,statusOfReport.text,  context, reportpads);
+                    Provider.of<ReportpadModel>(context, listen: false).update();
+                    Navigator.pop(context);
+                  }
+                },
+                child: const Text('Submit')),
+                SizedBox(width: 100),
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  onPrimary: Colors.white,
+                ),
+                onPressed: () {
+                  _addToList(locationOfReport.text, dateOfReport.text, timeOfReport.text, severityOfReport.text,
+                      descriptionOfReport.text, partiesOfReport.text,statusOfReport.text,  context, reportpads);
+                  Provider.of<ReportpadModel>(context, listen: false).update();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ReportpadPage()),
+                  );
+
+                },
+                child: const Text('Load Draft')),
+          ],
+        )
       ],
     );
   }
 
-  void _addToList(String locationOfReport, String dateOfReport, String timeOfReport, int typeOfReport, String detailsOfReport, String partiesOfReport, int statusOfReport,
+  void _addToList(String locationOfReport, String dateOfReport, String timeOfReport, String severityOfReport, String detailsOfReport, String partiesOfReport, String statusOfReport,
       BuildContext context, List<Reportpad> reportpads) {
     Reportpad report =
-        Reportpad(location: locationOfReport, date: dateOfReport, time: timeOfReport, type: typeOfReport, description: detailsOfReport, parties: partiesOfReport, status: statusOfReport);
+        Reportpad(location: locationOfReport, date: dateOfReport, time: timeOfReport, severity: severityOfReport, description: detailsOfReport, parties: partiesOfReport, status: statusOfReport);
 
     reportpads.add(report);
   }
@@ -284,18 +333,33 @@ class _NewReportState extends State<NewReport> {
         padding: const EdgeInsets.all(15.0),
         child: ListView(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Center(
-                child: Text(
-                  'Create New Report',
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
+            Row(
+              children: [
+                SizedBox(width: 80),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Center(
+                    child: Text(
+                      'Create New Report',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                SizedBox(width: 30),
+                ElevatedButton(
+                  child: const Text('Delete'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const SecurityGuards()),
+                    );
+                  },
+                )
+              ],
             ),
             Form(
               key: formkey,
@@ -303,8 +367,8 @@ class _NewReportState extends State<NewReport> {
                 _buildlocationOfReportTextField(),
                 _buildDateOfReportTextField(),
                 _buildtimeOfReportTextField(),
-                _buildtypeOfReportTextField(),
-                _buildDetailsOfReportTextField(),
+                _buildseverityOfReportTextField(),
+                _builddescriptionOfReportTextField(),
                 _buildPartiesOfReportTextField(),
                 _buildstatusOfReportTextField(),
                 _onSubmit(context, reportpads)

@@ -4,14 +4,6 @@ import 'package:provider/provider.dart';
 import 'notepad.dart';
 import 'notepad_details.dart';
 
-///
-/// Notepad
-///
-///
-//void main() {
-//  runApp(const NotepadPage());
-//}
-
 class NotepadPage extends StatefulWidget {
   const NotepadPage({Key? key}) : super(key: key);
 
@@ -71,6 +63,7 @@ class _NotepadPageState extends State<NotepadPage> {
             Expanded(
               child: ListView.builder(
                   itemBuilder: (_, index) {
+                    notepadModel.sort();
                     var notepad = notepadModel.items[index];
                     return ListTile(
                       title: Text(notepad.title),
@@ -95,7 +88,7 @@ class _NotepadPageState extends State<NotepadPage> {
             //  title: Text("Notepad one"),
             //subtitle: Text("one subtitle"),
             //   onTap: () {
-            //笔记详情页面
+            
             // },
             //),
           ],

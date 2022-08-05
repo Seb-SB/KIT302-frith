@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'signup_business.dart';
 import 'business_owners.dart';
+import 'dart:convert';
+import 'package:flutter_application_frith/Model/business_owner.dart';
+import 'package:http/http.dart' as http;
 
 class BusLogin extends StatefulWidget {
   const BusLogin({Key? key}) : super(key: key);
@@ -10,29 +13,45 @@ class BusLogin extends StatefulWidget {
 }
 
 class _BusLoginState extends State<BusLogin> {
-  String email = ""; //Temporary solution for email
-  String password = ""; //Temporary solution for password
+  GlobalKey<FormState> formkey =
+      GlobalKey<FormState>(); //keep track of form state
+
+  bool _isLoading = false;
+  String errorMessage = "";
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  ///String email = ""; //Temporary solution for email
+  ///String password = ""; //Temporary solution for password
 
   Widget _buildEmailTextField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          'Email',
-        ),
-        SizedBox(height: 10.0),
+        const SizedBox(height: 10.0),
         Container(
           alignment: Alignment.center,
           height: 60.0,
-          child: TextField(
+          child: TextFormField(
+            controller: emailController,
             keyboardType: TextInputType.emailAddress,
-            onChanged: (value) => email = value,
-            decoration: InputDecoration(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "Please enter a valid email";
+              }
+              return null;
+            },
+            decoration: const InputDecoration(
+              contentPadding: EdgeInsets.symmetric(vertical: 15),
               border: InputBorder.none,
-              focusedBorder:
-                  OutlineInputBorder(borderRadius: BorderRadius.horizontal()),
-              contentPadding: EdgeInsets.only(top: 14.0),
               hintText: 'Enter your Email',
+              prefixIcon: Icon(Icons.email),
             ),
           ),
         )
@@ -44,22 +63,24 @@ class _BusLoginState extends State<BusLogin> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          'Password',
-        ),
-        SizedBox(height: 10.0),
+        const SizedBox(height: 10.0),
         Container(
           alignment: Alignment.center,
           height: 60.0,
-          child: TextField(
+          child: TextFormField(
+            controller: passwordController,
             obscureText: true,
-            onChanged: (value) => password = value,
-            decoration: InputDecoration(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "Please enter a valid password";
+              }
+              return null;
+            },
+            decoration: const InputDecoration(
+              contentPadding: EdgeInsets.symmetric(vertical: 15),
               border: InputBorder.none,
-              focusedBorder:
-                  OutlineInputBorder(borderRadius: BorderRadius.horizontal()),
-              contentPadding: EdgeInsets.only(top: 14.0),
               hintText: 'Enter your Password',
+              prefixIcon: Icon(Icons.lock),
             ),
           ),
         )
@@ -67,30 +88,85 @@ class _BusLoginState extends State<BusLogin> {
     );
   }
 
-  /*
-  TODO: onPressed > check that both textfields have valid values
-  Store somewhere
-  ...
-  LATER - check database with those values -> if valid then send to logged in view
-  
-  */
   Widget _buildLoginButton() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 25.0),
+      padding: const EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
       child: ElevatedButton(
-        child: const Text("LOGIN"),
-        onPressed: () => {
-          print("login button pressed"),
-          print("email: ${email}"),
-          print("password: ${password}"),
+          child: const Text("LOGIN"),
+          //onPressed: _handleSubmittedValue,
+          onPressed: () {
+            setState(() {
+              _isLoading = true;
+            });
+
+            if (!formkey.currentState!.validate()) {
+              setState(() {
+                _isLoading = false;
+              });
+            } else {
+              _logIn(emailController.text, passwordController.text);
+
+              final snackbar = SnackBar(
+                  behavior: SnackBarBehavior.floating,
+                  content: Text(errorMessage));
+              if (errorMessage.isNotEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(snackbar);
+              }
+            }
+          }),
+    );
+  }
+
+  Future<void> _logIn(String email, String password) async {
+    var url = 'http://192.168.0.128/frith/connection/business_owner_login.php';
+
+    Map data = {'email': email, 'password': password};
+
+    var jsonData = null;
+
+    ///print(data.entries);
+
+    final response = await http.post(Uri.parse(url),
+        headers: {
+          //'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json; charset=UTF-8',
+          //'Accept': 'application/json'
+        },
+        //body: data,
+        body: jsonEncode(data),
+        encoding: Encoding.getByName("utf-8"));
+
+    /*var response =
+        await http.get(Uri.parse('$url?email=$email&password=$password'));*/
+
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      jsonData = await jsonDecode(jsonEncode(response.body));
+      //print(jsonData);
+      jsonData = jsonDecode(jsonData);
+      //print(jsonData["error"]);
+      if (jsonData["error"] == true) {
+        //print(jsonData);
+        errorMessage = await jsonData["errmsg"];
+        setState(() {
+          _isLoading = false;
+        });
+        //create scaffold
+
+      } else {
+        setState(() {
+          _isLoading = false;
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const BusinessOwners()),
-          ),
-        }, //TESTING
-      ),
-    );
+          );
+        });
+      }
+    } else {
+      print(jsonData["errmsg"]);
+    }
   }
 
   // TODO: Map to Security Guard Sign Up Page!!
@@ -126,30 +202,37 @@ class _BusLoginState extends State<BusLogin> {
             ),
             Container(
                 height: double.infinity,
-                child: SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 40.0,
-                    vertical: 120.0,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Business Owner',
-                        style: TextStyle(
-                          fontSize: 30.0,
+                child: _isLoading
+                    ? Center(child: CircularProgressIndicator())
+                    : SingleChildScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 40.0,
+                          vertical: 120.0,
                         ),
-                      ),
-                      SizedBox(height: 30.0),
-                      _buildEmailTextField(),
-                      SizedBox(height: 30.0),
-                      _buildPasswordTextField(),
-                      _buildLoginButton(),
-                      _buildSignUpButton(),
-                    ],
-                  ),
-                ))
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            const Text(
+                              'Business Owner',
+                              style: TextStyle(
+                                fontSize: 30.0,
+                              ),
+                            ),
+                            Form(
+                              key: formkey,
+                              child: Column(children: <Widget>[
+                                SizedBox(height: 30.0),
+                                _buildEmailTextField(),
+                                SizedBox(height: 30.0),
+                                _buildPasswordTextField(),
+                                _buildLoginButton(),
+                                _buildSignUpButton(),
+                              ]),
+                            )
+                          ],
+                        ),
+                      ))
           ],
         ));
   }

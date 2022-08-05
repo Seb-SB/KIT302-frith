@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter/src/material/bottom_navigation_bar.dart';
+import 'package:flutter_application_frith/View/business_login.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_application_frith/InformationPool/inforPool.dart';
+import 'package:flutter_application_frith/InformationPool/information_homepage.dart';
 
-
-class  BusinessOwners extends StatefulWidget {
+class BusinessOwners extends StatefulWidget {
   const BusinessOwners({Key? key}) : super(key: key);
 
   @override
@@ -14,21 +19,7 @@ class _BusinessOwnersState extends State<BusinessOwners> {
     return Scaffold(
         appBar: AppBar(
           title: Text("Business Owner"),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  //
-                  print("button is pressed!");
-                },
-                icon: Icon(Icons.camera_alt_sharp)),
-
-            IconButton(
-                onPressed: () {
-                  //
-                  print("button is pressed!");
-                },
-                icon: Icon(Icons.more_horiz)),
-          ],
+          actions: [_popupMenuButton(context)],
         ),
         body: Center(
           child: Column(
@@ -36,63 +27,98 @@ class _BusinessOwnersState extends State<BusinessOwners> {
             //crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
+                //information Pool Function
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Container(
-                      color: Colors.blueAccent,
-                      width: 150,
-                      height: 100,
-                      child: Text("Share Information Pool",
-                        style: TextStyle(
-                            fontSize: 26,
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const InformationpoolPage(
+                                 
+                                )));
+                      },
+                      child: Container(
+                          color: Colors.blueAccent,
+                          width: 140,
+                          height: 90,
+                          child: Icon(
+                            //change informationpoolpool icon
+                            Icons.insert_comment,
                             color: Colors.white,
-                          fontWeight: FontWeight.bold,),
-                      )),
-                  Container(
-                      color: Colors.blueAccent,
-                      width: 150,
-                      height: 100,
-                      child: Text("Incident Report",
-                        style: TextStyle(
-                            fontSize: 26,
-                            color: Colors.white,
-                          fontWeight: FontWeight.bold,),
-                      )),
+                            size: 80,
+                          ))),
                 ],
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 60),
               Row(
+                //"Business Event",
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
                     //alignment: Alignment.centerLeft,
-                      color: Colors.blueAccent,
-                      width: 150,
-                      height: 100,
-                      child: Text("Business Event",
-                        style:TextStyle(
-                            fontSize: 26,
-                            color: Colors.white,
-                          fontWeight: FontWeight.bold,),
-                      )),
-                  Container(
-                    // alignment: Alignment.centerRight,
-
-                      width: 150,
-                      height: 100,
-                      color: Colors.blueAccent,
-                      child: Text("Emergency",
-                        style: TextStyle(
-                            fontSize: 26,
-                            color: Colors.white,
-                           fontWeight: FontWeight.bold,),
-                      )),
+                    color: Colors.blueAccent,
+                    width: 150,
+                    height: 100,
+                    child: Icon(
+                      //change business event icon
+                      Icons.event_available,
+                      color: Colors.white,
+                      size: 80,
+                    ),
+                  ),
                 ],
               ),
             ],
           ),
-        )
-
+        ));
+  }
+  PopupMenuButton _popupMenuButton(BuildContext context) {
+    return PopupMenuButton(
+      itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+        PopupMenuItem(
+          onTap: () {
+            //
+            print("Logout");
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              GestureDetector(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text("Notice"),
+                            content:
+                                Text("Are you sure you would like to Logout?"),
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text("No"),
+                                onPressed: () => Navigator.of(context).pop(),
+                              ),
+                              TextButton(
+                                child: Text("Yes"),
+                                onPressed: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              BusLogin())); //go back to security login page SecLogin
+                                },
+                              ),
+                            ],
+                          );
+                        });
+                  },
+                  child: new Text('Logout')),
+            ],
+          ),
+          //value: 'logout',
+        ),
+      ],
     );
   }
 }

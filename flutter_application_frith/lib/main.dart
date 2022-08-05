@@ -19,8 +19,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => NotepadModel(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ReportpadModel()),
+        ChangeNotifierProvider(create: (context) => NotepadModel())
+      ],
       child: MaterialApp(
         title: 'Frith',
         theme: ThemeData(

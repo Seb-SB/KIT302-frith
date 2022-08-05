@@ -8,9 +8,6 @@ import 'reportpad_details.dart';
 /// Reportpad
 ///
 ///
-//void main() {
-//  runApp(const ReportpadPage());
-//}
 
 class ReportpadPage extends StatefulWidget {
   const ReportpadPage({Key? key}) : super(key: key);
@@ -29,7 +26,7 @@ class _ReportpadPageState extends State<ReportpadPage> {
       BuildContext context, ReportpadModel reportpadModel, _) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Incedent Report'),
+        title: Text('Incident Report'),
       ),
       body: Center(
         child: Column(

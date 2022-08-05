@@ -12,18 +12,25 @@ class ReportpadDetails extends StatefulWidget {
 
 class _ReportpadDetailsState extends State<ReportpadDetails> {
   final _formKey = GlobalKey<FormState>();
-  final titleController = TextEditingController();
+  final locationController = TextEditingController();
   final dateController = TextEditingController();
-  final detailsController = TextEditingController();
-
+  final timeController = TextEditingController();
+  final typeController = TextEditingController();
+  final descriptionController = TextEditingController();
+  final partiesController = TextEditingController();
+  final statusController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var reportpads = Provider.of<ReportpadModel>(context, listen: false).reportItems;
     var reportpad = reportpads[widget.id];
 
-    titleController.text = reportpad.location;
+    locationController.text = reportpad.location;
     dateController.text = reportpad.date.toString();
-    detailsController.text = reportpad.description;
+    timeController.text = reportpad.time;
+    typeController.text = reportpad.type.toString();
+    descriptionController.text = reportpad.location;
+    partiesController.text = reportpad.location;
+    statusController.text = reportpad.status.toString();
 
     return Consumer<ReportpadModel>(builder: (context, reportpadModel, _) {
       return Scaffold(
@@ -46,7 +53,7 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                             TextFormField(
                               decoration:
                                   const InputDecoration(labelText: "Title"),
-                              controller: titleController,
+                              controller: locationController,
                               autofocus: true,
                             ),
                             TextFormField(
@@ -57,7 +64,7 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                             TextFormField(
                               decoration:
                                   const InputDecoration(labelText: "Details"),
-                              controller: detailsController,
+                              controller: descriptionController,
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -65,10 +72,10 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                                   onPressed: () {
                                     if (_formKey.currentState?.validate() ??
                                         false) {
-                                      reportpad.location = titleController.text;
+                                      reportpad.location = locationController.text;
                                       reportpad.date = dateController
                                           .text; //good code would validate these
-                                      reportpad.description = detailsController
+                                      reportpad.description = descriptionController
                                           .text; //good code would validate these
 
                                       //update the model

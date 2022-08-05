@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_frith/report/reportpad.dart';
+import 'package:flutter_application_frith/report/reportpad_homepage.dart';
 import 'package:provider/provider.dart';
 
 class NewReport extends StatefulWidget {
@@ -17,7 +18,7 @@ class _NewReportState extends State<NewReport> {
   TextEditingController dateOfReport = TextEditingController();
   TextEditingController timeOfReport = TextEditingController();
   TextEditingController typeOfReport = TextEditingController();
-  TextEditingController detailsOfReport = TextEditingController();
+  TextEditingController descriptionOfReport = TextEditingController();
   TextEditingController partiesOfReport = TextEditingController();
   TextEditingController statusOfReport = TextEditingController();
 
@@ -147,7 +148,7 @@ class _NewReportState extends State<NewReport> {
           alignment: Alignment.center,
           height: 60.0,
           child: TextFormField(
-            controller: detailsOfReport,
+            controller: descriptionOfReport,
             keyboardType: TextInputType.text,
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -237,12 +238,28 @@ class _NewReportState extends State<NewReport> {
                 print("invalid entry");
               } else {
                 _addToList(locationOfReport.text, dateOfReport.text, timeOfReport.text, int.parse(typeOfReport.text),
-                    detailsOfReport.text, partiesOfReport.text,int.parse(statusOfReport.text),  context, reportpads);
+                    descriptionOfReport.text, partiesOfReport.text,int.parse(statusOfReport.text),  context, reportpads);
                 Provider.of<ReportpadModel>(context, listen: false).update();
                 Navigator.pop(context);
               }
             },
-            child: const Text('SUBMIT')),
+            child: const Text('Submit')),
+        ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.blue,
+              onPrimary: Colors.white,
+            ),
+            onPressed: () {
+                _addToList(locationOfReport.text, dateOfReport.text, timeOfReport.text, int.parse(typeOfReport.text),
+                    descriptionOfReport.text, partiesOfReport.text,int.parse(statusOfReport.text),  context, reportpads);
+                Provider.of<ReportpadModel>(context, listen: false).update();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ReportpadPage()),
+                );
+              
+            },
+            child: const Text('Load Draft')),
       ],
     );
   }

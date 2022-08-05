@@ -7,6 +7,7 @@ import '../emergency/emergencyphone.dart';
 import '../notepad/notepad_homepage.dart';
 import 'package:torch_light/torch_light.dart';
 
+import '../report/new_report.dart';
 import '../report/reportpad_homepage.dart';
 
 class SecurityGuards extends StatefulWidget {
@@ -166,7 +167,7 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const ReportpadPage(
+                              builder: (context) => const NewReport(
 
                                 ///title: '',
                               )));

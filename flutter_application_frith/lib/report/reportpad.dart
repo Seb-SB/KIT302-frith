@@ -6,12 +6,12 @@ class Reportpad {
   String location;
   String date;
   String time;
-  int type;
+  String severity;
   String description;
   String parties;
-  int status;
+  String status;
 
-  Reportpad({required this.location, required this.date, required this.time, required this.type, required this.description,
+  Reportpad({required this.location, required this.date, required this.time, required this.severity, required this.description,
       required this.parties, required this.status});
 }
 
@@ -22,15 +22,15 @@ class ReportpadModel extends ChangeNotifier {
   //Normally a model would get from a database here, we are just hardcoding some data for this week
   ReportpadModel() {
     add(Reportpad(
-        location: "lobby", date: "01/03/2022", time: "1pm", type: 2, description: "The 1st report is ...", parties: "joe blogs", status: 4));
+        location: "lobby", date: "01/03/2022", time: "1pm", severity: "Danger", description: "The 1st report is ...", parties: "joe blogs", status: "Reported"));
     add(Reportpad(
-        location: "lobby", date: "01/03/2022", time: "1pm", type: 2, description: "The 2nd report is ...", parties: "joe blogs", status: 4));
+        location: "lobby", date: "01/03/2022", time: "1pm", severity: "Danger", description: "The 2nd report is ...", parties: "joe blogs", status: "Reported"));
     add(Reportpad(
-        location: "lobby", date: "01/03/2022", time: "1pm", type: 2, description: "The 3rd report is ...", parties: "joe blogs", status: 4));
+        location: "lobby", date: "01/03/2022", time: "1pm", severity: "Danger", description: "The 3rd report is ...", parties: "joe blogs", status: "Reported"));
     add(Reportpad(
-        location: "lobby", date: "01/03/2022", time: "1pm", type: 2, description: "The 4th report is ...", parties: "joe blogs", status: 4));
+        location: "lobby", date: "01/03/2022", time: "1pm", severity: "Danger", description: "The 4th report is ...", parties: "joe blogs", status: "Reported"));
     add(Reportpad(
-        location: "lobby", date: "01/03/2022", time: "1pm", type: 2, description: "The 5th report is ...", parties: "joe blogs", status: 4));
+        location: "lobby", date: "01/03/2022", time: "1pm", severity: "Danger", description: "The 5th report is ...", parties: "joe blogs", status: "Reported"));
   }
 
   void add(Reportpad item) {

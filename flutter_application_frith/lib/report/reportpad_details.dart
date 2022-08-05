@@ -25,9 +25,9 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
     var reportpad = reportpads[widget.id];
 
     locationController.text = reportpad.location;
-    dateController.text = reportpad.date.toString();
+    dateController.text = reportpad.date;
     timeController.text = reportpad.time;
-    typeController.text = reportpad.type.toString();
+    typeController.text = reportpad.severity;
     descriptionController.text = reportpad.location;
     partiesController.text = reportpad.location;
     statusController.text = reportpad.status.toString();
@@ -40,7 +40,7 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
           body: Padding(
               padding: const EdgeInsets.all(8),
               child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     //Display movie id
                     Text("Reportpad Index ${widget.id}"),

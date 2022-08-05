@@ -26,7 +26,8 @@ class _ReportpadPageState extends State<ReportpadPage> {
       BuildContext context, ReportpadModel reportpadModel, _) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Incident Report'),
+        title: Text('Incident Report Drafts'),
+        centerTitle: true,
       ),
       body: Center(
         child: Column(

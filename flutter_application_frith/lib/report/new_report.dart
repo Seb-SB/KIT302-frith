@@ -271,7 +271,7 @@ class _NewReportState extends State<NewReport> {
       children: <Widget>[
         Row(
           children: [
-            SizedBox(width: 50),
+            SizedBox(width: 30),
             ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blue,
@@ -290,7 +290,7 @@ class _NewReportState extends State<NewReport> {
                   }
                 },
                 child: const Text('Submit')),
-                SizedBox(width: 100),
+                SizedBox(width: 30),
             ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blue,
@@ -307,6 +307,23 @@ class _NewReportState extends State<NewReport> {
 
                 },
                 child: const Text('Load Draft')),
+            SizedBox(width: 30),
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  onPrimary: Colors.white,
+                ),
+                onPressed: () {
+                  _addToList(locationOfReport.text, dateOfReport.text, timeOfReport.text, severityOfReport.text,
+                      descriptionOfReport.text, partiesOfReport.text,statusOfReport.text,  context, reportpads);
+                  Provider.of<ReportpadModel>(context, listen: false).update();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ReportpadPage()),
+                  );
+
+                },
+                child: const Text('Save Draft')),
           ],
         )
       ],

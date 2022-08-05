@@ -15,7 +15,7 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
   final locationController = TextEditingController();
   final dateController = TextEditingController();
   final timeController = TextEditingController();
-  final typeController = TextEditingController();
+  final severityController = TextEditingController();
   final descriptionController = TextEditingController();
   final partiesController = TextEditingController();
   final statusController = TextEditingController();
@@ -27,15 +27,15 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
     locationController.text = reportpad.location;
     dateController.text = reportpad.date;
     timeController.text = reportpad.time;
-    typeController.text = reportpad.severity;
-    descriptionController.text = reportpad.location;
-    partiesController.text = reportpad.location;
-    statusController.text = reportpad.status.toString();
+    severityController.text = reportpad.severity;
+    descriptionController.text = reportpad.description;
+    partiesController.text = reportpad.parties;
+    statusController.text = reportpad.status;
 
     return Consumer<ReportpadModel>(builder: (context, reportpadModel, _) {
       return Scaffold(
           appBar: AppBar(
-            title: const Text("Edit Reportpad"),
+            title: const Text("Edit Incident Report"),
           ),
           body: Padding(
               padding: const EdgeInsets.all(8),
@@ -43,7 +43,7 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     //Display movie id
-                    Text("Reportpad Index ${widget.id}"),
+                    Text("Report Index ${widget.id}"),
                     Form(
                       key: _formKey,
                       child: Padding(
@@ -52,7 +52,7 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                           children: <Widget>[
                             TextFormField(
                               decoration:
-                                  const InputDecoration(labelText: "Title"),
+                                  const InputDecoration(labelText: "Location"),
                               controller: locationController,
                               autofocus: true,
                             ),
@@ -63,8 +63,32 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                             ),
                             TextFormField(
                               decoration:
-                                  const InputDecoration(labelText: "Details"),
+                              const InputDecoration(labelText: "Time"),
+                              controller: timeController,
+                              autofocus: true,
+                            ),
+                            TextFormField(
+                              decoration:
+                                  const InputDecoration(labelText: "Severity"),
+                              controller: severityController,
+                            ),
+                            TextFormField(
+                              decoration:
+                              const InputDecoration(labelText: "Description"),
                               controller: descriptionController,
+                              autofocus: true,
+                            ),
+                            TextFormField(
+                              decoration:
+                              const InputDecoration(labelText: "Parties"),
+                              controller: partiesController,
+                              autofocus: true,
+                            ),
+                            TextFormField(
+                              decoration:
+                              const InputDecoration(labelText: "Police Status"),
+                              controller: statusController,
+                              autofocus: true,
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -73,10 +97,12 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                                     if (_formKey.currentState?.validate() ??
                                         false) {
                                       reportpad.location = locationController.text;
-                                      reportpad.date = dateController
-                                          .text; //good code would validate these
-                                      reportpad.description = descriptionController
-                                          .text; //good code would validate these
+                                      reportpad.date = dateController.text;
+                                      reportpad.time = timeController.text;
+                                      reportpad.severity = severityController.text;
+                                      reportpad.description = descriptionController.text;
+                                      reportpad.parties = partiesController.text;
+                                      reportpad.status = statusController.text;
 
                                       //update the model
 

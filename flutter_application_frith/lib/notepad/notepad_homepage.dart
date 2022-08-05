@@ -30,6 +30,7 @@ class _NotepadPageState extends State<NotepadPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Notepad'),
+        centerTitle: true,
       ),
       body: Center(
         child: Column(

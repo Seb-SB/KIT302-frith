@@ -51,6 +51,7 @@ class _SecurityGuardsState extends State<SecurityGuards> {
         appBar: AppBar(
           title: Text("Security Guards"),
           actions: [_popupMenuButton(context)],
+          centerTitle: true,
         ),
         body: Center(
           child: Column(

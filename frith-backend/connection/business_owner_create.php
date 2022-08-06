@@ -90,16 +90,10 @@ if($received){
     $json["message"] = "did not receive post values";
 }
 
+mysqli_close($conn);
 //tell browser that it is json data
 header('Content-Type: application/json');
 
 echo json_encode($json);
 
-/* 'BusinessName': busName,
-      'ABN': busABN,
-      'PhoneNumber': busPhoneNumber,
-      'EmailAddress': busEmail,
-      'Password': busPassword,
-      'ManagerFirstName': busFirstName,
-      'ManagerLastName': busLastName, */
 ?>

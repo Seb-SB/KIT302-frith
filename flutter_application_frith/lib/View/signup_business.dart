@@ -27,6 +27,7 @@ class _SignUpBusinessState extends State<SignUpBusiness> {
       TextEditingController();
   TextEditingController businessPasswordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController poolIDController = TextEditingController();
 
   var errorMessage = "";
   var _isLoading = false;
@@ -272,6 +273,36 @@ class _SignUpBusinessState extends State<SignUpBusiness> {
     );
   }
 
+  Widget _buildBusinessPoolIDTextField() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const SizedBox(height: 10.0),
+        Container(
+          alignment: Alignment.center,
+          height: 60.0,
+          child: TextFormField(
+            controller: poolIDController,
+            keyboardType: TextInputType.text,
+            obscureText: true,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "Please enter a pool ID";
+              }
+              return null;
+            },
+            decoration: const InputDecoration(
+              contentPadding: EdgeInsets.symmetric(vertical: 15),
+              border: InputBorder.none,
+              hintText: "Enter Pool ID",
+              prefixIcon: Icon(Icons.access_time_sharp),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
   Widget _loginRedirectButton() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -327,7 +358,8 @@ class _SignUpBusinessState extends State<SignUpBusiness> {
                     businessNumberController.text,
                     businessManagerFirstNameController.text,
                     businessManagerLastNameController.text,
-                    businessPasswordController.text);
+                    businessPasswordController.text,
+                    int.parse(poolIDController.text));
               }
             },
             child: const Text('SUBMIT')),
@@ -342,7 +374,8 @@ class _SignUpBusinessState extends State<SignUpBusiness> {
       String busPhoneNumber,
       String busFirstName,
       String busLastName,
-      String busPassword) async {
+      String busPassword,
+      int busPoolID) async {
     var url = 'http://192.168.0.128/frith/connection/business_owner_create.php';
 
     Map data = {
@@ -353,6 +386,7 @@ class _SignUpBusinessState extends State<SignUpBusiness> {
       'Password': busPassword,
       'ManagerFirstName': busFirstName,
       'ManagerLastName': busLastName,
+      'PoolID': busPoolID
     };
 
     var jsonData = null;
@@ -387,7 +421,7 @@ class _SignUpBusinessState extends State<SignUpBusiness> {
           _isLoading = false;
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => BusLogin()),
+            MaterialPageRoute(builder: (context) => const BusLogin()),
           );
           errorMessage = "";
         });
@@ -435,6 +469,7 @@ class _SignUpBusinessState extends State<SignUpBusiness> {
                           _buildBusinessManagerLastNameTextField(),
                           _buildBusinessPasswordTextField(),
                           _buildBusinessConfirmPasswordTextField(),
+                          _buildBusinessPoolIDTextField(),
                           _loginRedirectButton(),
                           _submitFormButton()
                         ],

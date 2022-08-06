@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_frith/Model/securityGuard.dart';
 import 'package:flutter_application_frith/notepad/notepad.dart';
 import 'package:provider/provider.dart';
 

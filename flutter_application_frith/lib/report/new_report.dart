@@ -1,7 +1,6 @@
-//mport 'dart:js_util';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_frith/Model/securityGuard.dart';
 import 'package:flutter_application_frith/report/reportpad.dart';
 import 'package:flutter_application_frith/report/reportpad_homepage.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +9,10 @@ import '../View/security_guards.dart';
 
 class NewReport extends StatefulWidget {
   const NewReport({Key? key}) : super(key: key);
+
+  ///const NewReport({key, required this.guard});
+
+  ///final SecurityGuard guard;
 
   @override
   _NewReportState createState() => _NewReportState();
@@ -85,6 +88,7 @@ class _NewReportState extends State<NewReport> {
       ],
     );
   }
+
   Widget _buildwitnessesOfReportTextField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -113,6 +117,7 @@ class _NewReportState extends State<NewReport> {
       ],
     );
   }
+
   Widget _buildseverityOfReportTextField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -144,8 +149,14 @@ class _NewReportState extends State<NewReport> {
                     severityOfReport.text = dropdownValue;
                   });
                 },
-                items: <String>['Danger', 'High', 'Informative', 'Low', 'Medium', 'None']
-                    .map<DropdownMenuItem<String>>((String value) {
+                items: <String>[
+                  'Danger',
+                  'High',
+                  'Informative',
+                  'Low',
+                  'Medium',
+                  'None'
+                ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),
@@ -155,10 +166,7 @@ class _NewReportState extends State<NewReport> {
             ),
           ],
         )
-
       ],
-      
-      
     );
   }
 
@@ -190,6 +198,7 @@ class _NewReportState extends State<NewReport> {
       ],
     );
   }
+
   Widget _buildPartiesOfReportTextField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -218,6 +227,7 @@ class _NewReportState extends State<NewReport> {
       ],
     );
   }
+
   Widget _buildstatusOfReportTextField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -249,8 +259,13 @@ class _NewReportState extends State<NewReport> {
                     statusOfReport.text = dropdownValue;
                   });
                 },
-                items: <String>['Reported', 'Under Investigation', 'Solved', 'Closed', 'None']
-                    .map<DropdownMenuItem<String>>((String value) {
+                items: <String>[
+                  'Reported',
+                  'Under Investigation',
+                  'Solved',
+                  'Closed',
+                  'None'
+                ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),
@@ -261,10 +276,9 @@ class _NewReportState extends State<NewReport> {
           ],
         )
       ],
-
-
     );
   }
+
   Widget _onSubmit(BuildContext context, List<Reportpad> reportpads) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -283,28 +297,45 @@ class _NewReportState extends State<NewReport> {
                   if (!formkey.currentState!.validate()) {
                     print("invalid entry");
                   } else {
-                    _addToList(locationOfReport.text, dateOfReport.text, witnessesOfReport.text, severityOfReport.text,
-                        descriptionOfReport.text, partiesOfReport.text,statusOfReport.text,  context, reportpads);
-                    Provider.of<ReportpadModel>(context, listen: false).update();
+                    _addToList(
+                        locationOfReport.text,
+                        dateOfReport.text,
+                        witnessesOfReport.text,
+                        severityOfReport.text,
+                        descriptionOfReport.text,
+                        partiesOfReport.text,
+                        statusOfReport.text,
+                        context,
+                        reportpads);
+                    Provider.of<ReportpadModel>(context, listen: false)
+                        .update();
                     Navigator.pop(context);
                   }
                 },
                 child: const Text('Submit')),
-                SizedBox(width: 30),
+            SizedBox(width: 30),
             ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   primary: Colors.blue,
                   onPrimary: Colors.white,
                 ),
                 onPressed: () {
-                  _addToList(locationOfReport.text, dateOfReport.text, witnessesOfReport.text, severityOfReport.text,
-                      descriptionOfReport.text, partiesOfReport.text,statusOfReport.text,  context, reportpads);
+                  _addToList(
+                      locationOfReport.text,
+                      dateOfReport.text,
+                      witnessesOfReport.text,
+                      severityOfReport.text,
+                      descriptionOfReport.text,
+                      partiesOfReport.text,
+                      statusOfReport.text,
+                      context,
+                      reportpads);
                   Provider.of<ReportpadModel>(context, listen: false).update();
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ReportpadPage()),
+                    MaterialPageRoute(
+                        builder: (context) => const ReportpadPage()),
                   );
-
                 },
                 child: const Text('Load Draft')),
             SizedBox(width: 30),
@@ -314,14 +345,22 @@ class _NewReportState extends State<NewReport> {
                   onPrimary: Colors.white,
                 ),
                 onPressed: () {
-                  _addToList(locationOfReport.text, dateOfReport.text, witnessesOfReport.text, severityOfReport.text,
-                      descriptionOfReport.text, partiesOfReport.text,statusOfReport.text,  context, reportpads);
+                  _addToList(
+                      locationOfReport.text,
+                      dateOfReport.text,
+                      witnessesOfReport.text,
+                      severityOfReport.text,
+                      descriptionOfReport.text,
+                      partiesOfReport.text,
+                      statusOfReport.text,
+                      context,
+                      reportpads);
                   Provider.of<ReportpadModel>(context, listen: false).update();
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ReportpadPage()),
+                    MaterialPageRoute(
+                        builder: (context) => const ReportpadPage()),
                   );
-
                 },
                 child: const Text('Save Draft')),
           ],
@@ -330,17 +369,32 @@ class _NewReportState extends State<NewReport> {
     );
   }
 
-  void _addToList(String locationOfReport, String dateOfReport, String witnessesOfReport, String severityOfReport, String detailsOfReport, String partiesOfReport, String statusOfReport,
-      BuildContext context, List<Reportpad> reportpads) {
-    Reportpad report =
-        Reportpad(location: locationOfReport, date: dateOfReport, witnesses: witnessesOfReport, severity: severityOfReport, description: detailsOfReport, parties: partiesOfReport, status: statusOfReport);
+  void _addToList(
+      String locationOfReport,
+      String dateOfReport,
+      String witnessesOfReport,
+      String severityOfReport,
+      String detailsOfReport,
+      String partiesOfReport,
+      String statusOfReport,
+      BuildContext context,
+      List<Reportpad> reportpads) {
+    Reportpad report = Reportpad(
+        location: locationOfReport,
+        date: dateOfReport,
+        witnesses: witnessesOfReport,
+        severity: severityOfReport,
+        description: detailsOfReport,
+        parties: partiesOfReport,
+        status: statusOfReport);
 
     reportpads.add(report);
   }
 
   @override
   Widget build(BuildContext context) {
-    var reportpads = Provider.of<ReportpadModel>(context, listen: false).reportItems;
+    var reportpads =
+        Provider.of<ReportpadModel>(context, listen: false).reportItems;
     return Scaffold(
       appBar: AppBar(
         title: const Text("New Report"),
@@ -370,10 +424,13 @@ class _NewReportState extends State<NewReport> {
                 ElevatedButton(
                   child: const Text('Delete'),
                   onPressed: () {
+                    Navigator.pop(context);
+                    /* TESTING
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const SecurityGuards()),
-                    );
+                      MaterialPageRoute(
+                          builder: (context) => const SecurityGuards(guard: null,)),
+                    );*/
                   },
                 )
               ],

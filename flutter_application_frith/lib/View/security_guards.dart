@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/src/material/bottom_navigation_bar.dart';
+import 'package:flutter_application_frith/Model/securityGuard.dart';
 import 'package:flutter_application_frith/View/security_login.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../emergency/emergencyphone.dart';
 import '../notepad/notepad_homepage.dart';
 import 'package:torch_light/torch_light.dart';
-
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import '../report/new_report.dart';
 import '../report/reportpad_homepage.dart';
 
 class SecurityGuards extends StatefulWidget {
   const SecurityGuards({Key? key}) : super(key: key);
+
+  ///const SecurityGuards({key, required this.guard});
+
+  //final SecurityGuard guard;
 
   @override
   State<SecurityGuards> createState() => _SecurityGuardsState();
@@ -19,6 +24,7 @@ class SecurityGuards extends StatefulWidget {
 
 class _SecurityGuardsState extends State<SecurityGuards> {
   bool light = false;
+  var sessionManager = SessionManager();
 
   Future<bool> _checkIfLightExists() async {
     try {
@@ -99,7 +105,7 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const NotepadPage(
+                                builder: (context) => NotepadPage(
 
                                     ///title: '',
                                     )));
@@ -164,26 +170,24 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const NewReport(
-
-                                ///title: '',
-                              )));
-                    },
-                    child: Container(
-                      // alignment: Alignment.centerLeft,
-                      color: Colors.blueAccent,
-                      width: 140,
-                      height: 90,
-                      child: Icon(
-                        Icons.note,
-                        color: Colors.white,
-                        size: 80,
-                      ) //"Incident Report"
-                      )),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const NewReport(),
+                            ));
+                      },
+                      child: Container(
+                          // alignment: Alignment.centerLeft,
+                          color: Colors.blueAccent,
+                          width: 140,
+                          height: 90,
+                          child: Icon(
+                            Icons.note,
+                            color: Colors.white,
+                            size: 80,
+                          ) //"Incident Report"
+                          )),
                   Container(
                       //alignment: Alignment.centerRight,
 
@@ -230,6 +234,8 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                               TextButton(
                                 child: Text("Yes"),
                                 onPressed: () {
+                                  SessionManager()
+                                      .destroy(); //Destroy session data
                                   Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(

@@ -343,7 +343,7 @@ class _SignUpBusinessState extends State<SignUpBusiness> {
       String busFirstName,
       String busLastName,
       String busPassword) async {
-    var url = 'http://192.168.0.128/frith/connection/security_guard_create.php';
+    var url = 'http://192.168.0.128/frith/connection/business_owner_create.php';
 
     Map data = {
       'BusinessName': busName,

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_frith/Model/securityGuard.dart';
 import 'package:flutter_application_frith/notepad/new_note.dart';
 import 'package:provider/provider.dart';
 import 'notepad.dart';
 import 'notepad_details.dart';
 
 class NotepadPage extends StatefulWidget {
-  const NotepadPage({Key? key}) : super(key: key);
+  NotepadPage({Key? key}) : super(key: key);
+
+  ///late LoggedInGuard guard = LoggedInGuard();
 
   @override
   _NotepadPageState createState() => _NotepadPageState();
@@ -17,8 +20,7 @@ class _NotepadPageState extends State<NotepadPage> {
     return Consumer<NotepadModel>(builder: buildScaffold);
   }
 
-  Scaffold buildScaffold(
-      BuildContext context, NotepadModel notepadModel, _) {
+  Scaffold buildScaffold(BuildContext context, NotepadModel notepadModel, _) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Notepad'),
@@ -41,6 +43,8 @@ class _NotepadPageState extends State<NotepadPage> {
                     children: [
                       GestureDetector(
                         onTap: () {
+                          ///print("----");
+                          ///print(widget.guard.getGuardValue().FirstName);
                           //
                           Navigator.push(
                               context,
@@ -88,7 +92,7 @@ class _NotepadPageState extends State<NotepadPage> {
             //  title: Text("Notepad one"),
             //subtitle: Text("one subtitle"),
             //   onTap: () {
-            
+
             // },
             //),
           ],

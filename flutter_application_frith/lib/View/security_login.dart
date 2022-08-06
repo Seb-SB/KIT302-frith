@@ -1,5 +1,5 @@
 // ignore_for_file: unnecessary_null_comparison
-
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_frith/Model/securityGuard.dart';
@@ -11,6 +11,7 @@ import 'package:http/http.dart' as http;
 
 class SecLogin extends StatefulWidget {
   late Future<SecurityGuard> futureSecurityGuard;
+  late LoggedInGuard guard = new LoggedInGuard();
 
   SecLogin({Key? key}) : super(key: key);
 
@@ -27,6 +28,9 @@ class _SecLoginState extends State<SecLogin> {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  late SecurityGuard current_guard;
+  var sessionManager = SessionManager();
 
   @override
   void initState() {
@@ -126,27 +130,52 @@ class _SecLoginState extends State<SecLogin> {
 
     Map data = {'email': email, 'password': password};
 
-    var jsonData = null;
-
-    ///print(data.entries);
-
     final response = await http.post(Uri.parse(url),
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Accept': 'application/json'
+          ///'Content-Type': 'application/x-www-form-urlencoded',
+          ///'Accept': 'application/json'
+          'Content-Type': 'application/json; charset=UTF-8',
         },
-        body: data,
+        body: jsonEncode(data),
         encoding: Encoding.getByName("utf-8"));
-
-    /*var response =
-        await http.get(Uri.parse('$url?email=$email&password=$password'));*/
 
     print(response.body);
 
     if (response.statusCode == 200) {
-      jsonData = await jsonDecode(jsonEncode(response.body));
+      //jsonData = await jsonDecode(jsonEncode(response.body));
       //print(jsonData);
-      jsonData = jsonDecode(jsonData);
+
+      //new line here
+      //current_guard = SecurityGuard.fromJSON(jsonData);
+
+      var jsonData = await json.decode(response.body);
+      current_guard = SecurityGuard.fromJSON(jsonData);
+      widget.guard.setGuardValue(current_guard);
+      print("----");
+      print(widget.guard.getGuardValue().FirstName);
+
+      await sessionManager.set(
+          "GuardKey", widget.guard.getGuardValue().GuardKey);
+
+      await sessionManager.set(
+          "FirstName", widget.guard.getGuardValue().FirstName);
+
+      await sessionManager.set(
+          "LastName", widget.guard.getGuardValue().LastName);
+
+      await sessionManager.set(
+          "EmailAddress", widget.guard.getGuardValue().EmailAddress);
+
+      await sessionManager.set(
+          "Password", widget.guard.getGuardValue().Password);
+
+      await sessionManager.set(
+          "PhoneNumber", widget.guard.getGuardValue().PhoneNumber);
+
+      //dynamic guardKey = await SessionManager().get("GuardKey");
+
+      ///print(guardKey);
+
       //print(jsonData["error"]);
       if (jsonData["error"] == true) {
         //print(jsonData);
@@ -166,7 +195,7 @@ class _SecLoginState extends State<SecLogin> {
         });
       }
     } else {
-      print(jsonData["errmsg"]);
+      //print(jsonData["errmsg"]);
     }
   }
 
@@ -203,13 +232,13 @@ class _SecLoginState extends State<SecLogin> {
       //}
     }
   }
-
+  /*
   void _saveAndRedirectToHome() async {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const SecurityGuards()),
     );
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {

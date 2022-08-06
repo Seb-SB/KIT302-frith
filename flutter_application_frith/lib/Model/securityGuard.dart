@@ -4,6 +4,7 @@ import 'dart:convert';
 
 //SecurityGuard securityGuardModelFromMap(String str) =>
 //SecurityGuard.fromMap(json.decode(str));
+///SecurityGuard guard = SecurityGuard.fromJSON(json);
 
 class SecurityGuard {
   String GuardKey;
@@ -46,5 +47,23 @@ class SecurityGuard {
     data['Password'] = Password;
 
     return data;
+  }
+}
+
+class LoggedInGuard {
+  late SecurityGuard logged_in_guard = SecurityGuard(
+      GuardKey: "",
+      FirstName: "",
+      LastName: "",
+      PhoneNumber: "",
+      EmailAddress: "",
+      Password: "");
+
+  void setGuardValue(SecurityGuard current_guard) {
+    logged_in_guard = current_guard;
+  }
+
+  SecurityGuard getGuardValue() {
+    return logged_in_guard;
   }
 }

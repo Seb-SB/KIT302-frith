@@ -70,21 +70,40 @@ if (empty($data['ManagerLastName'])) {
     $received = true;
 }
 
+if (empty($data['PoolID'])) {
+    $received = false;
+} else {
+    $busPoolID = $data['PoolID'];
+    $received = true;
+}
+
 //if all values were received
 if($received){
 
 
     //TODO: Check with database setup -> how to add business account
-
-    $sql = "INSERT INTO `accountbusinessowner`(`BusinessName`, `ABN`, `PhoneNumber`, `EmailAddress`, `Password`, `ManagerFirstName`, `ManagerLastName`) VALUES ('$busName','$ABN','$busPhoneNumber','$busEmail','$busPassword','$busFirstName','$busLastName');";
+    $sql = "SELECT * FROM `informationpool` WHERE `PoolID`= '$busPoolID';";
     $res = mysqli_query($conn, $sql);
-    
-    if (!$res) {
+    $numrows = mysqli_num_rows($res);
+
+    //if table does not contain unique key
+    if ($numrows == 0) {
         $json["error"] = true;
-        $json["message"] = "Database error";
+        $json["message"] = "Invalid Pool ID";
     } else {
-        $json["message"] = "Success";
+        $sql = "INSERT INTO `accountbusinessowner`(`StatusID`, `PoolID`, `BusinessName`, `ABN`, `PhoneNumber`, `EmailAddress`, `Password`, `ManagerFirstName`, `ManagerLastName`) VALUES ('Pending','$busPoolID','$busName','$ABN','$busPhoneNumber','$busEmail','$busPassword','$busFirstName','$busLastName');";
+        $res = mysqli_query($conn, $sql);
+    
+        if (!$res) {
+            $json["error"] = true;
+            $json["message"] = "Database error";
+        } else {
+            $json["message"] = "Success";
+        }
     }
+
+
+    
 } else {
     $json["error"] = true;
     $json["message"] = "did not receive post values";

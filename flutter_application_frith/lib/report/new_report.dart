@@ -1,7 +1,5 @@
 //mport 'dart:js_util';
 
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_frith/report/reportpad.dart';
@@ -9,7 +7,6 @@ import 'package:flutter_application_frith/report/reportpad_homepage.dart';
 import 'package:provider/provider.dart';
 
 import '../View/security_guards.dart';
-import 'package:http/http.dart' as http;
 
 class NewReport extends StatefulWidget {
   const NewReport({Key? key}) : super(key: key);
@@ -26,9 +23,7 @@ class _NewReportState extends State<NewReport> {
   TextEditingController descriptionOfReport = TextEditingController();
   TextEditingController partiesOfReport = TextEditingController();
   TextEditingController statusOfReport = TextEditingController();
-  var timeNow;
-  var errorMessage = "";
-  var _isLoading = false;
+  final statusItems = ['Danger', 'High', 'Informative', 'low', 'medium'];
   String dropdownValue = 'None';
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
@@ -288,7 +283,6 @@ class _NewReportState extends State<NewReport> {
                   if (!formkey.currentState!.validate()) {
                     print("invalid entry");
                   } else {
-                    timeNow = DateTime.now();
                     _addToList(locationOfReport.text, dateOfReport.text, witnessesOfReport.text, severityOfReport.text,
                         descriptionOfReport.text, partiesOfReport.text,statusOfReport.text,  context, reportpads);
                     Provider.of<ReportpadModel>(context, listen: false).update();
@@ -303,6 +297,8 @@ class _NewReportState extends State<NewReport> {
                   onPrimary: Colors.white,
                 ),
                 onPressed: () {
+                  _addToList(locationOfReport.text, dateOfReport.text, witnessesOfReport.text, severityOfReport.text,
+                      descriptionOfReport.text, partiesOfReport.text,statusOfReport.text,  context, reportpads);
                   Provider.of<ReportpadModel>(context, listen: false).update();
                   Navigator.push(
                     context,
@@ -320,7 +316,6 @@ class _NewReportState extends State<NewReport> {
                 onPressed: () {
                   _addToList(locationOfReport.text, dateOfReport.text, witnessesOfReport.text, severityOfReport.text,
                       descriptionOfReport.text, partiesOfReport.text,statusOfReport.text,  context, reportpads);
-                  _submit(timeNow, severityOfReport.text, statusOfReport.text, locationOfReport.text, descriptionOfReport.text, partiesOfReport.text, witnessesOfReport.text);
                   Provider.of<ReportpadModel>(context, listen: false).update();
                   Navigator.push(
                     context,
@@ -401,70 +396,4 @@ class _NewReportState extends State<NewReport> {
       ),
     );
   }
-  Future<void> _submit(DateTime timeNow, String severityOfReport, String statusOfReport,
-      String locationOfReport, String descriptionOfReport, String partiesOfReport, String witnessesOfReport) async {
-    var url = 'http://192.168.0.128/frith/connection/security_guard_create.php';
-
-    Map data = {
-      'TimeSubmitted': timeNow,
-      'IncidentType': statusOfReport,
-      'SpecificArea': locationOfReport,
-      'Description': descriptionOfReport,
-      'PartiesInvolved': partiesOfReport,
-      'Witnesses ': witnessesOfReport,
-      'ReportFiled': severityOfReport
-    };
-
-    Map data1 = <String, dynamic>{};
-
-    data1['TimeSubmitted'] = timeNow;
-    data1['IncidentType'] = statusOfReport;
-    data1['SpecificArea'] = locationOfReport;
-    data1['Description'] = descriptionOfReport;
-    data1['PartiesInvolved'] = partiesOfReport;
-    data1['Witnesses'] = witnessesOfReport;
-    data1['ReportFiled'] = severityOfReport;
-
-    var jsonData = null;
-
-    ///print(data.entries);
-
-    final response = await http.post(Uri.parse(url),
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Accept': 'application/json'
-        },
-        body: data1,
-        encoding: Encoding.getByName("utf-8"));
-
-    print(response.body);
-
-    if (response.statusCode == 200) {
-      jsonData = await jsonDecode(jsonEncode(response.body));
-      print(jsonData);
-      jsonData = jsonDecode(jsonData);
-      //print(jsonData["error"]);
-      if (jsonData["error"] == true) {
-        //print(jsonData);
-        errorMessage = await jsonData["message"];
-        setState(() {
-          _isLoading = false;
-        });
-        //create scaffold
-
-      } else {
-        setState(() {
-          _isLoading = false;
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => SecurityGuards()),
-          );
-          errorMessage = "";
-        });
-      }
-    } else {
-      print(jsonData["message"]);
-    }
-  }
-
 }

@@ -3,8 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/src/material/bottom_navigation_bar.dart';
 import 'package:flutter_application_frith/View/business_login.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_application_frith/InformationPool/inforPool.dart';
+import 'package:flutter_application_frith/InformationPool/informationPool.dart';
 import 'package:flutter_application_frith/InformationPool/information_homepage.dart';
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 
 class BusinessOwners extends StatefulWidget {
   const BusinessOwners({Key? key}) : super(key: key);
@@ -20,6 +21,7 @@ class _BusinessOwnersState extends State<BusinessOwners> {
         appBar: AppBar(
           title: Text("Business Owner"),
           actions: [_popupMenuButton(context)],
+          centerTitle: true,
         ),
         body: Center(
           child: Column(
@@ -35,9 +37,7 @@ class _BusinessOwnersState extends State<BusinessOwners> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const InformationpoolPage(
-                                 
-                                )));
+                                builder: (context) => InformationHomepage()));
                       },
                       child: Container(
                           color: Colors.blueAccent,
@@ -74,6 +74,7 @@ class _BusinessOwnersState extends State<BusinessOwners> {
           ),
         ));
   }
+
   PopupMenuButton _popupMenuButton(BuildContext context) {
     return PopupMenuButton(
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'information_details.dart';
 import 'information_homepage.dart';
 
 class InformationPool {
@@ -32,12 +31,12 @@ class InformationPoolModel extends ChangeNotifier {
         date: "2021-07-23 12:00:02.000",
         details: "The second one is ..."));
     add(InformationPool(
-       title: "Information3",
+        title: "Information3",
         time: "1.00pm",
         date: "2021-07-23 12:00:02.000",
         details: "The  note is ..."));
     add(InformationPool(
-       title: "Information4",
+        title: "Information4",
         time: "3.00pm",
         date: "2021-05-23 12:00:02.000",
         details: "The  note is ..."));
@@ -54,9 +53,9 @@ class InformationPoolModel extends ChangeNotifier {
   }
 
   void sort() {
-    items.sort((a, b) =>DateTime.parse( b.date).compareTo(DateTime.parse(a.date)));
+    items.sort(
+        (a, b) => DateTime.parse(b.date).compareTo(DateTime.parse(a.date)));
   }
-
 
   void removeAll() {
     items.clear();

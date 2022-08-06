@@ -78,7 +78,6 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                           } else {
                             _turnOffLight();
                           }
-                          //TODO turn on flashlight
                         });
                       },
                       child: Container(
@@ -128,13 +127,6 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      /*
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const PhonePage()));*/
-                    },
                     child: Container(
                         // alignment: Alignment.centerRight,
 

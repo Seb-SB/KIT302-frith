@@ -18,7 +18,7 @@ class NewReport extends StatefulWidget {
 class _NewReportState extends State<NewReport> {
   TextEditingController locationOfReport = TextEditingController();
   TextEditingController dateOfReport = TextEditingController();
-  TextEditingController timeOfReport = TextEditingController();
+  TextEditingController witnessesOfReport = TextEditingController();
   TextEditingController severityOfReport = TextEditingController();
   TextEditingController descriptionOfReport = TextEditingController();
   TextEditingController partiesOfReport = TextEditingController();
@@ -85,7 +85,7 @@ class _NewReportState extends State<NewReport> {
       ],
     );
   }
-  Widget _buildtimeOfReportTextField() {
+  Widget _buildwitnessesOfReportTextField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
@@ -94,7 +94,7 @@ class _NewReportState extends State<NewReport> {
           alignment: Alignment.center,
           height: 60.0,
           child: TextFormField(
-            controller: timeOfReport,
+            controller: witnessesOfReport,
             keyboardType: TextInputType.text,
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -105,8 +105,8 @@ class _NewReportState extends State<NewReport> {
             decoration: const InputDecoration(
               contentPadding: EdgeInsets.symmetric(vertical: 15),
               border: InputBorder.none,
-              hintText: 'Time:',
-              prefixIcon: Icon(Icons.timer),
+              hintText: 'witnesses:',
+              prefixIcon: Icon(Icons.title),
             ),
           ),
         )
@@ -283,7 +283,7 @@ class _NewReportState extends State<NewReport> {
                   if (!formkey.currentState!.validate()) {
                     print("invalid entry");
                   } else {
-                    _addToList(locationOfReport.text, dateOfReport.text, timeOfReport.text, severityOfReport.text,
+                    _addToList(locationOfReport.text, dateOfReport.text, witnessesOfReport.text, severityOfReport.text,
                         descriptionOfReport.text, partiesOfReport.text,statusOfReport.text,  context, reportpads);
                     Provider.of<ReportpadModel>(context, listen: false).update();
                     Navigator.pop(context);
@@ -297,7 +297,7 @@ class _NewReportState extends State<NewReport> {
                   onPrimary: Colors.white,
                 ),
                 onPressed: () {
-                  _addToList(locationOfReport.text, dateOfReport.text, timeOfReport.text, severityOfReport.text,
+                  _addToList(locationOfReport.text, dateOfReport.text, witnessesOfReport.text, severityOfReport.text,
                       descriptionOfReport.text, partiesOfReport.text,statusOfReport.text,  context, reportpads);
                   Provider.of<ReportpadModel>(context, listen: false).update();
                   Navigator.push(
@@ -314,7 +314,7 @@ class _NewReportState extends State<NewReport> {
                   onPrimary: Colors.white,
                 ),
                 onPressed: () {
-                  _addToList(locationOfReport.text, dateOfReport.text, timeOfReport.text, severityOfReport.text,
+                  _addToList(locationOfReport.text, dateOfReport.text, witnessesOfReport.text, severityOfReport.text,
                       descriptionOfReport.text, partiesOfReport.text,statusOfReport.text,  context, reportpads);
                   Provider.of<ReportpadModel>(context, listen: false).update();
                   Navigator.push(
@@ -330,10 +330,10 @@ class _NewReportState extends State<NewReport> {
     );
   }
 
-  void _addToList(String locationOfReport, String dateOfReport, String timeOfReport, String severityOfReport, String detailsOfReport, String partiesOfReport, String statusOfReport,
+  void _addToList(String locationOfReport, String dateOfReport, String witnessesOfReport, String severityOfReport, String detailsOfReport, String partiesOfReport, String statusOfReport,
       BuildContext context, List<Reportpad> reportpads) {
     Reportpad report =
-        Reportpad(location: locationOfReport, date: dateOfReport, time: timeOfReport, severity: severityOfReport, description: detailsOfReport, parties: partiesOfReport, status: statusOfReport);
+        Reportpad(location: locationOfReport, date: dateOfReport, witnesses: witnessesOfReport, severity: severityOfReport, description: detailsOfReport, parties: partiesOfReport, status: statusOfReport);
 
     reportpads.add(report);
   }
@@ -383,11 +383,11 @@ class _NewReportState extends State<NewReport> {
               child: Column(children: <Widget>[
                 _buildlocationOfReportTextField(),
                 _buildDateOfReportTextField(),
-                _buildtimeOfReportTextField(),
-                _buildseverityOfReportTextField(),
+                _buildwitnessesOfReportTextField(),
                 _builddescriptionOfReportTextField(),
                 _buildPartiesOfReportTextField(),
                 _buildstatusOfReportTextField(),
+                _buildseverityOfReportTextField(),
                 _onSubmit(context, reportpads)
               ]),
             ),

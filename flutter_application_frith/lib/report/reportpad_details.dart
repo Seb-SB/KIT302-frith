@@ -14,7 +14,7 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
   final _formKey = GlobalKey<FormState>();
   final locationController = TextEditingController();
   final dateController = TextEditingController();
-  final timeController = TextEditingController();
+  final witnessesController = TextEditingController();
   final severityController = TextEditingController();
   final descriptionController = TextEditingController();
   final partiesController = TextEditingController();
@@ -26,7 +26,7 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
 
     locationController.text = reportpad.location;
     dateController.text = reportpad.date;
-    timeController.text = reportpad.time;
+    witnessesController.text = reportpad.witnesses;
     severityController.text = reportpad.severity;
     descriptionController.text = reportpad.description;
     partiesController.text = reportpad.parties;
@@ -63,8 +63,8 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                             ),
                             TextFormField(
                               decoration:
-                              const InputDecoration(labelText: "Time"),
-                              controller: timeController,
+                              const InputDecoration(labelText: "witnesses"),
+                              controller: witnessesController,
                               autofocus: true,
                             ),
                             TextFormField(
@@ -98,7 +98,7 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                                         false) {
                                       reportpad.location = locationController.text;
                                       reportpad.date = dateController.text;
-                                      reportpad.time = timeController.text;
+                                      reportpad.witnesses = witnessesController.text;
                                       reportpad.severity = severityController.text;
                                       reportpad.description = descriptionController.text;
                                       reportpad.parties = partiesController.text;

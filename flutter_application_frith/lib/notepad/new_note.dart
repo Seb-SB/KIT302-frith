@@ -47,7 +47,7 @@ class _NewNoteState extends State<NewNote> {
       ],
     );
   }
-
+  /*
   Widget _buildDateOfNoteTextField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,7 +75,7 @@ class _NewNoteState extends State<NewNote> {
         )
       ],
     );
-  }
+  }*/
 
   Widget _buildDetailsOfNoteTextField() {
     return Column(
@@ -120,8 +120,9 @@ class _NewNoteState extends State<NewNote> {
               if (!formkey.currentState!.validate()) {
                 print("invalid entry");
               } else {
-                _addToList(titleOfNote.text, int.parse(dateOfNote.text),
-                    detailsOfNote.text, context, notepads);
+                final time = DateTime.now().toString();
+                _addToList(titleOfNote.text, time, detailsOfNote.text, context,
+                    notepads);
                 Provider.of<NotepadModel>(context, listen: false).update();
                 Navigator.pop(context);
               }
@@ -131,7 +132,7 @@ class _NewNoteState extends State<NewNote> {
     );
   }
 
-  void _addToList(String titleOfNote, int dateOfNote, String detailsOfNote,
+  void _addToList(String titleOfNote, String dateOfNote, String detailsOfNote,
       BuildContext context, List<Notepad> notepads) {
     Notepad note =
         Notepad(title: titleOfNote, date: dateOfNote, details: detailsOfNote);
@@ -167,7 +168,7 @@ class _NewNoteState extends State<NewNote> {
               key: formkey,
               child: Column(children: <Widget>[
                 _buildtitleOfNoteTextField(),
-                _buildDateOfNoteTextField(),
+                //_buildDateOfNoteTextField(),
                 _buildDetailsOfNoteTextField(),
                 _onSubmit(context, notepads)
               ]),

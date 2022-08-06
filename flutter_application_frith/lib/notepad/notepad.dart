@@ -4,13 +4,13 @@ import 'notepad_homepage.dart';
 
 class Notepad {
   String title;
-  String time;
+  //String time;
   String date;
   String details;
 
   Notepad(
       {required this.title,
-      required this.time,
+      //required this.time,
       required this.date,
       required this.details});
 }
@@ -23,27 +23,27 @@ class NotepadModel extends ChangeNotifier {
   NotepadModel() {
     add(Notepad(
         title: "Notepad1",
-        time: "1.00pm",
+        //time: "1.00pm",
         date: "2021-05-23 12:00:02.000",
         details: "The first note is ..."));
     add(Notepad(
         title: "Notepad2",
-        time: "2.00pm",
+        //time: "2.00pm",
         date: "2021-07-25 12:00:02.000",
         details: "The second note is ..."));
     add(Notepad(
         title: "Notepad3",
-        time: "1.00pm",
+        //time: "1.00pm",
         date: "2021-07-20 12:00:02.000",
         details: "The third note is ..."));
     add(Notepad(
         title: "Notepad4",
-        time: "3.30pm",
+        //time: "3.30pm",
         date: "2021-04-23 12:00:02.000",
         details: "The 4th note is ..."));
     add(Notepad(
         title: "Notepad5",
-        time: "1.00pm",
+        //time: "1.00pm",
         date: "2021-09-23 12:00:02.000",
         details: "The 5th note is ..."));
   }
@@ -54,7 +54,8 @@ class NotepadModel extends ChangeNotifier {
   }
 
   void sort() {
-    items.sort((a, b) =>DateTime.parse( b.date).compareTo(DateTime.parse(a.date)));
+    items.sort(
+        (a, b) => DateTime.parse(b.date).compareTo(DateTime.parse(a.date)));
   }
 
   void removeAll() {

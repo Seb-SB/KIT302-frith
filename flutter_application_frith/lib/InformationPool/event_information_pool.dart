@@ -38,7 +38,6 @@ class InformationPoolModel extends ChangeNotifier {
 
   //Normally a model would get from a database here, we are just hardcoding some data for this week
   InformationPoolModel() {
-    /*
     add(EventInformationPool(
         businessID: 1,
         dateTime: "2021-07-23 12:00:02.000",
@@ -54,7 +53,7 @@ class InformationPoolModel extends ChangeNotifier {
         eventTitle: "EVENT TITLE2",
         levelID: "D",
         numberOfPerpetrators: 4,
-        eventColour: "#262424"));*/
+        eventColour: "#262424"));
   }
 
   void add(EventInformationPool item) {

@@ -42,7 +42,4 @@ if($row_number == 0) {
 
 mysqli_close($conn);
 
-//tell browser that it is json data
-
-
 ?>

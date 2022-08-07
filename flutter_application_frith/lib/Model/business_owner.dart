@@ -1,5 +1,5 @@
 class business_owner {
-  int BusinessID;
+  String BusinessID;
   String BusinessName;
   String BusinessABN;
   String BusinessEmail;
@@ -45,7 +45,7 @@ class business_owner {
 
 class LoggedInBusiness {
   late business_owner logged_in_business = business_owner(
-      BusinessID: 0,
+      BusinessID: "",
       BusinessName: "",
       BusinessABN: "",
       BusinessEmail: "",

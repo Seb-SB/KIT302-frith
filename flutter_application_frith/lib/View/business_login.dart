@@ -142,7 +142,7 @@ class _BusLoginState extends State<BusLogin> {
     print(response.body);
 
     if (response.statusCode == 200) {
-      jsonData = await jsonDecode(jsonEncode(response.body));
+      jsonData = await jsonDecode(response.body);
       logged_in_business = business_owner.fromJSON(jsonData);
       widget.business.setLoggedInBusinessValue(logged_in_business);
 

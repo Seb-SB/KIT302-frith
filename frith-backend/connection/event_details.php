@@ -33,14 +33,16 @@ if($row_number == 0) {
         $json["levelID"] = $row['LevelID'];
         $json["eventColour"] = $event_colour;
 
+        header('Content-Type: application/json');
+
+        echo json_encode($json);
+
     }
 }
 
 mysqli_close($conn);
 
 //tell browser that it is json data
-header('Content-Type: application/json');
 
-echo json_encode($json);
 
 ?>

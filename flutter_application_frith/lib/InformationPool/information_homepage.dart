@@ -18,7 +18,6 @@ class _InformationHomepageState extends State<InformationHomepage> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Consumer<InformationPoolModel>(builder: buildScaffold);
   }
 

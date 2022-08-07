@@ -3,6 +3,6 @@
 3    package="com.svprdga.torchlight" >
 4
 5    <uses-sdk android:minSdkVersion="21" />
-5-->C:\Users\User\flutter\.pub-cache\hosted\pub.dartlang.org\torch_light-0.4.0\android\src\main\AndroidManifest.xml
+5-->M:\PCPrograms\Flutter\flutter\.pub-cache\hosted\pub.dartlang.org\torch_light-0.4.0\android\src\main\AndroidManifest.xml
 6
 7</manifest>

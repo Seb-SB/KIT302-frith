@@ -1,4 +1,5 @@
 class business_owner {
+  int BusinessID;
   String BusinessName;
   String BusinessABN;
   String BusinessEmail;
@@ -8,7 +9,8 @@ class business_owner {
 
   //constructor
   business_owner(
-      {required this.BusinessName,
+      {required this.BusinessID,
+      required this.BusinessName,
       required this.BusinessABN,
       required this.BusinessEmail,
       required this.ManagerFirstName,
@@ -18,6 +20,7 @@ class business_owner {
   //convert from JSON
   factory business_owner.fromJSON(Map<String, dynamic> json) {
     return business_owner(
+        BusinessID: json["BusinessID"],
         BusinessName: json["BusinessName"],
         BusinessABN: json["BusinessABN"],
         BusinessEmail: json["BusinessEmail"],
@@ -37,5 +40,24 @@ class business_owner {
     data["BusinessNumber"] = BusinessNumber;
 
     return data;
+  }
+}
+
+class LoggedInBusiness {
+  late business_owner logged_in_business = business_owner(
+      BusinessID: 0,
+      BusinessName: "",
+      BusinessABN: "",
+      BusinessEmail: "",
+      ManagerFirstName: "",
+      ManagerLastName: "",
+      BusinessNumber: "");
+
+  void setLoggedInBusinessValue(business_owner current_business) {
+    logged_in_business = current_business;
+  }
+
+  business_owner getLoggedInBusinessValue() {
+    return logged_in_business;
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_frith/InformationPool/event_information_pool.dart';
 import 'package:flutter_application_frith/InformationPool/information_homepage.dart';
 import 'package:flutter_application_frith/View/home_page.dart';
 import 'package:flutter_application_frith/View/security_login.dart';
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ReportpadModel()),
-        ChangeNotifierProvider(create: (context) => NotepadModel())
+        ChangeNotifierProvider(create: (context) => NotepadModel()),
+        ChangeNotifierProvider(create: (context) => InformationPoolModel())
 
         ///Provider(create: (context) => InformationpoolPage())
       ],

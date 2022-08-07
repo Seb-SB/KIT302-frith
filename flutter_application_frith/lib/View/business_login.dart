@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_frith/InformationPool/event_information_pool.dart';
 import 'signup_business.dart';
 import 'business_owners.dart';
 import 'dart:convert';
 import 'package:flutter_application_frith/Model/business_owner.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 
 class BusLogin extends StatefulWidget {
-  const BusLogin({Key? key}) : super(key: key);
+  late LoggedInBusiness business = LoggedInBusiness();
+
+  BusLogin({Key? key}) : super(key: key);
 
   @override
   _BusLoginState createState() => _BusLoginState();
@@ -21,6 +25,9 @@ class _BusLoginState extends State<BusLogin> {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  var sessionManager = SessionManager();
+  late business_owner logged_in_business;
 
   @override
   void initState() {
@@ -125,30 +132,49 @@ class _BusLoginState extends State<BusLogin> {
 
     var jsonData = null;
 
-    ///print(data.entries);
-
     final response = await http.post(Uri.parse(url),
         headers: {
-          //'Content-Type': 'application/x-www-form-urlencoded',
           'Content-Type': 'application/json; charset=UTF-8',
-          //'Accept': 'application/json'
         },
-        //body: data,
         body: jsonEncode(data),
         encoding: Encoding.getByName("utf-8"));
-
-    /*var response =
-        await http.get(Uri.parse('$url?email=$email&password=$password'));*/
 
     print(response.body);
 
     if (response.statusCode == 200) {
       jsonData = await jsonDecode(jsonEncode(response.body));
-      //print(jsonData);
-      jsonData = jsonDecode(jsonData);
-      //print(jsonData["error"]);
+      logged_in_business = business_owner.fromJSON(jsonData);
+      widget.business.setLoggedInBusinessValue(logged_in_business);
+
+      /*
+      * Assign session values for current business
+      */
+
+      await sessionManager.set(
+          "BusinessID", widget.business.getLoggedInBusinessValue().BusinessID);
+
+      await sessionManager.set("BusinessEmail",
+          widget.business.getLoggedInBusinessValue().BusinessEmail);
+
+      await sessionManager.set("BusinessABN",
+          widget.business.getLoggedInBusinessValue().BusinessABN);
+
+      await sessionManager.set("BusinessName",
+          widget.business.getLoggedInBusinessValue().BusinessName);
+
+      await sessionManager.set("BusinessNumber",
+          widget.business.getLoggedInBusinessValue().BusinessNumber);
+
+      await sessionManager.set("ManagerFirstName",
+          widget.business.getLoggedInBusinessValue().ManagerFirstName);
+
+      await sessionManager.set("ManagerLastName",
+          widget.business.getLoggedInBusinessValue().ManagerLastName);
+
+      dynamic busEmail = await SessionManager().get("BusinessEmail");
+      print(busEmail);
+
       if (jsonData["error"] == true) {
-        //print(jsonData);
         errorMessage = await jsonData["errmsg"];
         setState(() {
           _isLoading = false;

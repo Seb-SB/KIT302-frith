@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/src/material/bottom_navigation_bar.dart';
 import 'package:flutter_application_frith/View/business_login.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_application_frith/InformationPool/informationPool.dart';
+import 'package:flutter_application_frith/InformationPool/event_information_pool.dart';
 import 'package:flutter_application_frith/InformationPool/information_homepage.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 
@@ -34,10 +34,10 @@ class _BusinessOwnersState extends State<BusinessOwners> {
                 children: [
                   GestureDetector(
                       onTap: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => InformationHomepage()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => InformationHomepage()));
                       },
                       child: Container(
                           color: Colors.blueAccent,

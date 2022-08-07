@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_frith/InformationPool/event_details.dart';
 import 'package:provider/provider.dart';
 import 'event_information_pool.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
@@ -49,6 +50,12 @@ class _InformationHomepageState extends State<InformationHomepage> {
                     ),
                     title: Text(eventItem.eventTitle),
                     subtitle: Text(eventItem.dateTime),
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return EventDetailsPanel(id: index);
+                      }));
+                    },
                   );
                 },
                 itemCount: informationPoolModel.informationItems.length,

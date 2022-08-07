@@ -40,20 +40,45 @@ class InformationPoolModel extends ChangeNotifier {
   InformationPoolModel() {
     add(EventInformationPool(
         businessID: 1,
-        dateTime: "2021-07-23 12:00:02.000",
-        eventDescription: "This happened!!",
-        eventTitle: "EVENT TITLE",
+        dateTime: "2022-03-23 20:00:02.000",
+        eventDescription:
+            "There was a fight between two groups, two people were knocked out.",
+        eventTitle: "Fight in bar",
         levelID: "H",
         numberOfPerpetrators: 6,
         eventColour: "#eb4034"));
     add(EventInformationPool(
         businessID: 30,
-        dateTime: "2022-07-23 12:00:02.000",
-        eventDescription: "This happened!! erer",
-        eventTitle: "EVENT TITLE2",
+        dateTime: "2022-10-23 12:30:02.000",
+        eventDescription: "Fake ID displayed - removed from perp.",
+        eventTitle: "Fake ID Used",
         levelID: "D",
         numberOfPerpetrators: 4,
         eventColour: "#262424"));
+    add(EventInformationPool(
+        businessID: 30,
+        dateTime: "2022-03-23 04:30:02.000",
+        eventDescription: "Perp broke multiple glasses and screamed at staff.",
+        eventTitle: "Violent barhopper.",
+        levelID: "L",
+        numberOfPerpetrators: 1,
+        eventColour: "#ebc924"));
+    add(EventInformationPool(
+        businessID: 30,
+        dateTime: "2022-03-23 04:30:02.000",
+        eventDescription: "Dangerous individual doing bad things.",
+        eventTitle: "Dangerous Individual",
+        levelID: "M",
+        numberOfPerpetrators: 1,
+        eventColour: "#eb9334"));
+    add(EventInformationPool(
+        businessID: 30,
+        dateTime: "2022-03-23 04:30:02.000",
+        eventDescription: "Large group leaving due to denial of service.",
+        eventTitle: "Large inebriated group on the move",
+        levelID: "I",
+        numberOfPerpetrators: 10,
+        eventColour: "#3489eb"));
   }
 
   void add(EventInformationPool item) {

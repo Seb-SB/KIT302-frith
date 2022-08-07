@@ -34,10 +34,10 @@ class _BusinessOwnersState extends State<BusinessOwners> {
                 children: [
                   GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => InformationHomepage()));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => InformationHomepage()));
                       },
                       child: Container(
                           color: Colors.blueAccent,

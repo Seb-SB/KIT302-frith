@@ -126,7 +126,7 @@ class _SecLoginState extends State<SecLogin> {
   }
 
   Future<void> _logIn(String email, String password) async {
-    var url = 'http://192.168.0.128/frith/connection/security_guard_login.php';
+    var url = 'http://192.168.1.21/frith/connection/security_guard_login.php';
 
     Map data = {'email': email, 'password': password};
 

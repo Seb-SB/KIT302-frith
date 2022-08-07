@@ -2,9 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_frith/Model/securityGuard.dart';
 import 'package:flutter_application_frith/report/reportpad.dart';
-import 'package:flutter_application_frith/report/reportpad_homepage.dart';
+import 'package:flutter_application_frith/report/Report_Draft_Page.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:flutter_application_frith/Model/securityGuard.dart';
+import 'package:flutter_application_frith/View/security_login.dart';
 
+import 'package:http/http.dart' as http;
 import '../View/security_guards.dart';
 
 class NewReport extends StatefulWidget {
@@ -28,6 +34,9 @@ class _NewReportState extends State<NewReport> {
   TextEditingController statusOfReport = TextEditingController();
   final statusItems = ['Danger', 'High', 'Informative', 'low', 'medium'];
   String dropdownValue = 'None';
+  var errorMessage = "";
+  var _isLoading = false;
+  var timeNow;
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
   Widget _buildlocationOfReportTextField() {
@@ -60,34 +69,34 @@ class _NewReportState extends State<NewReport> {
     );
   }
 
-  Widget _buildDateOfReportTextField() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        const SizedBox(height: 10.0),
-        Container(
-          alignment: Alignment.center,
-          height: 60.0,
-          child: TextFormField(
-            controller: dateOfReport,
-            keyboardType: TextInputType.text,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "Please enter a date";
-              }
-              return null;
-            },
-            decoration: const InputDecoration(
-              contentPadding: EdgeInsets.symmetric(vertical: 15),
-              border: InputBorder.none,
-              hintText: 'Date:',
-              prefixIcon: Icon(Icons.date_range),
-            ),
-          ),
-        )
-      ],
-    );
-  }
+  // Widget _buildDateOfReportTextField() {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.center,
+  //     children: <Widget>[
+  //       const SizedBox(height: 10.0),
+  //       Container(
+  //         alignment: Alignment.center,
+  //         height: 60.0,
+  //         child: TextFormField(
+  //           controller: dateOfReport,
+  //           keyboardType: TextInputType.text,
+  //           validator: (value) {
+  //             if (value == null || value.isEmpty) {
+  //               return "Please enter a date";
+  //             }
+  //             return null;
+  //           },
+  //           decoration: const InputDecoration(
+  //             contentPadding: EdgeInsets.symmetric(vertical: 15),
+  //             border: InputBorder.none,
+  //             hintText: 'Date:',
+  //             prefixIcon: Icon(Icons.date_range),
+  //           ),
+  //         ),
+  //       )
+  //     ],
+  //   );
+  // }
 
   Widget _buildwitnessesOfReportTextField() {
     return Column(
@@ -149,19 +158,21 @@ class _NewReportState extends State<NewReport> {
                     severityOfReport.text = dropdownValue;
                   });
                 },
+                hint: const Center(child: Text("None")),
                 items: <String>[
                   'Danger',
                   'High',
                   'Informative',
                   'Low',
-                  'Medium',
-                  'None'
-                ].map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
+                  'Medium'
+                ].map<DropdownMenuItem<String>>(
+                  (String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  },
+                ).toList(),
               ),
             ),
           ],
@@ -228,56 +239,56 @@ class _NewReportState extends State<NewReport> {
     );
   }
 
-  Widget _buildstatusOfReportTextField() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        const SizedBox(height: 10.0),
-        Row(
-          children: [
-            Container(
-              alignment: Alignment.center,
-              height: 60.0,
-              child: Text("Police Status:   "),
-            ),
-            SizedBox(width: 60),
-            Container(
-              alignment: Alignment.center,
-              height: 60.0,
-              child: DropdownButton<String>(
-                value: dropdownValue,
-                icon: const Icon(Icons.arrow_upward),
-                elevation: 16,
-                style: const TextStyle(color: Colors.deepPurple),
-                underline: Container(
-                  height: 2,
-                  color: Colors.deepPurpleAccent,
-                ),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    dropdownValue = newValue!;
-                    statusOfReport.text = dropdownValue;
-                  });
-                },
-                items: <String>[
-                  'Reported',
-                  'Under Investigation',
-                  'Solved',
-                  'Closed',
-                  'None'
-                ].map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-              ),
-            )
-          ],
-        )
-      ],
-    );
-  }
+  // Widget _buildstatusOfReportTextField() {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.center,
+  //     children: <Widget>[
+  //       const SizedBox(height: 10.0),
+  //       Row(
+  //         children: [
+  //           Container(
+  //             alignment: Alignment.center,
+  //             height: 60.0,
+  //             child: Text("Police Status:   "),
+  //           ),
+  //           SizedBox(width: 60),
+  //           Container(
+  //             alignment: Alignment.center,
+  //             height: 60.0,
+  //             child: DropdownButton<String>(
+  //               value: dropdownValue,
+  //               icon: const Icon(Icons.arrow_upward),
+  //               elevation: 16,
+  //               style: const TextStyle(color: Colors.deepPurple),
+  //               underline: Container(
+  //                 height: 2,
+  //                 color: Colors.deepPurpleAccent,
+  //               ),
+  //               onChanged: (String? newValue) {
+  //                 setState(() {
+  //                   dropdownValue = newValue!;
+  //                   statusOfReport.text = dropdownValue;
+  //                 });
+  //               },
+  //               items: <String>[
+  //                 'Reported',
+  //                 'Under Investigation',
+  //                 'Solved',
+  //                 'Closed',
+  //                 'None'
+  //               ].map<DropdownMenuItem<String>>((String value) {
+  //                 return DropdownMenuItem<String>(
+  //                   value: value,
+  //                   child: Text(value),
+  //                 );
+  //               }).toList(),
+  //             ),
+  //           )
+  //         ],
+  //       )
+  //     ],
+  //   );
+  // }
 
   Widget _onSubmit(BuildContext context, List<Reportpad> reportpads) {
     return Column(
@@ -292,7 +303,6 @@ class _NewReportState extends State<NewReport> {
                   onPrimary: Colors.white,
                 ),
                 onPressed: () {
-                  print("pressed");
                   print(severityOfReport.text);
                   if (!formkey.currentState!.validate()) {
                     print("invalid entry");
@@ -307,6 +317,19 @@ class _NewReportState extends State<NewReport> {
                         statusOfReport.text,
                         context,
                         reportpads);
+                    // DateTime now = DateTime.now();
+                    // String timeNow = DateFormat('yyyy-MM-dd – kk:mm').format(now);
+
+                    //statusOfReport = 'y';
+                    _submit(
+                        timeNow = "1pm",
+                        severityOfReport.text,
+                        locationOfReport.text,
+                        witnessesOfReport.text,
+                        descriptionOfReport.text,
+                        partiesOfReport.text,
+                        statusOfReport.text);
+
                     Provider.of<ReportpadModel>(context, listen: false)
                         .update();
                     Navigator.pop(context);
@@ -334,7 +357,7 @@ class _NewReportState extends State<NewReport> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const ReportpadPage()),
+                        builder: (context) => const ReportDraftPage()),
                   );
                 },
                 child: const Text('Load Draft')),
@@ -359,7 +382,7 @@ class _NewReportState extends State<NewReport> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const ReportpadPage()),
+                        builder: (context) => const ReportDraftPage()),
                   );
                 },
                 child: const Text('Save Draft')),
@@ -439,11 +462,11 @@ class _NewReportState extends State<NewReport> {
               key: formkey,
               child: Column(children: <Widget>[
                 _buildlocationOfReportTextField(),
-                _buildDateOfReportTextField(),
+                //_buildDateOfReportTextField(),
                 _buildwitnessesOfReportTextField(),
                 _builddescriptionOfReportTextField(),
                 _buildPartiesOfReportTextField(),
-                _buildstatusOfReportTextField(),
+                //_buildstatusOfReportTextField(),
                 _buildseverityOfReportTextField(),
                 _onSubmit(context, reportpads)
               ]),
@@ -452,5 +475,68 @@ class _NewReportState extends State<NewReport> {
         ),
       ),
     );
+  }
+
+  Future<void> _submit(
+      String timeSubmitted,
+      String incidentType,
+      String specificArea,
+      String description,
+      String partiesInvolved,
+      String witnesses,
+      String reportFiled) async {
+    var url = 'http://192.168.0.128/frith/connection/security_guard_create.php';
+
+    Map data1 = <String, dynamic>{};
+
+    data1['TimeSubmitted'] = timeSubmitted;
+    data1['IncidentType'] = incidentType;
+    data1['SpecificArea'] = specificArea;
+    data1['Description'] = description;
+    data1['PartiesInvolved'] = partiesInvolved;
+    data1['Witnesses'] = witnesses;
+    data1['ReportFiled'] = reportFiled;
+
+    var jsonData = null;
+
+    ///print(data.entries);
+
+    final response = await http.post(Uri.parse(url),
+        headers: {
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+          // 'Accept': 'application/json'
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data1),
+        encoding: Encoding.getByName("utf-8"));
+
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      jsonData = await jsonDecode(jsonEncode(response.body));
+      print(jsonData);
+      jsonData = jsonDecode(jsonData);
+      //print(jsonData["error"]);
+      if (jsonData["error"] == true) {
+        //print(jsonData);
+        errorMessage = await jsonData["message"];
+        setState(() {
+          _isLoading = false;
+        });
+        //create scaffold
+
+      } else {
+        setState(() {
+          _isLoading = false;
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SecurityGuards()),
+          );
+          errorMessage = "";
+        });
+      }
+    } else {
+      print(jsonData["message"]);
+    }
   }
 }

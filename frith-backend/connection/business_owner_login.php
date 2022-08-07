@@ -12,10 +12,6 @@ $data = json_decode($json1, true);
 
 $received = false;
 $json["error"] = false;
-$json["errmsg"] = "";
-$json["errmsg1"] = "";
-$json["errmsg2"] = "";
-
 
 //check if email value has been received 
 if (empty($data['email'])) {
@@ -42,17 +38,24 @@ if($received) {
     $res = mysqli_query($conn, $sql);
     $numrows = mysqli_num_rows($res);
     
-    //if table contains corresponding value
-    if ($numrows > 0) {
-        $json["Email"] = $email;
-        $json["Password"] = $password;
-        $json["error"] = false;
-        $json["errmsg"] = "Success";
-        
-    } else {
+
+
+    if(! $res) {
         $json["error"] = true;
         $json["errmsg"] = "Invalid credentials.";
-    }   
+    } else {
+        while($row = mysqli_fetch_assoc($res)){
+            $json["BusinessEmail"] = $email;
+            $json["Password"] = $password;
+            $json["BusinessABN"] = $row['ABN'];
+            $json["BusinessName"] = $row['BusinessName'];
+            $json["ManagerFirstName"] = $row['ManagerFirstName'];
+            $json["ManagerLastName"] = $row['ManagerLastName'];
+            $json["BusinessNumber"] = $row['PhoneNumber'];
+            $json["BusinessID"] = $row['BusinessID'];
+        }
+
+    }
 
 } else {
     $json["error"] = true;
@@ -60,13 +63,6 @@ if($received) {
 }
 
 mysqli_close($conn);
-
-///testing
-$json["Email"] = $email;
-$json["Password"] = $password;
-$json["error"] = false;
-$json["errmsg"] = "Success";
-///testing
 
 //tell browser that it is json data
 header('Content-Type: application/json');

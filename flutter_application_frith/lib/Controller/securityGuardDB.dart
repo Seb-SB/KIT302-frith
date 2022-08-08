@@ -7,7 +7,7 @@ import 'package:flutter_application_frith/Model/securityGuard.dart';
 
 import '../Model/api_response_sec.dart';
 
-String baseUrl = 'http://192.168.0.128/frith/'; //might be .128:9001/
+String baseUrl = 'http://192.168.1.21/frith/'; //might be .128:9001/
 
 Future<ApiResponse> authenticateSecurityGuard(
     String username, String password) async {

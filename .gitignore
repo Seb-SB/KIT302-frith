@@ -1,0 +1,9 @@
+
+*.flat
+flutter_application_frith/.dart_tool/package_config_subset
+*.json
+flutter_application_frith/.dart_tool/package_config_subset
+*.json
+*.dex
+flutter_application_frith/build/app/intermediates/incremental/mergeDebugAssets/merger.xml
+*.apk

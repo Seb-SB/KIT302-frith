@@ -9,9 +9,10 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter_application_frith/Model/securityGuard.dart';
 import 'package:flutter_application_frith/View/security_login.dart';
-
+import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:http/http.dart' as http;
 import '../View/security_guards.dart';
+import 'package:intl/intl.dart';
 
 class NewReport extends StatefulWidget {
   const NewReport({Key? key}) : super(key: key);
@@ -25,21 +26,22 @@ class NewReport extends StatefulWidget {
 }
 
 class _NewReportState extends State<NewReport> {
-  TextEditingController locationOfReport = TextEditingController();
-  TextEditingController dateOfReport = TextEditingController();
+  TextEditingController specificAreaOfReport = TextEditingController();
+  //TextEditingController dateOfReport = TextEditingController();
   TextEditingController witnessesOfReport = TextEditingController();
   TextEditingController severityOfReport = TextEditingController();
   TextEditingController descriptionOfReport = TextEditingController();
-  TextEditingController partiesOfReport = TextEditingController();
-  TextEditingController statusOfReport = TextEditingController();
-  final statusItems = ['Danger', 'High', 'Informative', 'low', 'medium'];
-  String dropdownValue = 'None';
+  TextEditingController partiesInvolvedOfReport = TextEditingController();
+  TextEditingController reportFiledOfReport = TextEditingController();
+  var sessionManager = SessionManager();
+  final reportFiledItems = ['Danger', 'High', 'Informative', 'low', 'medium'];
+  String? dropdownValue;
   var errorMessage = "";
   var _isLoading = false;
   var timeNow;
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
-  Widget _buildlocationOfReportTextField() {
+  Widget _buildspecificAreaOfReportTextField() {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -49,7 +51,7 @@ class _NewReportState extends State<NewReport> {
           alignment: Alignment.center,
           height: 60.0,
           child: TextFormField(
-            controller: locationOfReport,
+            controller: specificAreaOfReport,
             keyboardType: TextInputType.name,
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -154,8 +156,8 @@ class _NewReportState extends State<NewReport> {
                 ),
                 onChanged: (String? newValue) {
                   setState(() {
-                    dropdownValue = newValue!;
-                    severityOfReport.text = dropdownValue;
+                    dropdownValue = newValue;
+                    severityOfReport.text = dropdownValue.toString();
                   });
                 },
                 hint: const Center(child: Text("None")),
@@ -219,7 +221,7 @@ class _NewReportState extends State<NewReport> {
           alignment: Alignment.center,
           height: 60.0,
           child: TextFormField(
-            controller: partiesOfReport,
+            controller: partiesInvolvedOfReport,
             keyboardType: TextInputType.text,
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -230,7 +232,7 @@ class _NewReportState extends State<NewReport> {
             decoration: const InputDecoration(
               contentPadding: EdgeInsets.symmetric(vertical: 15),
               border: InputBorder.none,
-              hintText: 'Details of parties Involved:',
+              hintText: 'Details of Parties Involved:',
               prefixIcon: Icon(Icons.title),
             ),
           ),
@@ -239,7 +241,7 @@ class _NewReportState extends State<NewReport> {
     );
   }
 
-  // Widget _buildstatusOfReportTextField() {
+  // Widget _buildreportFiledOfReportTextField() {
   //   return Column(
   //     crossAxisAlignment: CrossAxisAlignment.center,
   //     children: <Widget>[
@@ -267,7 +269,7 @@ class _NewReportState extends State<NewReport> {
   //               onChanged: (String? newValue) {
   //                 setState(() {
   //                   dropdownValue = newValue!;
-  //                   statusOfReport.text = dropdownValue;
+  //                   reportFiledOfReport.text = dropdownValue;
   //                 });
   //               },
   //               items: <String>[
@@ -308,27 +310,31 @@ class _NewReportState extends State<NewReport> {
                     print("invalid entry");
                   } else {
                     _addToList(
-                        locationOfReport.text,
-                        dateOfReport.text,
+                        specificAreaOfReport.text,
+                        //dateOfReport.text,
                         witnessesOfReport.text,
                         severityOfReport.text,
                         descriptionOfReport.text,
-                        partiesOfReport.text,
-                        statusOfReport.text,
+                        partiesInvolvedOfReport.text,
+                        reportFiledOfReport.text,
                         context,
                         reportpads);
-                    // DateTime now = DateTime.now();
-                    // String timeNow = DateFormat('yyyy-MM-dd – kk:mm').format(now);
+                    //DateTime timeNow = DateTime.now();
+                    //String timeNow =
+                    //DateFormat('yyyy-MM-dd – kk:mm:ss').format(now);
+                    DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
+                    String timeNow = dateFormat.format(DateTime.now());
 
-                    //statusOfReport = 'y';
+                    //reportFiledOfReport = 'y';
                     _submit(
-                        timeNow = "1pm",
-                        severityOfReport.text,
-                        locationOfReport.text,
-                        witnessesOfReport.text,
-                        descriptionOfReport.text,
-                        partiesOfReport.text,
-                        statusOfReport.text);
+                      timeNow,
+                      severityOfReport.text,
+                      specificAreaOfReport.text,
+                      witnessesOfReport.text,
+                      descriptionOfReport.text,
+                      partiesInvolvedOfReport.text,
+                      //reportFiledOfReport.text
+                    );
 
                     Provider.of<ReportpadModel>(context, listen: false)
                         .update();
@@ -344,13 +350,13 @@ class _NewReportState extends State<NewReport> {
                 ),
                 onPressed: () {
                   _addToList(
-                      locationOfReport.text,
-                      dateOfReport.text,
+                      specificAreaOfReport.text,
+                      //dateOfReport.text,
                       witnessesOfReport.text,
                       severityOfReport.text,
                       descriptionOfReport.text,
-                      partiesOfReport.text,
-                      statusOfReport.text,
+                      partiesInvolvedOfReport.text,
+                      reportFiledOfReport.text,
                       context,
                       reportpads);
                   Provider.of<ReportpadModel>(context, listen: false).update();
@@ -369,13 +375,13 @@ class _NewReportState extends State<NewReport> {
                 ),
                 onPressed: () {
                   _addToList(
-                      locationOfReport.text,
-                      dateOfReport.text,
+                      specificAreaOfReport.text,
+                      //dateOfReport.text,
                       witnessesOfReport.text,
                       severityOfReport.text,
                       descriptionOfReport.text,
-                      partiesOfReport.text,
-                      statusOfReport.text,
+                      partiesInvolvedOfReport.text,
+                      reportFiledOfReport.text,
                       context,
                       reportpads);
                   Provider.of<ReportpadModel>(context, listen: false).update();
@@ -393,23 +399,23 @@ class _NewReportState extends State<NewReport> {
   }
 
   void _addToList(
-      String locationOfReport,
-      String dateOfReport,
+      String specificAreaOfReport,
+      //String dateOfReport,
       String witnessesOfReport,
       String severityOfReport,
       String detailsOfReport,
-      String partiesOfReport,
-      String statusOfReport,
+      String partiesInvolvedOfReport,
+      String reportFiledOfReport,
       BuildContext context,
       List<Reportpad> reportpads) {
     Reportpad report = Reportpad(
-        location: locationOfReport,
-        date: dateOfReport,
+        specificArea: specificAreaOfReport,
+        //date: dateOfReport,
         witnesses: witnessesOfReport,
         severity: severityOfReport,
         description: detailsOfReport,
-        parties: partiesOfReport,
-        status: statusOfReport);
+        partiesInvolved: partiesInvolvedOfReport,
+        reportFiled: reportFiledOfReport);
 
     reportpads.add(report);
   }
@@ -461,12 +467,12 @@ class _NewReportState extends State<NewReport> {
             Form(
               key: formkey,
               child: Column(children: <Widget>[
-                _buildlocationOfReportTextField(),
+                _buildspecificAreaOfReportTextField(),
                 //_buildDateOfReportTextField(),
                 _buildwitnessesOfReportTextField(),
                 _builddescriptionOfReportTextField(),
                 _buildPartiesOfReportTextField(),
-                //_buildstatusOfReportTextField(),
+                //_buildreportFiledOfReportTextField(),
                 _buildseverityOfReportTextField(),
                 _onSubmit(context, reportpads)
               ]),
@@ -478,22 +484,24 @@ class _NewReportState extends State<NewReport> {
   }
 
   Future<void> _submit(
-      String timeSubmitted,
+      //String timeSubmitted,
       String incidentType,
       String specificArea,
       String description,
-      String partiesInvolved,
+      String partiesInvolvedInvolved,
       String witnesses,
       String reportFiled) async {
-    var url = 'http://192.168.0.128/frith/connection/security_guard_create.php';
+    var url = 'http://192.168.1.21/frith/connection/incident_report_submit.php';
 
     Map data1 = <String, dynamic>{};
+    dynamic guardKey = await SessionManager().get("GuardKey");
 
-    data1['TimeSubmitted'] = timeSubmitted;
+    data1['GuardKey'] = guardKey;
+    //data1['TimeSubmitted'] = timeSubmitted;
     data1['IncidentType'] = incidentType;
     data1['SpecificArea'] = specificArea;
     data1['Description'] = description;
-    data1['PartiesInvolved'] = partiesInvolved;
+    data1['PartiesInvolved'] = partiesInvolvedInvolved;
     data1['Witnesses'] = witnesses;
     data1['ReportFiled'] = reportFiled;
 

@@ -70,8 +70,8 @@ class _ReportDraftPageState extends State<ReportDraftPage> {
                   itemBuilder: (_, index) {
                     var reportpad = reportpadModel.reportItems[index];
                     return ListTile(
-                      title: Text(reportpad.location),
-                      subtitle: Text(reportpad.date.toString()),
+                      title: Text(reportpad.specificArea),
+                      subtitle: Text(reportpad.severity),
                       //leading: Image.network(image),
 
                       onTap: () {

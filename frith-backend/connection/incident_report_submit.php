@@ -20,13 +20,18 @@ $data = json_decode($json1, true);
 $received = false;
 $json["error"] = false;
 $json["errmsg"] = "";
-
-if (empty($data['TimeSubmitted'])) {
+if (empty($data['GuardKey'])) {
     $received = false;
 } else {
-    $TimeSubmitted = $data['TimeSubmitted'];
+    $GuardKey = $data['GuardKey'];
     $received = true;
 }
+// if (empty($data['TimeSubmitted'])) {
+//     $received = false;
+// } else {
+//     $TimeSubmitted = $data['TimeSubmitted'];
+//     $received = true;
+// }
 if (empty($data['IncidentType'])) {
     $received = false;
 } else {
@@ -64,7 +69,8 @@ if (empty($data['Witnesses'])) {
 
 
 if ($received) {
-    $ReportFiled = "y";
+    $ReportFiled = "Y";
+    $BusinessID = 25;
     //$sql = "SELECT * FROM `incidentreport` WHERE `GuardKey`= '$UniqueKey';";
     //$res = mysqli_query($conn, $sql);
     //$numrows = mysqli_num_rows($res);
@@ -77,7 +83,7 @@ if ($received) {
 
     // if ($json["error"] == false) {
 
-        $sql = "INSERT INTO `incidentreport`(`TimeSubmitted`, `IncidentType`, `SpecificArea`, `Description`, `PartiesInvolved`, `Witnesses`, `ReportFiled`) VALUES ('$TimeSubmitted','$IncidentType','$SpecificArea','$Description','$Witnesses','$ReportFiled');";
+        $sql = "INSERT INTO `incidentreport`(`GuardKey`,`BusinessID`, `IncidentType`, `SpecificArea`, `Description`, `PartiesInvolved`, `Witnesses`, `ReportFiled`) VALUES ('$GuardKey', '$BusinessID', '$IncidentType','$SpecificArea','$Description','$Witnesses','$ReportFiled');";
         $res = mysqli_query($conn, $sql);
 
         if (!$res) {

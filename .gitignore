@@ -7,3 +7,7 @@ flutter_application_frith/.dart_tool/package_config_subset
 *.dex
 flutter_application_frith/build/app/intermediates/incremental/mergeDebugAssets/merger.xml
 *.apk
+flutter_application_frith/.dart_tool/package_config_subset
+flutter_application_frith/.flutter-plugins
+flutter_application_frith/.flutter-plugins-dependencies
+flutter_application_frith/.packages

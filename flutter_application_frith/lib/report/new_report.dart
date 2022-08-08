@@ -1,18 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_frith/Model/securityGuard.dart';
-import 'package:flutter_application_frith/report/reportpad.dart';
 import 'package:flutter_application_frith/report/Report_Draft_Page.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:flutter_application_frith/Model/securityGuard.dart';
-import 'package:flutter_application_frith/View/security_login.dart';
+import 'package:flutter_application_frith/report/reportpad.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:http/http.dart' as http;
-import '../View/security_guards.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import '../View/security_guards.dart';
 
 class NewReport extends StatefulWidget {
   const NewReport({Key? key}) : super(key: key);

@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_frith/punchClock/punchClock.dart';
 import 'package:provider/provider.dart';
 
-class BusinessDetails extends StatefulWidget {
-  const BusinessDetails({Key? key, required this.id}) : super(key: key);
+class GuardClockDetails extends StatefulWidget {
+  const GuardClockDetails({Key? key, required this.id}) : super(key: key);
   final int id; //Add this line
   @override
-  _BusinessDetailsState createState() => _BusinessDetailsState();
+  _GuardClockDetailsState createState() => _GuardClockDetailsState();
 }
 
-class _BusinessDetailsState extends State<BusinessDetails> {
+class _GuardClockDetailsState extends State<GuardClockDetails> {
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final dateController = TextEditingController();

@@ -1,28 +1,25 @@
 import 'package:flutter/material.dart';
 
-class Gard {
+class Guard {
   String title;
   int date;
   String address;
 
-  Gard({required this.title, required this.date, required this.address});
+  Guard({required this.title, required this.date, required this.address});
 }
 
 class GardListModel extends ChangeNotifier {
   /// Internal, private state of the list.
-  final List<Gard> items = [];
+  final List<Guard> items = [];
 
   //Normally a model would get from a database here, we are just hardcoding some data for this week
   GardListModel() {
-    add(Gard(
-        title: "gard1", date: 2022, address: "addess 1"));
-    add(Gard(
-        title: "gard2", date: 2022, address: "addess 2"));
-    add(Gard(
-        title: "gard3", date: 2022, address: "addess 3"));
+    add(Guard(title: "guard1", date: 2022, address: "address 1"));
+    add(Guard(title: "guard2", date: 2022, address: "address 2"));
+    add(Guard(title: "guard3", date: 2022, address: "address 3"));
   }
 
-  void add(Gard item) {
+  void add(Guard item) {
     items.add(item);
     update();
   }

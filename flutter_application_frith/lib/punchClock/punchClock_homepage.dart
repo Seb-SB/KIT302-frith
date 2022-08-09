@@ -58,7 +58,7 @@ class _PunchClockPageState extends State<PunchClockPage> {
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return BusinessDetails(id: index);
+                              return GuardClockDetails(id: index);
                             }));
                           },
                         );

@@ -17,7 +17,7 @@ class InformationHomepage extends StatefulWidget {
 
 Widget _list_view_builder(AsyncSnapshot snapshot) {
   if (!snapshot.hasData) {
-    return const Center(child: Text("Loading..."));
+    return const Center(child: CircularProgressIndicator());
   } else {
     return ListView.builder(
       padding: const EdgeInsets.all(8.0),

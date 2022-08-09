@@ -12,20 +12,20 @@
 12         to allow setting breakpoints, to provide hot reload, etc.
 13    -->
 14    <uses-permission android:name="android.permission.INTERNET" />
-14-->M:\Utas\KIT302\KIT302-frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:3:4-65
-14-->M:\Utas\KIT302\KIT302-frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:3:21-63
+14-->D:\Frith\KIT302\KIT302-frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:3:4-65
+14-->D:\Frith\KIT302\KIT302-frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:3:21-63
 15    <uses-permission android:name="android.permission.FLASHLIGHT" />
-15-->M:\Utas\KIT302\KIT302-frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:4:4-68
-15-->M:\Utas\KIT302\KIT302-frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:4:21-65
+15-->D:\Frith\KIT302\KIT302-frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:4:4-68
+15-->D:\Frith\KIT302\KIT302-frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:4:21-65
 16
 17    <uses-feature android:name="android.hardware.camera.flash" />
-17-->M:\Utas\KIT302\KIT302-frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:5:4-65
-17-->M:\Utas\KIT302\KIT302-frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:5:18-62
+17-->D:\Frith\KIT302\KIT302-frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:5:4-65
+17-->D:\Frith\KIT302\KIT302-frith\flutter_application_frith\android\app\src\main\AndroidManifest.xml:5:18-62
 18
 19    <application
 20        android:name="android.app.Application"
 21        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-21-->[androidx.core:core:1.6.0] C:\Users\tedkr\.gradle\caches\transforms-2\files-2.1\122df2e57d294d1a53db26bbc3b813c1\core-1.6.0\AndroidManifest.xml:24:18-86
+21-->[androidx.core:core:1.6.0] C:\Users\User\.gradle\caches\transforms-2\files-2.1\122df2e57d294d1a53db26bbc3b813c1\core-1.6.0\AndroidManifest.xml:24:18-86
 22        android:debuggable="true"
 23        android:icon="@mipmap/ic_launcher"
 24        android:label="flutter_application_frith"
@@ -64,26 +64,26 @@
 57            android:value="2" />
 58
 59        <activity
-59-->[:url_launcher_android] M:\Utas\KIT302\KIT302-frith\flutter_application_frith\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-11:74
+59-->[:url_launcher_android] D:\Frith\KIT302\KIT302-frith\flutter_application_frith\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-11:74
 60            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
-60-->[:url_launcher_android] M:\Utas\KIT302\KIT302-frith\flutter_application_frith\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-74
+60-->[:url_launcher_android] D:\Frith\KIT302\KIT302-frith\flutter_application_frith\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-74
 61            android:exported="false"
-61-->[:url_launcher_android] M:\Utas\KIT302\KIT302-frith\flutter_application_frith\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-37
+61-->[:url_launcher_android] D:\Frith\KIT302\KIT302-frith\flutter_application_frith\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-37
 62            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-62-->[:url_launcher_android] M:\Utas\KIT302\KIT302-frith\flutter_application_frith\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-71
+62-->[:url_launcher_android] D:\Frith\KIT302\KIT302-frith\flutter_application_frith\build\url_launcher_android\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-71
 63
 64        <uses-library
-64-->[androidx.window:window:1.0.0-beta04] C:\Users\tedkr\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+64-->[androidx.window:window:1.0.0-beta04] C:\Users\User\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
 65            android:name="androidx.window.extensions"
-65-->[androidx.window:window:1.0.0-beta04] C:\Users\tedkr\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+65-->[androidx.window:window:1.0.0-beta04] C:\Users\User\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
 66            android:required="false" />
-66-->[androidx.window:window:1.0.0-beta04] C:\Users\tedkr\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+66-->[androidx.window:window:1.0.0-beta04] C:\Users\User\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
 67        <uses-library
-67-->[androidx.window:window:1.0.0-beta04] C:\Users\tedkr\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+67-->[androidx.window:window:1.0.0-beta04] C:\Users\User\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
 68            android:name="androidx.window.sidecar"
-68-->[androidx.window:window:1.0.0-beta04] C:\Users\tedkr\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+68-->[androidx.window:window:1.0.0-beta04] C:\Users\User\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
 69            android:required="false" />
-69-->[androidx.window:window:1.0.0-beta04] C:\Users\tedkr\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+69-->[androidx.window:window:1.0.0-beta04] C:\Users\User\.gradle\caches\transforms-2\files-2.1\03c633e46d75bfb21f082f0417f55161\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
 70    </application>
 71
 72</manifest>

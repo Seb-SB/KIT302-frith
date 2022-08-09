@@ -5,9 +5,9 @@ import 'package:flutter_application_frith/InformationPool/event_information_pool
 import 'package:provider/provider.dart';
 
 class EventDetailsPanel extends StatefulWidget {
-  const EventDetailsPanel({Key? key, required this.id}) : super(key: key);
+  const EventDetailsPanel({Key? key, required this.event}) : super(key: key);
 
-  final int id;
+  final EventInformationPool event;
 
   @override
   State<EventDetailsPanel> createState() => _EventDetailsPanelState();
@@ -16,11 +16,6 @@ class EventDetailsPanel extends StatefulWidget {
 class _EventDetailsPanelState extends State<EventDetailsPanel> {
   @override
   Widget build(BuildContext context) {
-    var event_details =
-        Provider.of<InformationPoolModel>(context, listen: false)
-            .informationItems;
-    var event = event_details[widget.id];
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("Event Details"),
@@ -38,7 +33,7 @@ class _EventDetailsPanelState extends State<EventDetailsPanel> {
                 Padding(
                   padding: const EdgeInsets.all(15),
                   child: Text(
-                    event.eventTitle,
+                    widget.event.eventTitle,
                     style: const TextStyle(
                       fontSize: 25.0,
                     ),
@@ -47,7 +42,7 @@ class _EventDetailsPanelState extends State<EventDetailsPanel> {
                 Padding(
                   padding: const EdgeInsets.all(15),
                   child: Text(
-                    "Reported:  " + event.dateTime,
+                    "Reported:  " + widget.event.dateTime,
                     style: const TextStyle(
                       fontSize: 15.0,
                     ),
@@ -57,7 +52,7 @@ class _EventDetailsPanelState extends State<EventDetailsPanel> {
                   padding: const EdgeInsets.all(15),
                   child: Text(
                     "Number of Perpetrators:  " +
-                        event.numberOfPerpetrators.toString(),
+                        widget.event.numberOfPerpetrators.toString(),
                     style: const TextStyle(
                       fontSize: 15.0,
                     ),
@@ -66,7 +61,7 @@ class _EventDetailsPanelState extends State<EventDetailsPanel> {
                 Padding(
                   padding: const EdgeInsets.all(15),
                   child: Text(
-                    event.eventDescription,
+                    widget.event.eventDescription,
                     style: const TextStyle(
                       fontSize: 15.0,
                     ),

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'information_homepage.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class EventInformationPool {
-  int businessID;
+  String businessID;
   String dateTime;
   String levelID;
   String eventTitle;
-  int numberOfPerpetrators;
+  String numberOfPerpetrators;
   String eventDescription;
   String eventColour;
   //TODO get colour from database
@@ -36,8 +38,34 @@ class InformationPoolModel extends ChangeNotifier {
   /// Internal, private state of the list.
   final List<EventInformationPool> informationItems = [];
 
+  var url = 'http://192.168.0.128/frith/connection/event_details.php';
+
+  Future<List<EventInformationPool>> _fetch_events() async {
+    var data = await http.get(Uri.parse(url));
+
+    var jsonData = json.decode(data.body);
+
+    List<EventInformationPool> events = [];
+
+    for (var v in jsonData) {
+      EventInformationPool event = EventInformationPool(
+          businessID: v['businessID'],
+          dateTime: v['dateTime'],
+          eventDescription: v['eventDescription'],
+          eventTitle: v['eventTitle'],
+          levelID: v['levelID'],
+          numberOfPerpetrators: v['numberOfPerpetrators'],
+          eventColour: v['eventColour']);
+
+      events.add(event);
+    }
+
+    return events;
+  }
+
   //Normally a model would get from a database here, we are just hardcoding some data for this week
   InformationPoolModel() {
+    /*
     add(EventInformationPool(
         businessID: 1,
         dateTime: "2022-03-23 20:00:02.000",
@@ -79,6 +107,7 @@ class InformationPoolModel extends ChangeNotifier {
         levelID: "I",
         numberOfPerpetrators: 10,
         eventColour: "#3489eb"));
+        */
   }
 
   void add(EventInformationPool item) {

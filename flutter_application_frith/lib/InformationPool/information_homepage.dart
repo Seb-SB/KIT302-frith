@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_frith/InformationPool/event_details.dart';
 import 'package:provider/provider.dart';
@@ -15,12 +17,101 @@ class InformationHomepage extends StatefulWidget {
 
 class _InformationHomepageState extends State<InformationHomepage> {
   var sessionManager = SessionManager(); //instantiate session
+  InformationPoolModel event = InformationPoolModel();
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<InformationPoolModel>(builder: buildScaffold);
+    return buildScaffold(context);
   }
 
+  var url = 'http://192.168.0.128/frith/connection/event_details.php';
+
+  Future<List<EventInformationPool>> _fetch_events() async {
+    var data = await http.get(Uri.parse(url));
+
+    var jsonData = json.decode(data.body);
+
+    List<EventInformationPool> events = [];
+
+    for (var v in jsonData) {
+      EventInformationPool event = EventInformationPool(
+          businessID: v['businessID'],
+          dateTime: v['dateTime'],
+          eventDescription: v['eventDescription'],
+          eventTitle: v['eventTitle'],
+          levelID: v['levelID'],
+          numberOfPerpetrators: v['numberOfPerpetrators'],
+          eventColour: v['eventColour']);
+
+      events.add(event);
+    }
+
+    return events;
+  }
+
+  Scaffold buildScaffold(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("List of Events"),
+        centerTitle: true,
+      ),
+      body: Container(
+        child: FutureBuilder(
+          future: _fetch_events(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            print(snapshot.data); //testing
+
+            if (!snapshot.hasData) {
+              return Container(child: const Center(child: Text("Loading...")));
+            } else {
+              return ListView.builder(
+                padding: const EdgeInsets.all(8.0),
+                itemExtent: 80,
+                itemBuilder: (BuildContext context, index) {
+                  //var eventItem = informationPoolModel.informationItems[index];
+                  return ListTile(
+                    trailing: SizedBox(
+                      width: 25.0,
+                      height: 25.0,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                            color: HexColor(snapshot.data[index].eventColour)),
+                      ),
+                    ),
+                    title: Text(snapshot.data[index].eventTitle),
+                    subtitle: Text(snapshot.data[index].dateTime),
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return EventDetailsPanel(event: snapshot.data[index]);
+                      }));
+                    },
+                  );
+                },
+                itemCount: snapshot.data.length,
+              );
+            }
+          },
+        ),
+      ),
+    );
+  }
+}
+
+//A little helper widget to avoid runtime errors -- we can't just display a Text() by itself if not inside a MaterialApp, so this workaround does the job
+class FullScreenText extends StatelessWidget {
+  final String text;
+
+  const FullScreenText({Key? key, required this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(
+        textDirection: TextDirection.ltr,
+        child: Column(children: [Expanded(child: Center(child: Text(text)))]));
+  }
+}
+/*
   Scaffold buildScaffold(
       BuildContext context, InformationPoolModel informationPoolModel, _) {
     return Scaffold(
@@ -65,20 +156,7 @@ class _InformationHomepageState extends State<InformationHomepage> {
   }
 }
 
-//A little helper widget to avoid runtime errors -- we can't just display a Text() by itself if not inside a MaterialApp, so this workaround does the job
-class FullScreenText extends StatelessWidget {
-  final String text;
 
-  const FullScreenText({Key? key, required this.text}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Directionality(
-        textDirection: TextDirection.ltr,
-        child: Column(children: [Expanded(child: Center(child: Text(text)))]));
-  }
-}
-/*
 class CustomListItem extends StatelessElement {
   const CustomListItem({
     Key? key,

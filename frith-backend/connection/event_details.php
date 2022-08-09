@@ -8,7 +8,7 @@ $sql = "SELECT * FROM `eventdetails`;";
 $res = mysqli_query($conn, $sql);
 $row_number = mysqli_num_rows($res);
 
-
+$output_array = array();
 
 if($row_number == 0) {
     $json["error"] = true;
@@ -24,22 +24,31 @@ if($row_number == 0) {
             
             $event_colour = $row_colour['Colour'];
         }
+        
+        $output_array[] = array(
+            'businessID' => $row['BusinessID'],
+            'dateTime' => $row['TimeSubmitted'],
+            'eventDescription' => $row['Description'],
+            'eventTitle' => $row['EventTitle'],
+            'numberOfPerpetrators' => $row['NumPerpetrators'],
+            'levelID' => $row['LevelID'],
+            'eventColour' => $event_colour
+        );
 
+        /*
         $json["businessID"] = $row['BusinessID'];
         $json["dateTime"] = $row['TimeSubmitted'];
         $json["eventDescription"] = $row['Description'];
         $json["eventTitle"] = $row['EventTitle'];
         $json["numberOfPerpetrators"] = $row['NumPerpetrators'];
         $json["levelID"] = $row['LevelID'];
-        $json["eventColour"] = $event_colour;
-
-        header('Content-Type: application/json');
-
-        echo json_encode($json);
-
+        $json["eventColour"] = $event_colour;  
+        */
     }
 }
+header('Content-Type: application/json');
 
+echo json_encode($output_array);
 mysqli_close($conn);
 
 ?>

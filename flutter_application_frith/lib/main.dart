@@ -5,6 +5,7 @@ import 'package:flutter_application_frith/View/home_page.dart';
 import 'package:flutter_application_frith/View/security_login.dart';
 import 'package:flutter_application_frith/View/business_login.dart';
 import 'package:flutter_application_frith/notepad/notepad.dart';
+import 'package:flutter_application_frith/punchClock/GardList.dart';
 import 'package:flutter_application_frith/report/reportpad.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => ReportpadModel()),
         ChangeNotifierProvider(create: (context) => NotepadModel()),
-        ChangeNotifierProvider(create: (context) => InformationPoolModel())
+        ChangeNotifierProvider(create: (context) => InformationPoolModel()),
+        ChangeNotifierProvider(create: (context) => GardListModel())
 
         ///Provider(create: (context) => InformationpoolPage())
       ],

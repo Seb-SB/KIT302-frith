@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:flutter_application_frith/Model/business_owner.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_session_manager/flutter_session_manager.dart';
+import 'package:flutter_application_frith/global_ip.dart' as globals;
 
 class BusLogin extends StatefulWidget {
   late LoggedInBusiness business = LoggedInBusiness();
@@ -126,7 +127,9 @@ class _BusLoginState extends State<BusLogin> {
   }
 
   Future<void> _logIn(String email, String password) async {
-    var url = 'http://192.168.0.128/frith/connection/business_owner_login.php';
+    var url = 'http://' +
+        globals.GLOBAL_IP +
+        '/frith/connection/business_owner_login.php';
 
     Map data = {'email': email, 'password': password};
 

@@ -5,6 +5,7 @@ import 'package:flutter_application_frith/View/security_login.dart';
 import 'signup_security.dart';
 import 'security_guards.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_application_frith/global_ip.dart' as globals;
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -304,7 +305,9 @@ class _SignUpState extends State<SignUp> {
 
   Future<void> _submit(String firstName, String lastName, String phoneNumber,
       String email, String password, String id) async {
-    var url = 'http://192.168.0.128/frith/connection/security_guard_create.php';
+    var url = 'http://' +
+        globals.GLOBAL_IP +
+        '/frith/connection/security_guard_create.php';
 
     Map data = {
       'FirstName': firstName,

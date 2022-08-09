@@ -6,6 +6,7 @@ import 'package:flutter_application_frith/Model/securityGuard.dart';
 import 'signup_security.dart';
 import 'security_guards.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_application_frith/global_ip.dart' as globals;
 
 //import 'shared_preferences/shared_preferences.dart';
 
@@ -126,7 +127,9 @@ class _SecLoginState extends State<SecLogin> {
   }
 
   Future<void> _logIn(String email, String password) async {
-    var url = 'http://192.168.1.21/frith/connection/security_guard_login.php';
+    var url = 'http://' +
+        globals.GLOBAL_IP +
+        '/frith/connection/security_guard_login.php';
 
     Map data = {'email': email, 'password': password};
 

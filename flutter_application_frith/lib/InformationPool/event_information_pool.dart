@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'information_homepage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_application_frith/global_ip.dart' as globals;
 
 class EventInformationPool {
-  String businessID;
+  int businessID;
   String dateTime;
   String levelID;
   String eventTitle;
-  String numberOfPerpetrators;
+  int numberOfPerpetrators;
   String eventDescription;
   String eventColour;
   //TODO get colour from database
@@ -38,7 +39,8 @@ class InformationPoolModel extends ChangeNotifier {
   /// Internal, private state of the list.
   final List<EventInformationPool> informationItems = [];
 
-  var url = 'http://192.168.0.128/frith/connection/event_details.php';
+  var url =
+      'http://' + globals.GLOBAL_IP + '/frith/connection/event_details.php';
 
   Future<List<EventInformationPool>> _fetch_events() async {
     var data = await http.get(Uri.parse(url));

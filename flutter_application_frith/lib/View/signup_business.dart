@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter_application_frith/Model/business_owner.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application_frith/View/business_login.dart';
+import 'package:flutter_application_frith/global_ip.dart' as globals;
 
 class SignUpBusiness extends StatefulWidget {
   const SignUpBusiness({Key? key}) : super(key: key);
@@ -376,7 +377,9 @@ class _SignUpBusinessState extends State<SignUpBusiness> {
       String busLastName,
       String busPassword,
       int busPoolID) async {
-    var url = 'http://192.168.0.128/frith/connection/business_owner_create.php';
+    var url = 'http://' +
+        globals.GLOBAL_IP +
+        '/frith/connection/business_owner_create.php';
 
     Map data = {
       'BusinessName': busName,

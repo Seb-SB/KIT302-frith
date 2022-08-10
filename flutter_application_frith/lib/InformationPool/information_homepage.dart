@@ -77,6 +77,9 @@ class _InformationHomepageState extends State<InformationHomepage> {
           eventColour: v['eventColour']);
 
       events.add(event);
+
+      events.sort((a, b) =>
+          DateTime.parse(b.dateTime).compareTo(DateTime.parse(a.dateTime)));
     }
 
     return events;

@@ -91,13 +91,11 @@ class _InformationHomepageState extends State<InformationHomepage> {
         title: const Text("List of Events"),
         centerTitle: true,
       ),
-      body: Container(
-        child: FutureBuilder(
-          future: _fetch_events(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            return _list_view_builder(snapshot);
-          },
-        ),
+      body: FutureBuilder(
+        future: _fetch_events(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          return _list_view_builder(snapshot);
+        },
       ),
     );
   }

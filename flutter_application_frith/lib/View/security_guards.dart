@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/src/material/bottom_navigation_bar.dart';
 import 'package:flutter_application_frith/Model/securityGuard.dart';
 import 'package:flutter_application_frith/View/security_login.dart';
+import 'package:flutter_application_frith/punchClock/punchClock_homepage.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../emergency/emergencyphone.dart';
 import '../notepad/notepad_homepage.dart';
@@ -180,17 +181,26 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                             size: 80,
                           ) //"Incident Report"
                           )),
-                  Container(
-                      //alignment: Alignment.centerRight,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const PunchClockPage(),
+                          ));
+                    },
+                    child: Container(
+                        //alignment: Alignment.centerRight,
 
-                      width: 140,
-                      height: 90,
-                      color: Colors.blueAccent,
-                      child: Icon(
-                        Icons.access_time_outlined, //start/end/shift
-                        color: Colors.white,
-                        size: 80,
-                      )),
+                        width: 140,
+                        height: 90,
+                        color: Colors.blueAccent,
+                        child: Icon(
+                          Icons.access_time_outlined, //start/end/shift
+                          color: Colors.white,
+                          size: 80,
+                        )),
+                  )
                 ],
               ),
             ],

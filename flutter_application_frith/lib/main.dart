@@ -6,6 +6,7 @@ import 'package:flutter_application_frith/View/security_login.dart';
 import 'package:flutter_application_frith/View/business_login.dart';
 import 'package:flutter_application_frith/notepad/notepad.dart';
 import 'package:flutter_application_frith/punchClock/guard_list.dart';
+import 'package:flutter_application_frith/punchClock/punchClock.dart';
 import 'package:flutter_application_frith/report/reportpad.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => ReportpadModel()),
         ChangeNotifierProvider(create: (context) => NotepadModel()),
         ChangeNotifierProvider(create: (context) => InformationPoolModel()),
-        ChangeNotifierProvider(create: (context) => GardListModel())
+        ChangeNotifierProvider(create: (context) => GardListModel()),
+        ChangeNotifierProvider(create: (context) => PunchClockModel())
 
         ///Provider(create: (context) => InformationpoolPage())
       ],

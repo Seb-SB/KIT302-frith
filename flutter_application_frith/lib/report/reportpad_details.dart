@@ -15,7 +15,7 @@ GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
 class ReportpadDetails extends StatefulWidget {
   const ReportpadDetails({Key? key, required this.id}) : super(key: key);
-  final int id; //Add this line
+  final int id;
   @override
   _ReportpadDetailsState createState() => _ReportpadDetailsState();
 }
@@ -24,14 +24,12 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
   final _formKey = GlobalKey<FormState>();
   final specificAreaController = TextEditingController();
   //final dateController = TextEditingController();
-  final witnessesController = TextEditingController();
   final severityController = TextEditingController();
   final descriptionController = TextEditingController();
-  final partiesInvolvedController = TextEditingController();
-  final reportFiledController = TextEditingController();
+  var reportFiledController = 'Y';
   var errorMessage = "";
   var _isLoading = false;
-  //var timeNow;
+  var timeNow;
   @override
   Widget build(BuildContext context) {
     var reportpads =
@@ -40,11 +38,9 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
 
     specificAreaController.text = reportpad.specificArea;
     //dateController.text = reportpad.date;
-    witnessesController.text = reportpad.witnesses;
     severityController.text = reportpad.severity;
     descriptionController.text = reportpad.description;
-    partiesInvolvedController.text = reportpad.partiesInvolved;
-    reportFiledController.text = reportpad.reportFiled;
+    reportFiledController = reportpad.reportFiled;
 
     return Consumer<ReportpadModel>(builder: (context, reportpadModel, _) {
       return Scaffold(
@@ -77,12 +73,6 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                             // ),
                             TextFormField(
                               decoration:
-                                  const InputDecoration(labelText: "Witnesses"),
-                              controller: witnessesController,
-                              autofocus: true,
-                            ),
-                            TextFormField(
-                              decoration:
                                   const InputDecoration(labelText: "Severity"),
                               controller: severityController,
                             ),
@@ -90,11 +80,6 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                               decoration: const InputDecoration(
                                   labelText: "Description"),
                               controller: descriptionController,
-                            ),
-                            TextFormField(
-                              decoration: const InputDecoration(
-                                  labelText: "Parties Involved"),
-                              controller: partiesInvolvedController,
                             ),
                             ElevatedButton(
                                 style: ElevatedButton.styleFrom(
@@ -105,23 +90,18 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                                   if (!formkey.currentState!.validate()) {
                                     print("invalid entry");
                                   } else {
-                                    //DateTime timeNow = DateTime.now();
-                                    //String timeNow =
-                                    //DateFormat('yyyy-MM-dd – kk:mm:ss').format(now);
-                                    DateFormat dateFormat =
-                                        DateFormat("yyyy-MM-dd HH:mm:ss");
-                                    String timeNow =
-                                        dateFormat.format(DateTime.now());
-
+                                    var timeNow = new DateTime.now();
+                                    var formatter = new DateFormat('yyyy-MM-dd HH:mm:ss');
+                                    String formatted = formatter.format(timeNow); // Save this to DB
+                                    print(formatted); // Output: 2021-05-11 08:52:45
+                                    print(formatter.parse(formatted));
                                     //reportFiledOfReport = 'y';
                                     _submit(
-                                        //timeNow,
+                                        formatted,
                                         specificAreaController.text,
-                                        witnessesController.text,
                                         severityController.text,
                                         descriptionController.text,
-                                        partiesInvolvedController.text,
-                                        reportFiledController.text);
+                                        reportFiledController);
 
                                     Provider.of<ReportpadModel>(context,
                                             listen: false)
@@ -136,26 +116,22 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                                   onPressed: () {
                                     if (_formKey.currentState?.validate() ??
                                         false) {
+
                                       reportpad.specificArea =
                                           specificAreaController.text;
-                                      //reportpad.date = dateController.text;
-                                      reportpad.witnesses =
-                                          witnessesController.text;
+                                      reportpad.date = DateTime.now();
                                       reportpad.severity =
                                           severityController.text;
                                       reportpad.description =
                                           descriptionController.text;
-                                      reportpad.partiesInvolved =
-                                          partiesInvolvedController.text;
                                       reportpad.reportFiled =
-                                          reportFiledController.text;
+                                          reportFiledController;
 
                                       //update the model
 
                                       Provider.of<ReportpadModel>(context,
                                               listen: false)
                                           .update();
-
                                       //return to previous screen
                                       Navigator.pop(context);
                                     }
@@ -186,12 +162,10 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
   }
 
   Future<void> _submit(
-      //String timeSubmitted,
+      String timeSubmitted,
       String incidentType,
       String specificArea,
       String description,
-      String partiesInvolvedInvolved,
-      String witnesses,
       String reportFiled) async {
     var url = 'http://192.168.1.21/frith/connection/incident_report_submit.php';
 
@@ -199,12 +173,10 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
     dynamic guardKey = await SessionManager().get("GuardKey");
 
     data1['GuardKey'] = guardKey;
-    //data1['TimeSubmitted'] = timeSubmitted;
+    data1['TimeSubmitted'] = timeSubmitted;
     data1['IncidentType'] = incidentType;
     data1['SpecificArea'] = specificArea;
     data1['Description'] = description;
-    data1['PartiesInvolved'] = partiesInvolvedInvolved;
-    data1['Witnesses'] = witnesses;
     data1['ReportFiled'] = reportFiled;
 
     var jsonData = null;

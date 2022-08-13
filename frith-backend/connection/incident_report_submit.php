@@ -22,49 +22,63 @@ $json["error"] = false;
 $json["errmsg"] = "";
 if (empty($data['GuardKey'])) {
     $received = false;
+    print("No GuardKey");
 } else {
     $GuardKey = $data['GuardKey'];
     $received = true;
+    print("Guard Key " + $GuardKey);
 }
-// if (empty($data['TimeSubmitted'])) {
-//     $received = false;
-// } else {
-//     $TimeSubmitted = $data['TimeSubmitted'];
-//     $received = true;
-// }
+if (empty($data['TimeSubmitted'])) {
+    $received = false;
+    print("No TimeSubmitted");
+} else {
+    $TimeSubmitted = $data['TimeSubmitted'];
+    $received = true;
+    print("Time " + $TimeSubmitted);
+}
 if (empty($data['IncidentType'])) {
     $received = false;
+    print("No IncidentType");
 } else {
     $IncidentType = $data['IncidentType'];
     $received = true;
+    print("IncidentType " + $IncidentType);
 }
-//check if ABN value has been received 
+
 if (empty($data['SpecificArea'])) {
     $received = false;
+    print("No SpecificArea");
 } else {
     $SpecificArea = $data['SpecificArea'];
     $received = true;
+    print("SpecificArea " + $SpecificArea);
 }
-//check if phone number value has been received 
+
 if (empty($data['Description'])) {
     $received = false;
+    print("No Description");
 } else {
     $Description = $data['Description'];
     $received = true;
+    print("Description " + $Description);
 }
 //check if PartiesInvolved value has been received 
 if (empty($data['PartiesInvolved'])) {
     $received = false;
+    print("No PartiesInvolved");
 } else {
     $PartiesInvolved = $data['PartiesInvolved'];
     $received = true;
+    print("PartiesInvolved " + $PartiesInvolved);
 }
 //check if Witnesses value has been received 
 if (empty($data['Witnesses'])) {
     $received = false;
+    print("No Witnesses");
 } else {
     $Witnesses = $data['Witnesses'];
     $received = true;
+    print("Witnesses " + $Witnesses);
 }
 
 
@@ -83,7 +97,7 @@ if ($received) {
 
     // if ($json["error"] == false) {
 
-        $sql = "INSERT INTO `incidentreport`(`GuardKey`,`BusinessID`, `IncidentType`, `SpecificArea`, `Description`, `PartiesInvolved`, `Witnesses`, `ReportFiled`) VALUES ('$GuardKey', '$BusinessID', '$IncidentType','$SpecificArea','$Description','$Witnesses','$ReportFiled');";
+        $sql = "INSERT INTO `incidentreport`(`GuardKey`,`BusinessID`, `TimeSubmitted`, `IncidentType`, `SpecificArea`, `Description`, `ReportFiled`) VALUES ('$GuardKey', '$BusinessID', '$TimeSubmitted','$IncidentType','$SpecificArea','$Description','$ReportFiled');";
         $res = mysqli_query($conn, $sql);
 
         if (!$res) {

@@ -24,18 +24,15 @@ class NewReport extends StatefulWidget {
 
 class _NewReportState extends State<NewReport> {
   TextEditingController specificAreaOfReport = TextEditingController();
-  //TextEditingController dateOfReport = TextEditingController();
-  TextEditingController witnessesOfReport = TextEditingController();
   TextEditingController severityOfReport = TextEditingController();
   TextEditingController descriptionOfReport = TextEditingController();
-  TextEditingController partiesInvolvedOfReport = TextEditingController();
-  TextEditingController reportFiledOfReport = TextEditingController();
+  var reportFiledOfReport = 'Y';
   var sessionManager = SessionManager();
   final reportFiledItems = ['Danger', 'High', 'Informative', 'low', 'medium'];
   String? dropdownValue;
   var errorMessage = "";
   var _isLoading = false;
-  var timeNow;
+  var dateOfReport = DateTime.now();
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
   Widget _buildspecificAreaOfReportTextField() {
@@ -97,34 +94,6 @@ class _NewReportState extends State<NewReport> {
   //   );
   // }
 
-  Widget _buildwitnessesOfReportTextField() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        const SizedBox(height: 10.0),
-        Container(
-          alignment: Alignment.center,
-          height: 60.0,
-          child: TextFormField(
-            controller: witnessesOfReport,
-            keyboardType: TextInputType.text,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "Please enter a type";
-              }
-              return null;
-            },
-            decoration: const InputDecoration(
-              contentPadding: EdgeInsets.symmetric(vertical: 15),
-              border: InputBorder.none,
-              hintText: 'witnesses:',
-              prefixIcon: Icon(Icons.title),
-            ),
-          ),
-        )
-      ],
-    );
-  }
 
   Widget _buildseverityOfReportTextField() {
     return Column(
@@ -209,34 +178,7 @@ class _NewReportState extends State<NewReport> {
     );
   }
 
-  Widget _buildPartiesOfReportTextField() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        const SizedBox(height: 10.0),
-        Container(
-          alignment: Alignment.center,
-          height: 60.0,
-          child: TextFormField(
-            controller: partiesInvolvedOfReport,
-            keyboardType: TextInputType.text,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "Please enter people involved";
-              }
-              return null;
-            },
-            decoration: const InputDecoration(
-              contentPadding: EdgeInsets.symmetric(vertical: 15),
-              border: InputBorder.none,
-              hintText: 'Details of Parties Involved:',
-              prefixIcon: Icon(Icons.title),
-            ),
-          ),
-        )
-      ],
-    );
-  }
+
 
   // Widget _buildreportFiledOfReportTextField() {
   //   return Column(
@@ -308,29 +250,28 @@ class _NewReportState extends State<NewReport> {
                   } else {
                     _addToList(
                         specificAreaOfReport.text,
-                        //dateOfReport.text,
-                        witnessesOfReport.text,
+                        dateOfReport,
                         severityOfReport.text,
                         descriptionOfReport.text,
-                        partiesInvolvedOfReport.text,
-                        reportFiledOfReport.text,
+                        reportFiledOfReport,
                         context,
                         reportpads);
                     //DateTime timeNow = DateTime.now();
                     //String timeNow =
                     //DateFormat('yyyy-MM-dd – kk:mm:ss').format(now);
-                    DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
-                    String timeNow = dateFormat.format(DateTime.now());
+                    var timeNow = new DateTime.now();
+                    var formatter = new DateFormat('yyyy-MM-dd HH:mm:ss');
+                    String formatted = formatter.format(timeNow); // Save this to DB
+                    //print(formatted); // Output: 2021-05-11 08:52:45
+                    //print(formatter.parse(formatted)); // Convert back to DateTime object
 
                     //reportFiledOfReport = 'y';
                     _submit(
-                      timeNow,
+                        dateOfReport,
                       severityOfReport.text,
                       specificAreaOfReport.text,
-                      witnessesOfReport.text,
                       descriptionOfReport.text,
-                      partiesInvolvedOfReport.text,
-                      //reportFiledOfReport.text
+                      reportFiledOfReport
                     );
 
                     Provider.of<ReportpadModel>(context, listen: false)
@@ -348,12 +289,10 @@ class _NewReportState extends State<NewReport> {
                 onPressed: () {
                   _addToList(
                       specificAreaOfReport.text,
-                      //dateOfReport.text,
-                      witnessesOfReport.text,
+                      dateOfReport,
                       severityOfReport.text,
                       descriptionOfReport.text,
-                      partiesInvolvedOfReport.text,
-                      reportFiledOfReport.text,
+                      reportFiledOfReport,
                       context,
                       reportpads);
                   Provider.of<ReportpadModel>(context, listen: false).update();
@@ -371,14 +310,13 @@ class _NewReportState extends State<NewReport> {
                   onPrimary: Colors.white,
                 ),
                 onPressed: () {
+                  dateOfReport = DateTime.now();
                   _addToList(
                       specificAreaOfReport.text,
-                      //dateOfReport.text,
-                      witnessesOfReport.text,
+                      dateOfReport,
                       severityOfReport.text,
                       descriptionOfReport.text,
-                      partiesInvolvedOfReport.text,
-                      reportFiledOfReport.text,
+                      reportFiledOfReport,
                       context,
                       reportpads);
                   Provider.of<ReportpadModel>(context, listen: false).update();
@@ -397,21 +335,17 @@ class _NewReportState extends State<NewReport> {
 
   void _addToList(
       String specificAreaOfReport,
-      //String dateOfReport,
-      String witnessesOfReport,
+      DateTime dateOfReport,
       String severityOfReport,
       String detailsOfReport,
-      String partiesInvolvedOfReport,
       String reportFiledOfReport,
       BuildContext context,
       List<Reportpad> reportpads) {
     Reportpad report = Reportpad(
         specificArea: specificAreaOfReport,
-        //date: dateOfReport,
-        witnesses: witnessesOfReport,
+        date: dateOfReport,
         severity: severityOfReport,
         description: detailsOfReport,
-        partiesInvolved: partiesInvolvedOfReport,
         reportFiled: reportFiledOfReport);
 
     reportpads.add(report);
@@ -465,11 +399,7 @@ class _NewReportState extends State<NewReport> {
               key: formkey,
               child: Column(children: <Widget>[
                 _buildspecificAreaOfReportTextField(),
-                //_buildDateOfReportTextField(),
-                _buildwitnessesOfReportTextField(),
                 _builddescriptionOfReportTextField(),
-                _buildPartiesOfReportTextField(),
-                //_buildreportFiledOfReportTextField(),
                 _buildseverityOfReportTextField(),
                 _onSubmit(context, reportpads)
               ]),
@@ -481,12 +411,10 @@ class _NewReportState extends State<NewReport> {
   }
 
   Future<void> _submit(
-      //String timeSubmitted,
+      DateTime timeSubmitted,
       String incidentType,
       String specificArea,
       String description,
-      String partiesInvolvedInvolved,
-      String witnesses,
       String reportFiled) async {
     var url = 'http://192.168.1.21/frith/connection/incident_report_submit.php';
 
@@ -494,12 +422,10 @@ class _NewReportState extends State<NewReport> {
     dynamic guardKey = await SessionManager().get("GuardKey");
 
     data1['GuardKey'] = guardKey;
-    //data1['TimeSubmitted'] = timeSubmitted;
+    data1['TimeSubmitted'] = timeSubmitted;
     data1['IncidentType'] = incidentType;
     data1['SpecificArea'] = specificArea;
     data1['Description'] = description;
-    data1['PartiesInvolved'] = partiesInvolvedInvolved;
-    data1['Witnesses'] = witnesses;
     data1['ReportFiled'] = reportFiled;
 
     var jsonData = null;

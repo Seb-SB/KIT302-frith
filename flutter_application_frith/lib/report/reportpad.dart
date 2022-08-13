@@ -2,20 +2,16 @@ import 'package:flutter/material.dart';
 
 class Reportpad {
   String specificArea;
-  //String date;
-  String witnesses;
+  DateTime date;
   String severity;
   String description;
-  String partiesInvolved;
   String reportFiled;
 
   Reportpad(
       {required this.specificArea,
-      //required this.date,
-      required this.witnesses,
+      required this.date,
       required this.severity,
       required this.description,
-      required this.partiesInvolved,
       required this.reportFiled});
 }
 
@@ -27,44 +23,16 @@ class ReportpadModel extends ChangeNotifier {
   ReportpadModel() {
     add(Reportpad(
         specificArea: "lobby",
-        //date: "01/03/2022",
-        witnesses: "1pm",
+        date: DateTime.now(),
         severity: "Danger",
         description: "The 1st report is ...",
-        partiesInvolved: "joe blogs",
-        reportFiled: "y"));
+        reportFiled: "N"));
     add(Reportpad(
-        specificArea: "lobby",
-        //date: "01/03/2022",
-        witnesses: "1pm",
+        specificArea: "Bar",
+        date: DateTime.now(),
         severity: "Danger",
         description: "The 2nd report is ...",
-        partiesInvolved: "joe blogs",
-        reportFiled: 'Y'));
-    add(Reportpad(
-        specificArea: "lobby",
-        //date: "01/03/2022",
-        witnesses: "1pm",
-        severity: "Danger",
-        description: "The 3rd report is ...",
-        partiesInvolved: "joe blogs",
-        reportFiled: 'Y'));
-    add(Reportpad(
-        specificArea: "lobby",
-        //date: "01/03/2022",
-        witnesses: "1pm",
-        severity: "Danger",
-        description: "The 4th report is ...",
-        partiesInvolved: "joe blogs",
-        reportFiled: "Y"));
-    add(Reportpad(
-        specificArea: "lobby",
-        //date: "01/03/2022",
-        witnesses: "1pm",
-        severity: "Danger",
-        description: "The 5th report is ...",
-        partiesInvolved: "joe blogs",
-        reportFiled: "N"));
+        reportFiled: 'N'));
   }
 
   void add(Reportpad item) {

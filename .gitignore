@@ -1,4 +1,16 @@
+# Miscellaneous
+*.class
+*.lock
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
 
+<<<<<<< Updated upstream
 *.flat
 flutter_application_frith/.dart_tool/package_config_subset
 *.json
@@ -99,6 +111,8 @@ Thumbs.db
 .history
 .svn/
 
+=======
+>>>>>>> Stashed changes
 # IntelliJ related
 *.iml
 *.ipr
@@ -208,6 +222,7 @@ app.*.symbols
 !**/ios/**/default.pbxuser
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+<<<<<<< Updated upstream
 !/dev/ci/**/Gemfile.lock
 # Gradle files
 .gradle/
@@ -350,3 +365,6 @@ Thumbs.db
 .cxx
 local.properties
 flutter_application_frith/.dart_tool/package_config.json
+=======
+!/dev/ci/**/Gemfile.lock
+>>>>>>> Stashed changes

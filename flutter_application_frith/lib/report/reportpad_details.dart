@@ -52,7 +52,6 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    //Display movie id
                     Text("Report Index ${widget.id}"),
                     Form(
                       key: _formKey,

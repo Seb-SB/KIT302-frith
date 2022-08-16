@@ -22,67 +22,62 @@ $json["error"] = false;
 $json["errmsg"] = "";
 if (empty($data2['GuardKey'])) {
     $received = false;
-    print("No GuardKey");
+
 } else {
     $GuardKey = $data2['GuardKey'];
     $received = true;
-    print("Guard Key ");
-    print($GuardKey);
+
 }
 if (empty($data2['TimeSubmitted'])) {
     $received = false;
-    print("No TimeSubmitted");
+
 } else {
     $TimeSubmitted = $data2['TimeSubmitted'];
     $received = true;
-    print("Time " + $TimeSubmitted);
-    print($TimeSubmitted);
+
 }
 if (empty($data2['IncidentType'])) {
     $received = false;
-    print("No IncidentType");
+
 } else {
     $IncidentType = $data2['IncidentType'];
     $received = true;
-    print("IncidentType ");
-    print($IncidentType);
 }
 
 if (empty($data2['SpecificArea'])) {
     $received = false;
-    print("No SpecificArea");
+
 } else {
     $SpecificArea = $data2['SpecificArea'];
     $received = true;
-    print("SpecificArea ");
-    print($SpecificArea);
 }
 
 if (empty($data2['Description'])) {
     $received = false;
-    print("No Description");
+
 } else {
     $Description = $data2['Description'];
     $received = true;
-    print("Description ");
-    print($Description);
 }
 
 
 if ($received) {
     $ReportFiled = "Y";
-    $BusinessID = 25;
-    //$sql = "SELECT * FROM `incidentreport` WHERE `GuardKey`= '$UniqueKey';";
-    //$res = mysqli_query($conn, $sql);
-    //$numrows = mysqli_num_rows($res);
+    
+    $sql = "SELECT `BusinessID` FROM `shiftdetails` WHERE `GuardKey`= '$GuardKey';";
+    $res = mysqli_query($conn, $sql);
+    if($res){
+        while($row = mysqli_fetch_assoc($res)){
+            $BusinessID = $row['BusinessID'];
+        }
+    }
+    else {
+        $json["error"] = false;
+    }
+    // if table does not contain unique key
+    
 
-    //if table does not contain unique key
-    // if ($numrows == 0) {
-    //     $json["error"] = true;
-    //     $json["message"] = "Invalid Unique Key";
-    // }
-
-    // if ($json["error"] == false) {
+    if ($json["error"] == false) {
 
         $sql = "INSERT INTO `incidentreport`(`GuardKey`,`BusinessID`, `TimeSubmitted`, `IncidentType`, `SpecificArea`, `Description`, `ReportFiled`) VALUES ('$GuardKey', '$BusinessID', '$TimeSubmitted','$IncidentType','$SpecificArea','$Description','$ReportFiled');";
         $res = mysqli_query($conn, $sql);
@@ -93,7 +88,7 @@ if ($received) {
         } else {
             $json["message"] = "Success";
         }
-    //}
+    }
 
 
 

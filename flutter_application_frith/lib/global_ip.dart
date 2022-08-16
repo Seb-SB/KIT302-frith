@@ -6,4 +6,4 @@
 
 library my_project.globals;
 
-final String GLOBAL_IP = "192.168.0.128";
+final String GLOBAL_IP = "192.168.1.21";

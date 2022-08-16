@@ -91,17 +91,20 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                                     print("invalid entry");
                                   } else {
                                     var timeNow = new DateTime.now();
-                                    var formatter = new DateFormat('yyyy-MM-dd HH:mm:ss');
-                                    String formatted = formatter.format(timeNow); // Save this to DB
-                                    print(formatted); // Output: 2021-05-11 08:52:45
+                                    var formatter =
+                                        new DateFormat('yyyy-MM-dd HH:mm:ss');
+                                    String formatted = formatter
+                                        .format(timeNow); // Save this to DB
+                                    print(
+                                        formatted); // Output: 2021-05-11 08:52:45
                                     print(formatter.parse(formatted));
                                     //reportFiledOfReport = 'y';
-                                    _submit(
-                                        formatted,
-                                        specificAreaController.text,
-                                        severityController.text,
-                                        descriptionController.text,
-                                        reportFiledController);
+                                    // _submit(
+                                    //     formatted,
+                                    //     specificAreaController.text,
+                                    //     severityController.text,
+                                    //     descriptionController.text,
+                                    //     reportFiledController);
 
                                     Provider.of<ReportpadModel>(context,
                                             listen: false)
@@ -116,7 +119,6 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                                   onPressed: () {
                                     if (_formKey.currentState?.validate() ??
                                         false) {
-
                                       reportpad.specificArea =
                                           specificAreaController.text;
                                       reportpad.date = DateTime.now();
@@ -161,64 +163,64 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
     });
   }
 
-  Future<void> _submit(
-      String timeSubmitted,
-      String incidentType,
-      String specificArea,
-      String description,
-      String reportFiled) async {
-    var url = 'http://192.168.1.21/frith/connection/incident_report_submit.php';
+  // Future<void> _submit(
+  //     String timeSubmitted,
+  //     String incidentType,
+  //     String specificArea,
+  //     String description,
+  //     String reportFiled) async {
+  //   var url = 'http://192.168.1.21/frith/connection/incident_report_submit.php';
 
-    Map data1 = <String, dynamic>{};
-    dynamic guardKey = await SessionManager().get("GuardKey");
+  //   Map data1 = <String, dynamic>{};
+  //   dynamic guardKey = await SessionManager().get("GuardKey");
 
-    data1['GuardKey'] = guardKey;
-    data1['TimeSubmitted'] = timeSubmitted;
-    data1['IncidentType'] = incidentType;
-    data1['SpecificArea'] = specificArea;
-    data1['Description'] = description;
-    data1['ReportFiled'] = reportFiled;
+  //   data1['GuardKey'] = guardKey;
+  //   data1['TimeSubmitted'] = timeSubmitted;
+  //   data1['IncidentType'] = incidentType;
+  //   data1['SpecificArea'] = specificArea;
+  //   data1['Description'] = description;
+  //   data1['ReportFiled'] = reportFiled;
 
-    var jsonData = null;
+  //   var jsonData = null;
 
-    ///print(data.entries);
+  //   ///print(data.entries);
 
-    final response = await http.post(Uri.parse(url),
-        headers: {
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-          // 'Accept': 'application/json'
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(data1),
-        encoding: Encoding.getByName("utf-8"));
+  //   final response = await http.post(Uri.parse(url),
+  //       headers: {
+  //         // 'Content-Type': 'application/x-www-form-urlencoded',
+  //         // 'Accept': 'application/json'
+  //         'Content-Type': 'application/json; charset=UTF-8',
+  //       },
+  //       body: jsonEncode(data1),
+  //       encoding: Encoding.getByName("utf-8"));
 
-    print(response.body);
+  //   print(response.body);
 
-    if (response.statusCode == 200) {
-      jsonData = await jsonDecode(jsonEncode(response.body));
-      print(jsonData);
-      jsonData = jsonDecode(jsonData);
-      //print(jsonData["error"]);
-      if (jsonData["error"] == true) {
-        //print(jsonData);
-        errorMessage = await jsonData["message"];
-        setState(() {
-          _isLoading = false;
-        });
-        //create scaffold
+  //   if (response.statusCode == 200) {
+  //     jsonData = await jsonDecode(jsonEncode(response.body));
+  //     print(jsonData);
+  //     jsonData = jsonDecode(jsonData);
+  //     //print(jsonData["error"]);
+  //     if (jsonData["error"] == true) {
+  //       //print(jsonData);
+  //       errorMessage = await jsonData["message"];
+  //       setState(() {
+  //         _isLoading = false;
+  //       });
+  //       //create scaffold
 
-      } else {
-        setState(() {
-          _isLoading = false;
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => SecurityGuards()),
-          );
-          errorMessage = "";
-        });
-      }
-    } else {
-      print(jsonData["message"]);
-    }
-  }
+  //     } else {
+  //       setState(() {
+  //         _isLoading = false;
+  //         Navigator.push(
+  //           context,
+  //           MaterialPageRoute(builder: (context) => SecurityGuards()),
+  //         );
+  //         errorMessage = "";
+  //       });
+  //     }
+  //   } else {
+  //     print(jsonData["message"]);
+  //   }
+  // }
 }

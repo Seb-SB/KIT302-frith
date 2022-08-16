@@ -8,7 +8,7 @@ import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_application_frith/global_ip.dart' as globals;
 import '../View/security_guards.dart';
 
 class NewReport extends StatefulWidget {
@@ -33,6 +33,7 @@ class _NewReportState extends State<NewReport> {
   var errorMessage = "";
   var _isLoading = false;
   var dateOfReport = DateTime.now();
+
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
   Widget _buildspecificAreaOfReportTextField() {
@@ -93,7 +94,6 @@ class _NewReportState extends State<NewReport> {
   //     ],
   //   );
   // }
-
 
   Widget _buildseverityOfReportTextField() {
     return Column(
@@ -178,59 +178,6 @@ class _NewReportState extends State<NewReport> {
     );
   }
 
-
-
-  // Widget _buildreportFiledOfReportTextField() {
-  //   return Column(
-  //     crossAxisAlignment: CrossAxisAlignment.center,
-  //     children: <Widget>[
-  //       const SizedBox(height: 10.0),
-  //       Row(
-  //         children: [
-  //           Container(
-  //             alignment: Alignment.center,
-  //             height: 60.0,
-  //             child: Text("Police Status:   "),
-  //           ),
-  //           SizedBox(width: 60),
-  //           Container(
-  //             alignment: Alignment.center,
-  //             height: 60.0,
-  //             child: DropdownButton<String>(
-  //               value: dropdownValue,
-  //               icon: const Icon(Icons.arrow_upward),
-  //               elevation: 16,
-  //               style: const TextStyle(color: Colors.deepPurple),
-  //               underline: Container(
-  //                 height: 2,
-  //                 color: Colors.deepPurpleAccent,
-  //               ),
-  //               onChanged: (String? newValue) {
-  //                 setState(() {
-  //                   dropdownValue = newValue!;
-  //                   reportFiledOfReport.text = dropdownValue;
-  //                 });
-  //               },
-  //               items: <String>[
-  //                 'Reported',
-  //                 'Under Investigation',
-  //                 'Solved',
-  //                 'Closed',
-  //                 'None'
-  //               ].map<DropdownMenuItem<String>>((String value) {
-  //                 return DropdownMenuItem<String>(
-  //                   value: value,
-  //                   child: Text(value),
-  //                 );
-  //               }).toList(),
-  //             ),
-  //           )
-  //         ],
-  //       )
-  //     ],
-  //   );
-  // }
-
   Widget _onSubmit(BuildContext context, List<Reportpad> reportpads) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -261,18 +208,20 @@ class _NewReportState extends State<NewReport> {
                     //DateFormat('yyyy-MM-dd – kk:mm:ss').format(now);
                     var timeNow = new DateTime.now();
                     var formatter = new DateFormat('yyyy-MM-dd HH:mm:ss');
-                    String formatted = formatter.format(timeNow); // Save this to DB
+                    String formatted =
+                        formatter.format(timeNow); // Save this to DB
+                    var guardKey = 1;
                     //print(formatted); // Output: 2021-05-11 08:52:45
                     //print(formatter.parse(formatted)); // Convert back to DateTime object
 
                     //reportFiledOfReport = 'y';
                     _submit(
-                        dateOfReport,
-                      severityOfReport.text,
-                      specificAreaOfReport.text,
-                      descriptionOfReport.text,
-                      reportFiledOfReport
-                    );
+                        guardKey.toString(),
+                        formatted,
+                        severityOfReport.text,
+                        specificAreaOfReport.text,
+                        descriptionOfReport.text,
+                        reportFiledOfReport);
 
                     Provider.of<ReportpadModel>(context, listen: false)
                         .update();
@@ -410,18 +359,14 @@ class _NewReportState extends State<NewReport> {
     );
   }
 
-  Future<void> _submit(
-      DateTime timeSubmitted,
-      String incidentType,
-      String specificArea,
-      String description,
-      String reportFiled) async {
+  Future<void> _submit(String guardKey, timeSubmitted, String incidentType,
+      String specificArea, String description, String reportFiled) async {
+    //var url = 'http://192.168.1.21/frith/connection/test_report.php';
     var url = 'http://192.168.1.21/frith/connection/incident_report_submit.php';
 
     Map data1 = <String, dynamic>{};
     dynamic guardKey = await SessionManager().get("GuardKey");
-
-    data1['GuardKey'] = guardKey;
+    data1['GuardKey'] = guardKey.toString();
     data1['TimeSubmitted'] = timeSubmitted;
     data1['IncidentType'] = incidentType;
     data1['SpecificArea'] = specificArea;

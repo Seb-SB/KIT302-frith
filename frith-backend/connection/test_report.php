@@ -4,17 +4,16 @@
 require 'db_conn.php';
 
 $reportID = "";
-$guardKey = "";
-$businessID = "";
-$incidentType = "";
-$specArea = "";
-$Description = "";
-$PartiesInvolved = "";
-$Witnesses = "";
-$ReportFiled = "";
+$guardKey = "1";
+$businessID = "25";
+$timeSubmitted = "2022-08-07 10:23:11";
+$incidentType = "Low";
+$specArea = "Bar";
+$Description = "test";
+$ReportFiled = "Y";
 
-$sql = "INSERT INTO `incidentreport` (`ReportID`, `GuardKey`, `BusinessID`, `IncidentType`, `SpecificArea`, `Description`, `PartiesInvolved`, `Witnesses`, `ReportFiled`) VALUES (NULL, '113', '1', 'bad', 'place', 'this is a test', 'many', 'manyu', 'Y');
-";
+$sql = "INSERT INTO `incidentreport`(`reportID`,`GuardKey`,`BusinessID`, `TimeSubmitted`, `IncidentType`, `SpecificArea`, `Description`, `ReportFiled`) VALUES ('$reportID', '$GuardKey', '$BusinessID', '$TimeSubmitted','$IncidentType','$SpecificArea','$Description','$ReportFiled');";
+        
 $res = mysqli_query($conn, $sql);
 
 mysqli_close($conn);

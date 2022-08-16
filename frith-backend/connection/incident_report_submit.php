@@ -11,74 +11,61 @@ require 'db_conn.php';
 // $json["testing"] = preg_split('/[&|=]/',$json["testing"], -1, PREG_SPLIT_NO_EMPTY);
 // $str = $json["testing"];
 
-$json1 = file_get_contents('php://input');
+$json2 = file_get_contents('php://input');
 
 //convert file contents to PHP object
-$data = json_decode($json1, true);
+$data2 = json_decode($json2, true);
 
 
 $received = false;
 $json["error"] = false;
 $json["errmsg"] = "";
-if (empty($data['GuardKey'])) {
+if (empty($data2['GuardKey'])) {
     $received = false;
     print("No GuardKey");
 } else {
-    $GuardKey = $data['GuardKey'];
+    $GuardKey = $data2['GuardKey'];
     $received = true;
-    print("Guard Key " + $GuardKey);
+    print("Guard Key ");
+    print($GuardKey);
 }
-if (empty($data['TimeSubmitted'])) {
+if (empty($data2['TimeSubmitted'])) {
     $received = false;
     print("No TimeSubmitted");
 } else {
-    $TimeSubmitted = $data['TimeSubmitted'];
+    $TimeSubmitted = $data2['TimeSubmitted'];
     $received = true;
     print("Time " + $TimeSubmitted);
+    print($TimeSubmitted);
 }
-if (empty($data['IncidentType'])) {
+if (empty($data2['IncidentType'])) {
     $received = false;
     print("No IncidentType");
 } else {
-    $IncidentType = $data['IncidentType'];
+    $IncidentType = $data2['IncidentType'];
     $received = true;
-    print("IncidentType " + $IncidentType);
+    print("IncidentType ");
+    print($IncidentType);
 }
 
-if (empty($data['SpecificArea'])) {
+if (empty($data2['SpecificArea'])) {
     $received = false;
     print("No SpecificArea");
 } else {
-    $SpecificArea = $data['SpecificArea'];
+    $SpecificArea = $data2['SpecificArea'];
     $received = true;
-    print("SpecificArea " + $SpecificArea);
+    print("SpecificArea ");
+    print($SpecificArea);
 }
 
-if (empty($data['Description'])) {
+if (empty($data2['Description'])) {
     $received = false;
     print("No Description");
 } else {
-    $Description = $data['Description'];
+    $Description = $data2['Description'];
     $received = true;
-    print("Description " + $Description);
-}
-//check if PartiesInvolved value has been received 
-if (empty($data['PartiesInvolved'])) {
-    $received = false;
-    print("No PartiesInvolved");
-} else {
-    $PartiesInvolved = $data['PartiesInvolved'];
-    $received = true;
-    print("PartiesInvolved " + $PartiesInvolved);
-}
-//check if Witnesses value has been received 
-if (empty($data['Witnesses'])) {
-    $received = false;
-    print("No Witnesses");
-} else {
-    $Witnesses = $data['Witnesses'];
-    $received = true;
-    print("Witnesses " + $Witnesses);
+    print("Description ");
+    print($Description);
 }
 
 

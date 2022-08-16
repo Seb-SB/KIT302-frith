@@ -25,13 +25,13 @@ class ReportpadModel extends ChangeNotifier {
         specificArea: "lobby",
         date: DateTime.now(),
         severity: "Danger",
-        description: "The 1st report is ...",
+        description: "John, RedHead, pale, 6.2ft, Had a knife ...",
         reportFiled: "N"));
     add(Reportpad(
         specificArea: "Bar",
         date: DateTime.now(),
-        severity: "Danger",
-        description: "The 2nd report is ...",
+        severity: "Low",
+        description: "Small FM, Brown hair, Pink shirt, stole a drink ...",
         reportFiled: 'N'));
   }
 

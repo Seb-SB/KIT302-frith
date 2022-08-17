@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_frith/InformationPool/event_details.dart';
+import 'package:flutter_application_frith/InformationPool/information_homepage.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'event_information_pool.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
@@ -24,8 +26,9 @@ class _CreateEventState extends State<CreateEvent> {
 
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   var sessionManager = SessionManager();
-  //dynamic businessID = await SessionManager().get("BusinessID");
+
   String? dropdownValue;
+  var _isLoading = false;
 
   Widget _buildSeverityLevelOfEventDropDown() {
     return Column(
@@ -170,6 +173,102 @@ class _CreateEventState extends State<CreateEvent> {
     );
   }
 
+  Widget _buildSubmitFormButton(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.blue,
+              onPrimary: Colors.white,
+            ),
+            onPressed: () {
+              if (!formkey.currentState!.validate()) {
+                ///TODO: manage loading state etc.
+              } else {
+                // print(eventTitleController.text);
+                // print(eventDescriptionController.text);
+                // print(severityOfEventController.text);
+                // print(int.parse(numberOfPerpetratorsController.text));
+                _submitToDatabase(
+                    eventTitleController.text,
+                    eventDescriptionController.text,
+                    numberOfPerpetratorsController.text,
+                    severityOfEventController.text,
+                    context);
+              }
+            },
+            child: const Text("SUBMIT")),
+      ],
+    );
+  }
+
+  Future<void> _submitToDatabase(
+      String eventTitle,
+      String eventDescription,
+      String numberOfPerpetrators,
+      String severityOfEvent,
+      BuildContext context) async {
+    var url = 'http://' +
+        globals.GLOBAL_IP +
+        '/frith/connection/create_new_event.php';
+
+    dynamic businessID = await SessionManager().get("BusinessID");
+
+    var currentTime = DateTime.now();
+    var timeFormatter = DateFormat('yyyy-MM-dd HH:mm:ss');
+    String submissionDateTime = timeFormatter.format(currentTime);
+
+    Map data = <String, dynamic>{};
+
+    data['BusinessID'] = businessID;
+    data['Severity'] = severityOfEvent;
+    data['TimeSubmitted'] = submissionDateTime;
+    data['EventTitle'] = eventTitle;
+    data['NumPerpetrators'] = numberOfPerpetrators;
+    data['Description'] = eventDescription;
+
+    final response = await http.post(Uri.parse(url),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data),
+        encoding: Encoding.getByName("utf-8"));
+
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      var jsonData = await jsonDecode(jsonEncode(response.body));
+
+      print(jsonData);
+
+      ///testing
+
+      jsonData = jsonDecode(jsonData);
+      if (jsonData["error"] == true) {
+        //print(jsonData);
+        ///errorMessage = await jsonData["message"];
+        setState(() {
+          _isLoading = false;
+        });
+        //create scaffold
+
+      } else {
+        setState(() {
+          _isLoading = false;
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => InformationHomepage()),
+          );
+
+          ///errorMessage = "";
+        });
+      }
+    } else {
+      ///print(jsonData["message"]);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -205,7 +304,8 @@ class _CreateEventState extends State<CreateEvent> {
                     _buildEventTitleTextFormField(),
                     _buildSeverityLevelOfEventDropDown(),
                     _buildEventNumberOfPerpetratorsTextFormField(),
-                    _buildEventDescriptionTextFormField()
+                    _buildEventDescriptionTextFormField(),
+                    _buildSubmitFormButton(context)
                   ],
                 )),
           ],

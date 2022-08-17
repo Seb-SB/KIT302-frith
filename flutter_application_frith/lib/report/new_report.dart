@@ -362,7 +362,9 @@ class _NewReportState extends State<NewReport> {
   Future<void> _submit(String guardKey, timeSubmitted, String incidentType,
       String specificArea, String description, String reportFiled) async {
     //var url = 'http://192.168.1.21/frith/connection/test_report.php';
-    var url = 'http://192.168.1.21/frith/connection/incident_report_submit.php';
+    var url = 'http://' +
+        globals.GLOBAL_IP +
+        '/frith/connection/incident_report_submit.php';
 
     Map data1 = <String, dynamic>{};
     dynamic guardKey = await SessionManager().get("GuardKey");

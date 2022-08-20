@@ -11,6 +11,7 @@ import 'package:torch_light/torch_light.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import '../report/new_report.dart';
 import '../report/Report_Draft_Page.dart';
+import 'package:flutter_application_frith/Request_Backup/Backup_homepage.dart';
 
 class SecurityGuards extends StatefulWidget {
   const SecurityGuards({Key? key}) : super(key: key);
@@ -140,23 +141,29 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                 ],
               ),
               SizedBox(height: 30),
-              Row(
+                   Row(
+                //Request Backup funcction
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  //request back up
                   GestureDetector(
-                    child: Container(
-                        // alignment: Alignment.centerRight,
-
-                        width: 140,
-                        height: 90,
-                        color: Colors.blueAccent,
-                        child: Icon(
-                          Icons.time_to_leave_outlined, //request back up
-                          color: Colors.white,
-                          size: 80,
-                        )),
-                  ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const BackupPage(),
+                            ));
+                      },
+                      child: Container(
+                          // alignment: Alignment.centerLeft,
+                          color: Colors.blueAccent,
+                          width: 150,
+                          height: 100,
+                          child: Icon(
+                            Icons.people_outline,
+                            color: Colors.white,
+                            size: 80,
+                          ) //"Incident Report"
+                          )),
                   //end of request back up
                   //emergency call function
                   GestureDetector(

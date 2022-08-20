@@ -158,11 +158,11 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                           color: Colors.blueAccent,
                           width: 150,
                           height: 100,
-                          child: Icon(
-                            Icons.people_outline,
+                          child: Text("SOS",
+                            style: TextStyle(
                             color: Colors.white,
-                            size: 80,
-                          ) //"Incident Report"
+                            fontSize: 70,
+                        ), textAlign:TextAlign.center),//"Incident Report"
                           )),
                   //end of request back up
                   //emergency call function

@@ -123,10 +123,27 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                   //End of Notepad
                 ],
               ),
-              SizedBox(height: 60),
+              SizedBox(height: 10),
+              Row(
+                children: [
+                  SizedBox(width: 40),
+                  Container(
+                      width: 150,
+                      alignment: Alignment.center,
+                      child: Text('FLASH LIGHT')),
+                  SizedBox(width: 30),
+                  Container(
+                    width: 150,
+                    alignment: Alignment.center,
+                    child: Text('NOTEPAD',),
+                  )
+                ],
+              ),
+              SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  //request back up
                   GestureDetector(
                     child: Container(
                         // alignment: Alignment.centerRight,
@@ -140,7 +157,8 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                           size: 80,
                         )),
                   ),
-                  //emergency function
+                  //end of request back up
+                  //emergency call function
                   GestureDetector(
                     onTap: () {
                       launch('tel:000');
@@ -156,9 +174,26 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                           size: 80,
                         )),
                   ),
+                  //end emergency call function
                 ],
               ),
-              SizedBox(height: 60),
+              SizedBox(height: 10),
+              Row(
+                children: [
+                  SizedBox(width: 40),
+                  Container(
+                      width: 150,
+                      alignment: Alignment.center,
+                      child: Text('REQUEST BACK UP')),
+                  SizedBox(width: 30),
+                  Container(
+                    width: 150,
+                    alignment: Alignment.center,
+                    child: Text('EMERGENCY CALL',),
+                  )
+                ],
+              ),
+              SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -200,6 +235,22 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                           color: Colors.white,
                           size: 80,
                         )),
+                  )
+                ],
+              ),
+              SizedBox(height: 10),
+              Row(
+                children: [
+                  SizedBox(width: 40),
+                  Container(
+                      width: 150,
+                      alignment: Alignment.center,
+                      child: Text('INCIDENT REPORT')),
+                  SizedBox(width: 30),
+                  Container(
+                    width: 150,
+                    alignment: Alignment.center,
+                    child: Text('SHIFT MANAGER',),
                   )
                 ],
               ),

@@ -7,7 +7,7 @@ import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_application_frith/global_ip.dart' as globals;
 import '../View/security_guards.dart';
 import 'reportpad.dart';
 
@@ -86,56 +86,62 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                                   onPrimary: Colors.white,
                                 ),
                                 onPressed: () {
-                                  if (!formkey.currentState!.validate()) {
-                                    print("invalid entry");
-                                  } else {
-                                    var timeNow = new DateTime.now();
-                                    var formatter =
-                                        new DateFormat('yyyy-MM-dd HH:mm:ss');
-                                    String formatted = formatter
-                                        .format(timeNow); // Save this to DB
-                                    print(
-                                        formatted); // Output: 2021-05-11 08:52:45
-                                    print(formatter.parse(formatted));
-                                    //reportFiledOfReport = 'y';
-                                    // _submit(
-                                    //     formatted,
-                                    //     specificAreaController.text,
-                                    //     severityController.text,
-                                    //     descriptionController.text,
-                                    //     reportFiledController);
+                                  reportpad.specificArea =
+                                      specificAreaController.text;
+                                  reportpad.date = DateTime.now();
+                                  reportpad.severity = severityController.text;
+                                  reportpad.description =
+                                      descriptionController.text;
+                                  reportpad.reportFiled = reportFiledController;
+                                  _deleteFromList(
+                                      reportpad.specificArea,
+                                      reportpad.date,
+                                      reportpad.severity,
+                                      reportpad.description,
+                                      reportpad.reportFiled,
+                                      context,
+                                      reportpads);
+                                  var timeNow = new DateTime.now();
+                                  var formatter =
+                                      new DateFormat('yyyy-MM-dd HH:mm:ss');
+                                  String formatted = formatter
+                                      .format(timeNow); // Save this to DB
+                                  var guardKey = 1;
+                                  _submit(
+                                      guardKey.toString(),
+                                      formatted,
+                                      reportpad.severity,
+                                      reportpad.specificArea,
+                                      reportpad.description,
+                                      reportpad.reportFiled);
 
-                                    Provider.of<ReportpadModel>(context,
-                                            listen: false)
-                                        .update();
-                                    Navigator.pop(context);
-                                  }
+                                  Provider.of<ReportpadModel>(context,
+                                          listen: false)
+                                      .update();
+                                  Navigator.pop(context);
                                 },
                                 child: const Text('Submit')),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: ElevatedButton.icon(
                                   onPressed: () {
-                                    if (_formKey.currentState?.validate() ??
-                                        false) {
-                                      reportpad.specificArea =
-                                          specificAreaController.text;
-                                      reportpad.date = DateTime.now();
-                                      reportpad.severity =
-                                          severityController.text;
-                                      reportpad.description =
-                                          descriptionController.text;
-                                      reportpad.reportFiled =
-                                          reportFiledController;
+                                    reportpad.specificArea =
+                                        specificAreaController.text;
+                                    reportpad.date = DateTime.now();
+                                    reportpad.severity =
+                                        severityController.text;
+                                    reportpad.description =
+                                        descriptionController.text;
+                                    reportpad.reportFiled =
+                                        reportFiledController;
 
-                                      //update the model
+                                    //update the model
 
-                                      Provider.of<ReportpadModel>(context,
-                                              listen: false)
-                                          .update();
-                                      //return to previous screen
-                                      Navigator.pop(context);
-                                    }
+                                    Provider.of<ReportpadModel>(context,
+                                            listen: false)
+                                        .update();
+                                    //return to previous screen
+                                    Navigator.pop(context);
                                   },
                                   icon: const Icon(Icons.save),
                                   label: const Text("Save Values")),
@@ -162,64 +168,80 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
     });
   }
 
-  // Future<void> _submit(
-  //     String timeSubmitted,
-  //     String incidentType,
-  //     String specificArea,
-  //     String description,
-  //     String reportFiled) async {
-  //   var url = 'http://192.168.1.21/frith/connection/incident_report_submit.php';
+  void _deleteFromList(
+      String specificAreaOfReport,
+      DateTime dateOfReport,
+      String severityOfReport,
+      String detailsOfReport,
+      String reportFiledOfReport,
+      BuildContext context,
+      List<Reportpad> reportpads) {
+    Reportpad report = Reportpad(
+        specificArea: specificAreaOfReport,
+        date: dateOfReport,
+        severity: severityOfReport,
+        description: detailsOfReport,
+        reportFiled: reportFiledOfReport);
 
-  //   Map data1 = <String, dynamic>{};
-  //   dynamic guardKey = await SessionManager().get("GuardKey");
+    reportpads.remove(report);
+  }
 
-  //   data1['GuardKey'] = guardKey;
-  //   data1['TimeSubmitted'] = timeSubmitted;
-  //   data1['IncidentType'] = incidentType;
-  //   data1['SpecificArea'] = specificArea;
-  //   data1['Description'] = description;
-  //   data1['ReportFiled'] = reportFiled;
+  Future<void> _submit(String guardKey, timeSubmitted, String incidentType,
+      String specificArea, String description, String reportFiled) async {
+    //var url = 'http://192.168.1.21/frith/connection/test_report.php';
+    var url = 'http://' +
+        globals.GLOBAL_IP +
+        '/frith/connection/incident_report_submit.php';
 
-  //   var jsonData = null;
+    Map data1 = <String, dynamic>{};
+    dynamic guardKey = await SessionManager().get("GuardKey");
+    data1['GuardKey'] = guardKey.toString();
+    data1['TimeSubmitted'] = timeSubmitted;
+    data1['IncidentType'] = incidentType;
+    data1['SpecificArea'] = specificArea;
+    data1['Description'] = description;
+    data1['ReportFiled'] = reportFiled;
 
-  //   ///print(data.entries);
+    var jsonData = null;
 
-  //   final response = await http.post(Uri.parse(url),
-  //       headers: {
-  //         // 'Content-Type': 'application/x-www-form-urlencoded',
-  //         // 'Accept': 'application/json'
-  //         'Content-Type': 'application/json; charset=UTF-8',
-  //       },
-  //       body: jsonEncode(data1),
-  //       encoding: Encoding.getByName("utf-8"));
+    ///print(data.entries);
 
-  //   print(response.body);
+    final response = await http.post(Uri.parse(url),
+        headers: {
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+          // 'Accept': 'application/json'
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data1),
+        encoding: Encoding.getByName("utf-8"));
 
-  //   if (response.statusCode == 200) {
-  //     jsonData = await jsonDecode(jsonEncode(response.body));
-  //     print(jsonData);
-  //     jsonData = jsonDecode(jsonData);
-  //     //print(jsonData["error"]);
-  //     if (jsonData["error"] == true) {
-  //       //print(jsonData);
-  //       errorMessage = await jsonData["message"];
-  //       setState(() {
-  //         _isLoading = false;
-  //       });
-  //       //create scaffold
+    print(response.body);
 
-  //     } else {
-  //       setState(() {
-  //         _isLoading = false;
-  //         Navigator.push(
-  //           context,
-  //           MaterialPageRoute(builder: (context) => SecurityGuards()),
-  //         );
-  //         errorMessage = "";
-  //       });
-  //     }
-  //   } else {
-  //     print(jsonData["message"]);
-  //   }
-  // }
+    if (response.statusCode == 200) {
+      jsonData = await jsonDecode(jsonEncode(response.body));
+      print(jsonData);
+      jsonData = jsonDecode(jsonData);
+      //print(jsonData["error"]);
+      if (jsonData["error"] == true) {
+        //print(jsonData);
+        errorMessage = await jsonData["message"];
+        setState(() {
+          _isLoading = false;
+        });
+        //create scaffold
+
+      } else {
+        setState(() {
+          _isLoading = false;
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SecurityGuards()),
+          );
+          errorMessage = "";
+        });
+      }
+    } else {
+      print(jsonData["message"]);
+    }
+  }
 }

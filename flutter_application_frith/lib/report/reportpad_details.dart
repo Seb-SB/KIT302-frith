@@ -7,7 +7,7 @@ import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_application_frith/global_ip.dart' as globals;
 import '../View/security_guards.dart';
 import 'reportpad.dart';
 
@@ -15,7 +15,7 @@ GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
 class ReportpadDetails extends StatefulWidget {
   const ReportpadDetails({Key? key, required this.id}) : super(key: key);
-  final int id; //Add this line
+  final int id;
   @override
   _ReportpadDetailsState createState() => _ReportpadDetailsState();
 }
@@ -24,14 +24,12 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
   final _formKey = GlobalKey<FormState>();
   final specificAreaController = TextEditingController();
   //final dateController = TextEditingController();
-  final witnessesController = TextEditingController();
   final severityController = TextEditingController();
   final descriptionController = TextEditingController();
-  final partiesInvolvedController = TextEditingController();
-  final reportFiledController = TextEditingController();
+  var reportFiledController = 'Y';
   var errorMessage = "";
   var _isLoading = false;
-  //var timeNow;
+  var timeNow;
   @override
   Widget build(BuildContext context) {
     var reportpads =
@@ -40,11 +38,9 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
 
     specificAreaController.text = reportpad.specificArea;
     //dateController.text = reportpad.date;
-    witnessesController.text = reportpad.witnesses;
     severityController.text = reportpad.severity;
     descriptionController.text = reportpad.description;
-    partiesInvolvedController.text = reportpad.partiesInvolved;
-    reportFiledController.text = reportpad.reportFiled;
+    reportFiledController = reportpad.reportFiled;
 
     return Consumer<ReportpadModel>(builder: (context, reportpadModel, _) {
       return Scaffold(
@@ -56,7 +52,6 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    //Display movie id
                     Text("Report Index ${widget.id}"),
                     Form(
                       key: _formKey,
@@ -77,12 +72,6 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                             // ),
                             TextFormField(
                               decoration:
-                                  const InputDecoration(labelText: "Witnesses"),
-                              controller: witnessesController,
-                              autofocus: true,
-                            ),
-                            TextFormField(
-                              decoration:
                                   const InputDecoration(labelText: "Severity"),
                               controller: severityController,
                             ),
@@ -91,74 +80,68 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                                   labelText: "Description"),
                               controller: descriptionController,
                             ),
-                            TextFormField(
-                              decoration: const InputDecoration(
-                                  labelText: "Parties Involved"),
-                              controller: partiesInvolvedController,
-                            ),
                             ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.blue,
                                   onPrimary: Colors.white,
                                 ),
                                 onPressed: () {
-                                  if (!formkey.currentState!.validate()) {
-                                    print("invalid entry");
-                                  } else {
-                                    //DateTime timeNow = DateTime.now();
-                                    //String timeNow =
-                                    //DateFormat('yyyy-MM-dd – kk:mm:ss').format(now);
-                                    DateFormat dateFormat =
-                                        DateFormat("yyyy-MM-dd HH:mm:ss");
-                                    String timeNow =
-                                        dateFormat.format(DateTime.now());
+                                  reportpad.specificArea =
+                                      specificAreaController.text;
+                                  reportpad.date = DateTime.now();
+                                  reportpad.severity = severityController.text;
+                                  reportpad.description =
+                                      descriptionController.text;
+                                  reportpad.reportFiled = reportFiledController;
+                                  _deleteFromList(
+                                      reportpad.specificArea,
+                                      reportpad.date,
+                                      reportpad.severity,
+                                      reportpad.description,
+                                      reportpad.reportFiled,
+                                      context,
+                                      reportpads);
+                                  var timeNow = new DateTime.now();
+                                  var formatter =
+                                      new DateFormat('yyyy-MM-dd HH:mm:ss');
+                                  String formatted = formatter
+                                      .format(timeNow); // Save this to DB
+                                  var guardKey = 1;
+                                  _submit(
+                                      guardKey.toString(),
+                                      formatted,
+                                      reportpad.severity,
+                                      reportpad.specificArea,
+                                      reportpad.description,
+                                      reportpad.reportFiled);
 
-                                    //reportFiledOfReport = 'y';
-                                    _submit(
-                                        //timeNow,
-                                        specificAreaController.text,
-                                        witnessesController.text,
-                                        severityController.text,
-                                        descriptionController.text,
-                                        partiesInvolvedController.text,
-                                        reportFiledController.text);
-
-                                    Provider.of<ReportpadModel>(context,
-                                            listen: false)
-                                        .update();
-                                    Navigator.pop(context);
-                                  }
+                                  Provider.of<ReportpadModel>(context,
+                                          listen: false)
+                                      .update();
+                                  Navigator.pop(context);
                                 },
                                 child: const Text('Submit')),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: ElevatedButton.icon(
                                   onPressed: () {
-                                    if (_formKey.currentState?.validate() ??
-                                        false) {
-                                      reportpad.specificArea =
-                                          specificAreaController.text;
-                                      //reportpad.date = dateController.text;
-                                      reportpad.witnesses =
-                                          witnessesController.text;
-                                      reportpad.severity =
-                                          severityController.text;
-                                      reportpad.description =
-                                          descriptionController.text;
-                                      reportpad.partiesInvolved =
-                                          partiesInvolvedController.text;
-                                      reportpad.reportFiled =
-                                          reportFiledController.text;
+                                    reportpad.specificArea =
+                                        specificAreaController.text;
+                                    reportpad.date = DateTime.now();
+                                    reportpad.severity =
+                                        severityController.text;
+                                    reportpad.description =
+                                        descriptionController.text;
+                                    reportpad.reportFiled =
+                                        reportFiledController;
 
-                                      //update the model
+                                    //update the model
 
-                                      Provider.of<ReportpadModel>(context,
-                                              listen: false)
-                                          .update();
-
-                                      //return to previous screen
-                                      Navigator.pop(context);
-                                    }
+                                    Provider.of<ReportpadModel>(context,
+                                            listen: false)
+                                        .update();
+                                    //return to previous screen
+                                    Navigator.pop(context);
                                   },
                                   icon: const Icon(Icons.save),
                                   label: const Text("Save Values")),
@@ -185,26 +168,38 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
     });
   }
 
-  Future<void> _submit(
-      //String timeSubmitted,
-      String incidentType,
-      String specificArea,
-      String description,
-      String partiesInvolvedInvolved,
-      String witnesses,
-      String reportFiled) async {
-    var url = 'http://192.168.1.21/frith/connection/incident_report_submit.php';
+  void _deleteFromList(
+      String specificAreaOfReport,
+      DateTime dateOfReport,
+      String severityOfReport,
+      String detailsOfReport,
+      String reportFiledOfReport,
+      BuildContext context,
+      List<Reportpad> reportpads) {
+    Reportpad report = Reportpad(
+        specificArea: specificAreaOfReport,
+        date: dateOfReport,
+        severity: severityOfReport,
+        description: detailsOfReport,
+        reportFiled: reportFiledOfReport);
+
+    reportpads.remove(report);
+  }
+
+  Future<void> _submit(String guardKey, timeSubmitted, String incidentType,
+      String specificArea, String description, String reportFiled) async {
+    //var url = 'http://192.168.1.21/frith/connection/test_report.php';
+    var url = 'http://' +
+        globals.GLOBAL_IP +
+        '/frith/connection/incident_report_submit.php';
 
     Map data1 = <String, dynamic>{};
     dynamic guardKey = await SessionManager().get("GuardKey");
-
-    data1['GuardKey'] = guardKey;
-    //data1['TimeSubmitted'] = timeSubmitted;
+    data1['GuardKey'] = guardKey.toString();
+    data1['TimeSubmitted'] = timeSubmitted;
     data1['IncidentType'] = incidentType;
     data1['SpecificArea'] = specificArea;
     data1['Description'] = description;
-    data1['PartiesInvolved'] = partiesInvolvedInvolved;
-    data1['Witnesses'] = witnesses;
     data1['ReportFiled'] = reportFiled;
 
     var jsonData = null;

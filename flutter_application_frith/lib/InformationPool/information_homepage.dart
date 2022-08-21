@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_frith/InformationPool/create_event_view.dart';
 import 'package:flutter_application_frith/InformationPool/event_details.dart';
+import 'package:flutter_application_frith/View/business_owners.dart';
 import 'package:provider/provider.dart';
 import 'event_information_pool.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
@@ -19,30 +21,35 @@ Widget _list_view_builder(AsyncSnapshot snapshot) {
   if (!snapshot.hasData) {
     return const Center(child: CircularProgressIndicator());
   } else {
-    return ListView.builder(
-      padding: const EdgeInsets.all(8.0),
-      itemExtent: 80,
-      itemBuilder: (BuildContext context, index) {
-        //var eventItem = informationPoolModel.informationItems[index];
-        return ListTile(
-          trailing: SizedBox(
-            width: 25.0,
-            height: 25.0,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                  color: HexColor(snapshot.data[index].eventColour)),
+    return Expanded(
+      //height: double.maxFinite,
+      child: ListView.builder(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        padding: const EdgeInsets.all(8.0),
+        itemExtent: 80,
+        itemBuilder: (BuildContext context, index) {
+          //var eventItem = informationPoolModel.informationItems[index];
+          return ListTile(
+            trailing: SizedBox(
+              width: 25.0,
+              height: 25.0,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                    color: HexColor(snapshot.data[index].eventColour)),
+              ),
             ),
-          ),
-          title: Text(snapshot.data[index].eventTitle),
-          subtitle: Text(snapshot.data[index].dateTime),
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return EventDetailsPanel(event: snapshot.data[index]);
-            }));
-          },
-        );
-      },
-      itemCount: snapshot.data.length,
+            title: Text(snapshot.data[index].eventTitle),
+            subtitle: Text(snapshot.data[index].dateTime),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return EventDetailsPanel(event: snapshot.data[index]);
+              }));
+            },
+          );
+        },
+        itemCount: snapshot.data.length,
+      ),
     );
   }
 }
@@ -85,17 +92,54 @@ class _InformationHomepageState extends State<InformationHomepage> {
     return events;
   }
 
+  //CreateEvent
   Scaffold buildScaffold(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const BusinessOwners()));
+          },
+        ),
         title: const Text("List of Events"),
         centerTitle: true,
       ),
-      body: FutureBuilder(
-        future: _fetch_events(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          return _list_view_builder(snapshot);
-        },
+      body: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CreateEvent()));
+                },
+                child: Row(
+                  children: const [
+                    Icon(Icons.create),
+                    Text("Create New Event"),
+                  ],
+                ),
+              )
+            ],
+          ),
+          Row(
+            children: [
+              FutureBuilder(
+                future: _fetch_events(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  return _list_view_builder(snapshot);
+                },
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

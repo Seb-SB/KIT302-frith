@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_frith/InformationPool/event_information_pool.dart';
+import 'package:flutter_application_frith/View/home_page.dart';
 import 'signup_business.dart';
 import 'business_owners.dart';
 import 'dart:convert';
@@ -220,6 +221,12 @@ class _BusLoginState extends State<BusLogin> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomePage()));
+              }),
           title: const Text("Login"),
           centerTitle: true,
         ),

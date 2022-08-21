@@ -1,4 +1,5 @@
 // ignore_for_file: unnecessary_null_comparison
+import 'package:flutter_application_frith/View/home_page.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -247,6 +248,12 @@ class _SecLoginState extends State<SecLogin> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomePage()));
+              }),
           title: const Text("Login"),
           centerTitle: true,
         ),

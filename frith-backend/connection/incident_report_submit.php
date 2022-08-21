@@ -11,79 +11,75 @@ require 'db_conn.php';
 // $json["testing"] = preg_split('/[&|=]/',$json["testing"], -1, PREG_SPLIT_NO_EMPTY);
 // $str = $json["testing"];
 
-$json1 = file_get_contents('php://input');
+$json2 = file_get_contents('php://input');
 
 //convert file contents to PHP object
-$data = json_decode($json1, true);
+$data2 = json_decode($json2, true);
 
 
 $received = false;
 $json["error"] = false;
 $json["errmsg"] = "";
-if (empty($data['GuardKey'])) {
+if (empty($data2['GuardKey'])) {
     $received = false;
+
 } else {
-    $GuardKey = $data['GuardKey'];
+    $GuardKey = $data2['GuardKey'];
+    $received = true;
+
+}
+if (empty($data2['TimeSubmitted'])) {
+    $received = false;
+
+} else {
+    $TimeSubmitted = $data2['TimeSubmitted'];
+    $received = true;
+
+}
+if (empty($data2['IncidentType'])) {
+    $received = false;
+
+} else {
+    $IncidentType = $data2['IncidentType'];
     $received = true;
 }
-// if (empty($data['TimeSubmitted'])) {
-//     $received = false;
-// } else {
-//     $TimeSubmitted = $data['TimeSubmitted'];
-//     $received = true;
-// }
-if (empty($data['IncidentType'])) {
+
+if (empty($data2['SpecificArea'])) {
     $received = false;
+
 } else {
-    $IncidentType = $data['IncidentType'];
+    $SpecificArea = $data2['SpecificArea'];
     $received = true;
 }
-//check if ABN value has been received 
-if (empty($data['SpecificArea'])) {
+
+if (empty($data2['Description'])) {
     $received = false;
+
 } else {
-    $SpecificArea = $data['SpecificArea'];
-    $received = true;
-}
-//check if phone number value has been received 
-if (empty($data['Description'])) {
-    $received = false;
-} else {
-    $Description = $data['Description'];
-    $received = true;
-}
-//check if PartiesInvolved value has been received 
-if (empty($data['PartiesInvolved'])) {
-    $received = false;
-} else {
-    $PartiesInvolved = $data['PartiesInvolved'];
-    $received = true;
-}
-//check if Witnesses value has been received 
-if (empty($data['Witnesses'])) {
-    $received = false;
-} else {
-    $Witnesses = $data['Witnesses'];
+    $Description = $data2['Description'];
     $received = true;
 }
 
 
 if ($received) {
     $ReportFiled = "Y";
-    $BusinessID = 25;
-    //$sql = "SELECT * FROM `incidentreport` WHERE `GuardKey`= '$UniqueKey';";
-    //$res = mysqli_query($conn, $sql);
-    //$numrows = mysqli_num_rows($res);
+    
+    $sql = "SELECT `BusinessID` FROM `shiftdetails` WHERE `GuardKey`= '$GuardKey';";
+    $res = mysqli_query($conn, $sql);
+    if($res){
+        while($row = mysqli_fetch_assoc($res)){
+            $BusinessID = $row['BusinessID'];
+        }
+    }
+    else {
+        $json["error"] = false;
+    }
+    // if table does not contain unique key
+    
 
-    //if table does not contain unique key
-    // if ($numrows == 0) {
-    //     $json["error"] = true;
-    //     $json["message"] = "Invalid Unique Key";
-    // }
+    if ($json["error"] == false) {
 
-    // if ($json["error"] == false) {
-
-        $sql = "INSERT INTO `incidentreport`(`GuardKey`,`BusinessID`, `IncidentType`, `SpecificArea`, `Description`, `PartiesInvolved`, `Witnesses`, `ReportFiled`) VALUES ('$GuardKey', '$BusinessID', '$IncidentType','$SpecificArea','$Description','$Witnesses','$ReportFiled');";
+        $sql = "INSERT INTO `incidentreport`(`GuardKey`,`BusinessID`, `TimeSubmitted`, `IncidentType`, `SpecificArea`, `Description`, `ReportFiled`) VALUES ('$GuardKey', '$BusinessID', '$TimeSubmitted','$IncidentType','$SpecificArea','$Description','$ReportFiled');";
         $res = mysqli_query($conn, $sql);
 
         if (!$res) {
@@ -92,7 +88,7 @@ if ($received) {
         } else {
             $json["message"] = "Success";
         }
-    //}
+    }
 
 
 

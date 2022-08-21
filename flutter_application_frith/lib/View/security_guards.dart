@@ -11,6 +11,7 @@ import 'package:torch_light/torch_light.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import '../report/new_report.dart';
 import '../report/Report_Draft_Page.dart';
+import 'package:flutter_application_frith/Request_Backup/Backup_homepage.dart';
 
 class SecurityGuards extends StatefulWidget {
   const SecurityGuards({Key? key}) : super(key: key);
@@ -123,24 +124,48 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                   //End of Notepad
                 ],
               ),
-              SizedBox(height: 60),
+              SizedBox(height: 10),
               Row(
+                children: [
+                  SizedBox(width: 40),
+                  Container(
+                      width: 150,
+                      alignment: Alignment.center,
+                      child: Text('FLASH LIGHT')),
+                  SizedBox(width: 30),
+                  Container(
+                    width: 150,
+                    alignment: Alignment.center,
+                    child: Text('NOTEPAD',),
+                  )
+                ],
+              ),
+              SizedBox(height: 30),
+                   Row(
+                //Request Backup funcction
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   GestureDetector(
-                    child: Container(
-                        // alignment: Alignment.centerRight,
-
-                        width: 140,
-                        height: 90,
-                        color: Colors.blueAccent,
-                        child: Icon(
-                          Icons.time_to_leave_outlined, //request back up
-                          color: Colors.white,
-                          size: 80,
-                        )),
-                  ),
-                  //emergency function
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const BackupPage(),
+                            ));
+                      },
+                      child: Container(
+                          // alignment: Alignment.centerLeft,
+                          color: Colors.blueAccent,
+                          width: 150,
+                          height: 100,
+                          child: Text("SOS",
+                            style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 70,
+                        ), textAlign:TextAlign.center),//"Incident Report"
+                          )),
+                  //end of request back up
+                  //emergency call function
                   GestureDetector(
                     onTap: () {
                       launch('tel:000');
@@ -156,9 +181,26 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                           size: 80,
                         )),
                   ),
+                  //end emergency call function
                 ],
               ),
-              SizedBox(height: 60),
+              SizedBox(height: 10),
+              Row(
+                children: [
+                  SizedBox(width: 40),
+                  Container(
+                      width: 150,
+                      alignment: Alignment.center,
+                      child: Text('REQUEST BACK UP')),
+                  SizedBox(width: 30),
+                  Container(
+                    width: 150,
+                    alignment: Alignment.center,
+                    child: Text('EMERGENCY CALL',),
+                  )
+                ],
+              ),
+              SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -200,6 +242,22 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                           color: Colors.white,
                           size: 80,
                         )),
+                  )
+                ],
+              ),
+              SizedBox(height: 10),
+              Row(
+                children: [
+                  SizedBox(width: 40),
+                  Container(
+                      width: 150,
+                      alignment: Alignment.center,
+                      child: Text('INCIDENT REPORT')),
+                  SizedBox(width: 30),
+                  Container(
+                    width: 150,
+                    alignment: Alignment.center,
+                    child: Text('SHIFT MANAGER',),
                   )
                 ],
               ),

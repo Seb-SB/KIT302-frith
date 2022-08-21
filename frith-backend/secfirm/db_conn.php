@@ -2,7 +2,7 @@
 
 $db = "frith";
 $servername = "localhost";
-$username = "frith";
+$username = "root";
 $password = "thisadmin";
 
 

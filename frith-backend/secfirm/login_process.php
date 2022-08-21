@@ -1,6 +1,8 @@
 <?php 
 include 'db_conn.php';
 
+include("../session.php");
+
 $email = $_POST['email'];
 $password = $_POST['password'];
 $error = "";

@@ -126,6 +126,51 @@
     </div>    
     </div>
 </div>    
+
+
+<!-- Business List View -->
+<div class="container">
+    <br />
+    <!-- BODY FOR Business List View -->
+    <h3 align="center">Assigned Businesses</h3>
+    <div class="row">
+    <div class="col-md-12">
+        <div class="panel-body">
+            <?php 
+                include "db_conn.php";
+
+                if(isset( $_SESSION["EmailAddress"])) {
+                    //echo $_SESSION["EmailAddress"];
+                    $email = $_SESSION["EmailAddress"];
+                }
+
+                
+
+                $query = "SELECT * FROM `accountbusinessowner` ORDER BY `BusinessName` ASC;";
+                $result = mysqli_query($conn,$query);
+            ?>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Business Name</th>
+                            <th>Contact Number</th>
+                        </tr>
+                        </thead> 
+                        <?php while($row = mysqli_fetch_array($result)){ ?>
+                            <tr data-id='<?php echo $row['BusinessID']; ?>' class="BusinessInfo"> <!-- WORK OUT THIS-->
+                                <td><?php echo $row['BusinessName']; ?></td>
+                                <td><?php echo $row['PhoneNumber']; ?></td> 
+                            </tr>
+                        <?php } ?>
+                </table>
+            </div>
+        </div>    
+    </div>    
+    </div>                         
+
+
+</div>
         
 
 <!-- SCRIPT FOR THIS PAGE -->
@@ -192,6 +237,46 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title">Security Guard Info</h4>
+                          <button type="button" class="close" data-dismiss="modal">×</button>
+                        </div>
+                        <div class="modal-body">
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </body>
+</html>
+
+<!-- Populate modal with business info -->
+<script type='text/javascript'>
+    // this opens up the pop up window for key list using AJAX
+    //when user click the row with class key info, it assigns the index and pass 
+    //the input to the url provided
+            $(document).ready(function(){
+                $('.BusinessInfo').click(function(){
+                    var userid = $(this).data('id');
+                    $.ajax({
+                        url: 'business_info.php',
+                        type: 'post',
+                        data: {userid: userid},
+                        success: function(response){ 
+                            $('.modal-body').html(response); 
+                            $('#empModalBus').modal('show'); 
+                        }
+                    });
+                });
+            });
+            </script>
+        </div>
+        <!-- modap pop up window body -->
+        <div class="modal fade" id="empModalBus" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Business Details</h4>
                           <button type="button" class="close" data-dismiss="modal">×</button>
                         </div>
                         <div class="modal-body">

@@ -5,6 +5,9 @@
         header("location:index.php");
     }
 
+    // echo '<pre>';
+    // var_dump($_SESSION);
+    // echo '</pre>';
 
 ?>
 
@@ -34,7 +37,22 @@
             <!-- this panel includes the table body -->
             <?php 
                 include "db_conn.php";
-                $query = "select * from firmuniquekey";
+
+                if(isset( $_SESSION["EmailAddress"])) {
+                    //echo $_SESSION["EmailAddress"];
+                    $email = $_SESSION["EmailAddress"];
+                }
+
+                $sql_firmid = "SELECT * FROM `accountsecurityfirm` WHERE `EmailAddress`='$email';";
+                $res = mysqli_query($conn,$sql_firmid);
+        
+                if($res) {
+                    while($row_firm_id = mysqli_fetch_assoc($res)) {
+                        $firm_id = $row_firm_id['FirmID'];
+                    }
+                }
+
+                $query = "SELECT * FROM `firmuniquekey` WHERE `FIRMID`='$firm_id'";
                 $result = mysqli_query($conn,$query);
             ?>
             <div class="table-responsive">
@@ -73,6 +91,16 @@
         <div class="panel-body">
             <?php 
                 include "db_conn.php";
+
+                //include("../session.php");
+
+                if(isset( $_SESSION["EmailAddress"])) {
+                    //echo $_SESSION["EmailAddress"];
+                    $email = $_SESSION["EmailAddress"];
+                }
+
+                
+
                 $query = "select * from accountsecurityguard";
                 $result = mysqli_query($conn,$query);
             ?>

@@ -12,7 +12,8 @@ $(document).ready(function () {
 
         $.ajax({
             type: "post",
-            url: "../api/v1/dispatcher.php/secfirm/login", //change from sysadmin to secfirm
+            //url: "../api/v1/dispatcher.php/secfirm/login", //change from sysadmin to secfirm
+            url: "../secfirm/login", //change from sysadmin to secfirm
             data: "json=" + encodeURIComponent(JSON.stringify(dataObj)),
             success: function (data) {
                 if (data !== "false") {

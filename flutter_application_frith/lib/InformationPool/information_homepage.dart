@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_frith/InformationPool/create_event_view.dart';
 import 'package:flutter_application_frith/InformationPool/event_details.dart';
+import 'package:flutter_application_frith/View/business_owners.dart';
 import 'package:provider/provider.dart';
 import 'event_information_pool.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
@@ -95,6 +96,15 @@ class _InformationHomepageState extends State<InformationHomepage> {
   Scaffold buildScaffold(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const BusinessOwners()));
+          },
+        ),
         title: const Text("List of Events"),
         centerTitle: true,
       ),

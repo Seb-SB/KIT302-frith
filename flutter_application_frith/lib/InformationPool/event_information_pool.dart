@@ -12,7 +12,6 @@ class EventInformationPool {
   int numberOfPerpetrators;
   String eventDescription;
   String eventColour;
-  //TODO get colour from database
 
   EventInformationPool(
       {required this.businessID,

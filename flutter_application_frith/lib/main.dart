@@ -12,8 +12,6 @@ import 'package:provider/provider.dart';
 import 'Request_Backup/Backup.dart';
 
 void main() {
-
-void main() {
   runApp(const MaterialApp(
     home: MyApp(),
   ));

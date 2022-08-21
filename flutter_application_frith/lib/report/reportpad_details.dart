@@ -101,7 +101,7 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                                       reportpad.reportFiled,
                                       context,
                                       reportpads);
-                                  var timeNow = new DateTime.now();
+                                  var timeNow = DateTime.now();
                                   var formatter =
                                       new DateFormat('yyyy-MM-dd HH:mm:ss');
                                   String formatted = formatter
@@ -235,7 +235,7 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
           _isLoading = false;
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SecurityGuards()),
+            MaterialPageRoute(builder: (context) => const SecurityGuards()),
           );
           errorMessage = "";
         });

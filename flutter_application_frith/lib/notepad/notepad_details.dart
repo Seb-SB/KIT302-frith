@@ -36,8 +36,7 @@ class _NotepadDetailsState extends State<NotepadDetails> {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    //Display movie id
-                    Text("Notepad Index ${widget.id}"),
+                    ///Text("Notepad Index ${widget.id}"),
                     Form(
                       key: _formKey,
                       child: Padding(

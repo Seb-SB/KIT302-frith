@@ -136,12 +136,14 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                   Container(
                     width: 150,
                     alignment: Alignment.center,
-                    child: Text('NOTEPAD',),
+                    child: Text(
+                      'NOTEPAD',
+                    ),
                   )
                 ],
               ),
               SizedBox(height: 30),
-                   Row(
+              Row(
                 //Request Backup funcction
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -154,16 +156,18 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                             ));
                       },
                       child: Container(
-                          // alignment: Alignment.centerLeft,
-                          color: Colors.blueAccent,
-                          width: 150,
-                          height: 100,
-                          child: Text("SOS",
+                        // alignment: Alignment.centerLeft,
+                        color: Colors.blueAccent,
+                        width: 150,
+                        height: 100,
+                        alignment: Alignment.center,
+                        child: const Text("SOS",
                             style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 70,
-                        ), textAlign:TextAlign.center),//"Incident Report"
-                          )),
+                              color: Colors.white,
+                              fontSize: 50,
+                            ),
+                            textAlign: TextAlign.center), //"Incident Report"
+                      )),
                   //end of request back up
                   //emergency call function
                   GestureDetector(
@@ -196,7 +200,9 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                   Container(
                     width: 150,
                     alignment: Alignment.center,
-                    child: Text('EMERGENCY CALL',),
+                    child: Text(
+                      'EMERGENCY CALL',
+                    ),
                   )
                 ],
               ),
@@ -257,7 +263,9 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                   Container(
                     width: 150,
                     alignment: Alignment.center,
-                    child: Text('SHIFT MANAGER',),
+                    child: Text(
+                      'SHIFT MANAGER',
+                    ),
                   )
                 ],
               ),

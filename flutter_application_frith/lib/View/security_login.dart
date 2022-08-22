@@ -130,7 +130,7 @@ class _SecLoginState extends State<SecLogin> {
   Future<void> _logIn(String email, String password) async {
     var url = 'http://' +
         globals.GLOBAL_IP +
-        '/frith/connection/security_guard_login.php';
+        '/frith-backend/connection/security_guard_login.php';
 
     Map data = {'email': email, 'password': password};
 

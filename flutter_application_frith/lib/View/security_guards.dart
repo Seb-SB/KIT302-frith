@@ -142,9 +142,9 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                   )
                 ],
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 10),
               Row(
-                //Request Backup funcction
+                //Request Backup function
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   GestureDetector(
@@ -161,12 +161,11 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                         width: 150,
                         height: 100,
                         alignment: Alignment.center,
-                        child: const Text("SOS",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 50,
-                            ),
-                            textAlign: TextAlign.center), //"Incident Report"
+                        child: Icon(
+                          Icons.add_moderator_sharp,
+                          color: Colors.white,
+                          size: 80,
+                        ), //"Incident Report"
                       )),
                   //end of request back up
                   //emergency call function
@@ -195,7 +194,7 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                   Container(
                       width: 150,
                       alignment: Alignment.center,
-                      child: Text('REQUEST BACK UP')),
+                      child: Text('REQUEST MANAGER')),
                   SizedBox(width: 30),
                   Container(
                     width: 150,
@@ -206,7 +205,7 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                   )
                 ],
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -267,6 +266,65 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                       'SHIFT MANAGER',
                     ),
                   )
+                ],
+              ),
+              SizedBox(height: 10),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                GestureDetector(
+                  onTap: () {
+                    AlertDialog alert = AlertDialog(
+                      title: Text('Are you sure you want to request back up'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SecurityGuards(),
+                              )),
+                          child: const Text('Cancel'),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const BackupPage(),
+                              )),
+                          child: const Text('Yes'),
+                        ),
+                      ],
+                    );
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return alert;
+                      },
+                    );
+                  },
+                  child: Container(
+                    // alignment: Alignment.centerLeft,
+                    color: Colors.red,
+                    width: 200,
+                    height: 90,
+                    alignment: Alignment.center,
+                    child: const Text("SOS",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 50,
+                        ),
+                        textAlign: TextAlign.center),
+                  ),
+                )
+              ]),
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                      width: 150,
+                      child: Text(
+                        'REQUEST BACK-UP',
+                        textAlign: TextAlign.center,
+                      )),
                 ],
               ),
             ],

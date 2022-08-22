@@ -3,7 +3,7 @@
  * and change the ip address.
  * 
 */
-
+//Ted 192.168.1.21
 library my_project.globals;
 
-const String GLOBAL_IP = "192.168.0.128";
+const String GLOBAL_IP = "192.168.1.21";

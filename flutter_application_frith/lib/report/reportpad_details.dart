@@ -80,47 +80,53 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                                   labelText: "Description"),
                               controller: descriptionController,
                             ),
-                            ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.blue,
-                                  onPrimary: Colors.white,
-                                ),
-                                onPressed: () {
-                                  reportpad.specificArea =
-                                      specificAreaController.text;
-                                  reportpad.date = DateTime.now();
-                                  reportpad.severity = severityController.text;
-                                  reportpad.description =
-                                      descriptionController.text;
-                                  reportpad.reportFiled = reportFiledController;
-                                  _deleteFromList(
-                                      reportpad.specificArea,
-                                      reportpad.date,
-                                      reportpad.severity,
-                                      reportpad.description,
-                                      reportpad.reportFiled,
-                                      context,
-                                      reportpads);
-                                  var timeNow = DateTime.now();
-                                  var formatter =
-                                      new DateFormat('yyyy-MM-dd HH:mm:ss');
-                                  String formatted = formatter
-                                      .format(timeNow); // Save this to DB
-                                  var guardKey = 1;
-                                  _submit(
-                                      guardKey.toString(),
-                                      formatted,
-                                      reportpad.severity,
-                                      reportpad.specificArea,
-                                      reportpad.description,
-                                      reportpad.reportFiled);
+                            Row(
+                              children: [
+                                ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.blue,
+                                      onPrimary: Colors.white,
+                                    ),
+                                    onPressed: () {
+                                      reportpad.specificArea =
+                                          specificAreaController.text;
+                                      reportpad.date = DateTime.now();
+                                      reportpad.severity =
+                                          severityController.text;
+                                      reportpad.description =
+                                          descriptionController.text;
+                                      reportpad.reportFiled =
+                                          reportFiledController;
+                                      _deleteFromList(
+                                          reportpad.specificArea,
+                                          reportpad.date,
+                                          reportpad.severity,
+                                          reportpad.description,
+                                          reportpad.reportFiled,
+                                          context,
+                                          reportpads);
+                                      var timeNow = new DateTime.now();
+                                      var formatter =
+                                          new DateFormat('yyyy-MM-dd HH:mm:ss');
+                                      String formatted = formatter
+                                          .format(timeNow); // Save this to DB
+                                      var guardKey = 1;
+                                      _submit(
+                                          guardKey.toString(),
+                                          formatted,
+                                          reportpad.severity,
+                                          reportpad.specificArea,
+                                          reportpad.description,
+                                          reportpad.reportFiled);
 
-                                  Provider.of<ReportpadModel>(context,
-                                          listen: false)
-                                      .update();
-                                  Navigator.pop(context);
-                                },
-                                child: const Text('Submit')),
+                                      Provider.of<ReportpadModel>(context,
+                                              listen: false)
+                                          .update();
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('Submit')),
+                              ],
+                            ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: ElevatedButton.icon(
@@ -235,7 +241,7 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
           _isLoading = false;
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const SecurityGuards()),
+            MaterialPageRoute(builder: (context) => SecurityGuards()),
           );
           errorMessage = "";
         });

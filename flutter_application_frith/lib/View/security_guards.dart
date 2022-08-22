@@ -179,7 +179,7 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                         width: 140,
                         height: 90,
                         child: Icon(
-                          Icons.warning_amber_outlined,
+                          Icons.emergency,
                           color: Colors.white,
                           size: 80,
                         )),

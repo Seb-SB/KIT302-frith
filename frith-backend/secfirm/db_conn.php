@@ -3,7 +3,7 @@
 $db = "frith";
 $servername = "localhost";
 $username = "root";
-$password = "thisadmin";
+$password = "123456";
 
 
 $conn = new mysqli($servername, $username, $password, $db);

@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_frith/global_ip.dart' as globals;
 import 'package:http/http.dart' as http;
 class Business {
+  String id;
   String title;
   int date;
   String address;
 
-  Business({required this.title, required this.date, required this.address});
+  Business({required this.id,required this.title, required this.date, required this.address});
 }
 
 class PunchClockModel extends ChangeNotifier {
@@ -46,7 +47,7 @@ class PunchClockModel extends ChangeNotifier {
       print(data);
       for (var i=0 ;i< data.length;i++) {
         add(
-            Business(title: data[i]['BusinessName'], date: 21, address: ''));
+            Business(id: data[i]['businessID'],title: data[i]['BusinessName'], date: 21, address: ''));
       }
     }
   }

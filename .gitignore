@@ -9,7 +9,11 @@
 .buildlog/
 .history
 .svn/
-
+.idea
+flutter_application_frith\build
+flutter_application_frith\pubspec.lock
+flutter_application_frith\lib\global_ip.dart
+flutter_application_frith\ios
 <<<<<<< Updated upstream
 *.flat
 flutter_application_frith/.dart_tool/package_config_subset

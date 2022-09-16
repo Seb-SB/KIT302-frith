@@ -7,7 +7,8 @@ $json2 = file_get_contents('php://input');
 
 //convert file contents to PHP object
 $data2 = json_decode($json2, true);
-$sql =  "SELECT * FROM `guardablearea`";
+$bussinessId = $_GET['bussinessId'];
+$sql =  "SELECT * FROM `guardablearea` where `BusinessID`='$bussinessId'";
 $result = mysqli_query($conn, $sql);
 if($result) {
     while($row = mysqli_fetch_assoc($result)) {

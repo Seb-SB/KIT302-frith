@@ -5,6 +5,8 @@ import 'package:flutter_application_frith/View/home_page.dart';
 import 'package:flutter_application_frith/View/security_login.dart';
 import 'package:flutter_application_frith/View/business_login.dart';
 import 'package:flutter_application_frith/notepad/notepad.dart';
+import 'package:flutter_application_frith/punchClock/businessDetail.dart';
+import 'package:flutter_application_frith/punchClock/businessModel.dart';
 import 'package:flutter_application_frith/punchClock/guard_list.dart';
 import 'package:flutter_application_frith/punchClock/punchClock.dart';
 import 'package:flutter_application_frith/report/reportpad.dart';
@@ -30,9 +32,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => InformationPoolModel()),
         ChangeNotifierProvider(create: (context) => GardListModel()),
         ChangeNotifierProvider(create: (context) => BackupModel()),
-        ChangeNotifierProvider(create: (context) => PunchClockModel())
+        ChangeNotifierProvider(create: (context) => BusinessModel()),
 
-        ///Provider(create: (context) => InformationpoolPage())
+        //Provider(create: (context) => InformationpoolPage())
       ],
       child: MaterialApp(
         title: 'Frith',

@@ -26,7 +26,7 @@ if ($result) {
             $condiction .= $output_array[$i]['GuardKey'];
             $condiction .= ',' ;
         }
-//        删除字符串最后一个逗号
+
         $condiction = substr($condiction,0,strlen($condiction) - 1);
         $condiction .= ')';
         $sql2 = "select * from `accountsecurityguard` where `GuardKey` in $condiction";
@@ -41,7 +41,7 @@ if ($result) {
                     'PhoneNumber' => $row['PhoneNumber'],
                     'EmailAddress' => $row['EmailAddress'],
                     'Password' => $row['Password'],
-                    'status' => $row1['status'],
+                    'Status' => $row1['Status'],
                 );
             }
             for ($i = 0 ; $i < count($output_array) ; $i++){

@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/src/material/bottom_navigation_bar.dart';
 import 'package:flutter_application_frith/Model/securityGuard.dart';
 import 'package:flutter_application_frith/View/security_login.dart';
-import 'package:flutter_application_frith/punchClock/punchClock_homepage.dart';
+import 'package:flutter_application_frith/punchClock/newPunchClockHomepage.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../emergency/emergencyphone.dart';
 import '../notepad/notepad_homepage.dart';
@@ -233,7 +233,7 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const PunchClockPage(),
+                            builder: (context) => const NewPunchClockPage(),
                           ));
                     },
                     child: Container(

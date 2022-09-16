@@ -14,8 +14,6 @@ class GuardClockDetails extends StatefulWidget {
 }
 
 class _GuardClockDetailsState extends State<GuardClockDetails> {
-
-
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final dateController = TextEditingController();
@@ -135,7 +133,8 @@ class _GuardClockDetailsState extends State<GuardClockDetails> {
                                     //added this line, this should be familiar from last week:
                                   );
                                 },
-                                itemCount: data.length)),
+                                itemCount: data.length)
+                        ),
                         DropdownButton<String>(
                           style: TextStyle(color: Colors.green),
                           items: location.map((item) {

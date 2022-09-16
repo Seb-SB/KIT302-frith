@@ -123,14 +123,23 @@ class _SecLoginState extends State<SecLogin> {
                 ScaffoldMessenger.of(context).showSnackBar(snackbar);
               }
             }
-          }),
+          }
+        /*onPressed: () => { //TESTING
+          print("login button pressed"),
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const SecurityGuards()),
+          ),
+        }, //TESTING */
+
+          ),
     );
   }
 
   Future<void> _logIn(String email, String password) async {
     var url = 'http://' +
         globals.GLOBAL_IP +
-        '/frith-backend/connection/security_guard_login.php';
+        '/frith/connection/security_guard_login.php';
 
     Map data = {'email': email, 'password': password};
 
@@ -178,7 +187,7 @@ class _SecLoginState extends State<SecLogin> {
 
       //dynamic guardKey = await SessionManager().get("GuardKey");
 
-      ///print(guardKey);
+      //print(guardKey);
 
       //print(jsonData["error"]);
       if (jsonData["error"] == true) {

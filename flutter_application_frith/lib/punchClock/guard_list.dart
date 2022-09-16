@@ -9,7 +9,6 @@ class Guard {
 }
 
 class GardListModel extends ChangeNotifier {
-  /// Internal, private state of the list.
   final List<Guard> items = [];
 
   //Normally a model would get from a database here, we are just hardcoding some data for this week

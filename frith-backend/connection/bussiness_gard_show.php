@@ -8,8 +8,9 @@ $json2 = file_get_contents('php://input');
 //convert file contents to PHP object
 $input = json_decode($json2, true);
 $bussinessId = $_GET['bussinessId'];
-$sql = "SELECT * FROM `shiftdetails` where `BusinessID`='$bussinessId'";
+$sql = "SELECT * FROM `shiftdetails` where `BusinessID`='$bussinessId' AND `Status`='1'";
 $result = mysqli_query($conn, $sql);
+$out = (array) null;
 if ($result) {
     while ($row1 = mysqli_fetch_assoc($result)) {
         $output_array[] = array(
@@ -59,9 +60,7 @@ if ($result) {
     }
 }
 
-
 mysqli_close($conn);
 header('Content-Type: application/json');
-echo json_encode($out)
-
+echo json_encode($out);
 ?>

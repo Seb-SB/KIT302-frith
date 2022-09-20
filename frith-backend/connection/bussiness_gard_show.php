@@ -8,8 +8,9 @@ $json2 = file_get_contents('php://input');
 //convert file contents to PHP object
 $input = json_decode($json2, true);
 $bussinessId = $_GET['bussinessId'];
-$sql = "SELECT * FROM `shiftdetails` where `BusinessID`='$bussinessId'";
+$sql = "SELECT * FROM `shiftdetails` where `BusinessID`='$bussinessId' AND `Status`='1'";
 $result = mysqli_query($conn, $sql);
+$out = (array) null;
 if ($result) {
     while ($row1 = mysqli_fetch_assoc($result)) {
         $output_array[] = array(
@@ -26,7 +27,7 @@ if ($result) {
             $condiction .= $output_array[$i]['GuardKey'];
             $condiction .= ',' ;
         }
-//        删除字符串最后一个逗号
+
         $condiction = substr($condiction,0,strlen($condiction) - 1);
         $condiction .= ')';
         $sql2 = "select * from `accountsecurityguard` where `GuardKey` in $condiction";
@@ -41,7 +42,7 @@ if ($result) {
                     'PhoneNumber' => $row['PhoneNumber'],
                     'EmailAddress' => $row['EmailAddress'],
                     'Password' => $row['Password'],
-                    'status' => $row1['status'],
+                    'Status' => $row1['Status'],
                 );
             }
             for ($i = 0 ; $i < count($output_array) ; $i++){
@@ -59,9 +60,7 @@ if ($result) {
     }
 }
 
-
 mysqli_close($conn);
 header('Content-Type: application/json');
-echo json_encode($out)
-
+echo json_encode($out);
 ?>

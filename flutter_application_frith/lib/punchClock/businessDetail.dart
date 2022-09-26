@@ -23,7 +23,8 @@ class _BusinessDetailsState extends State<BusinessDetails> {
   final phoneController = TextEditingController();
   final businessIDController = TextEditingController();
   bool _isLoading = true;
-  static List data = List.empty();
+  static List shiftData = List.empty();
+
   List location = List.empty();
   List selectedArea = List.empty();
   String selectedListValue = "1";
@@ -31,7 +32,9 @@ class _BusinessDetailsState extends State<BusinessDetails> {
   int _selectedIndex = 0;
   bool _isStartAble = false;
   bool _isEndAble = false;
-
+  bool _isOnDuty = false;
+  bool _isChange = false;
+  late int selfKey;
 
   @override
     Widget build(BuildContext context)
@@ -79,13 +82,13 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                               return Card(
                                   child: ListTile(
                                     leading: const Icon(Icons.people),
-                                    title: Text(data[index]['areaName']),
-                                    subtitle: Text(data[index]['FirstName'] + " " + data[index]['LastName']
+                                    title: Text(shiftData[index]['areaName']),
+                                    subtitle: Text(shiftData[index]['FirstName'] + " " + shiftData[index]['LastName']
                                     ),
                                   )
                               );
                             },
-                            itemCount: data.length),
+                            itemCount: shiftData.length),
                     ),
                     //Listview version of Locations
                     /*Center(
@@ -126,8 +129,13 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                           },
                           itemCount: location.length),
                     ),*/
-                    DropdownButton<String>(
-                        style: TextStyle(color: Colors.green),
+                    Container(
+                      height: MediaQuery.of(context).size.height/5,
+                      child: DropdownButton<String>(
+                        style: TextStyle(color: Colors.black, fontSize:30),
+                        isExpanded: true,
+                        itemHeight: 80.0,
+                        iconSize: 50,
                         items: location.map((item) {
                           return DropdownMenuItem(
                             child: Text(item['AreaName']),
@@ -138,19 +146,20 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                             _isStartAble = false;
                             _isEndAble = false;
                             selectedListValue = value!;
-                            selectedArea = data.where((item) => (item['areaID'] as String) == selectedListValue.toString()).toList();
-                            print(selectedListValue.toString());
-                            if(selectedArea.isEmpty){
+                            selectedArea = shiftData.where((item) => (item['areaID'] as String) == selectedListValue.toString()).toList();
+                            print("selectedListValue: (int)" + selectedListValue.toString() + "/selectedArea" + selectedArea.toString());
+                            if(!_isOnDuty){
                               _isStartAble = true;
-                            }else{
-                              _isEndAble = true;
+                            }else {
+                              changeEnd();
                             }
                           }
                           );
                         },
-                      value: selectedListValue,
-                      //value: selectedListValue,
+                        value: selectedListValue,
+                      ),
                     ),
+
                     /*Container(
                       width: double.infinity,
                       height: MediaQuery.of(context).size.height/5,
@@ -181,14 +190,22 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                     Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          ElevatedButton(
-                              onPressed: _isStartAble ? startShiftImpl : null,
-                              child: const Text('Start Shift')
+                          Container(
+                            width: MediaQuery.of(context).size.width/3.5,
+                              height: MediaQuery.of(context).size.height/6,
+                              child: ElevatedButton(
+                                  onPressed: _isStartAble ? startShiftImpl : null,
+                                  child: new Text('Start Shift', style: new TextStyle(fontSize: 20.0),),
+                              ),
                           ),
                           const SizedBox(width: 30),
-                          ElevatedButton(
-                              onPressed: _isEndAble ? endShiftImpl : null,
-                              child: const Text('End Shift')
+                          Container(
+                            width: MediaQuery.of(context).size.width/3.5,
+                            height: MediaQuery.of(context).size.height/6,
+                              child:  ElevatedButton(
+                                  onPressed: _isEndAble ? endShiftImpl : null,
+                                  child: new Text('End Shift', style: new TextStyle(fontSize: 20.0),)
+                              ),
                           ),
                         ]
                     )
@@ -199,7 +216,8 @@ class _BusinessDetailsState extends State<BusinessDetails> {
     }
 
   initData(id) async {
-
+    dynamic guardKey = await SessionManager().get("GuardKey");
+    selfKey = guardKey;
     var url = 'http://' +
         globals.GLOBAL_IP +
         '/frith/connection/bussiness_gard_show.php?bussinessId=' + id;
@@ -213,9 +231,14 @@ class _BusinessDetailsState extends State<BusinessDetails> {
       var shift = jsonDecode(response.body);
       print(shift);
       setState(() {
-        data = shift;
+        shiftData = shift;
       });
     }
+    for(int i =0; i < shiftData.length; i++) {
+      shiftData[i]['GuardKey'] == guardKey;
+      _isOnDuty = true;
+    }
+    print(_isOnDuty);
 
     var url2 = 'http://' +
         globals.GLOBAL_IP +
@@ -238,7 +261,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
         }
       });
 
-      final result = data
+      final result = shiftData
           .where((item) => (item['areaID'] as String) == location[0]['AreaID'].toString())
           .toList();
       setState(() {
@@ -247,29 +270,49 @@ class _BusinessDetailsState extends State<BusinessDetails> {
         print(selectedArea);
       });
     }
-
   }
-
-  //checking is the start button able
-  void isStartAble(String status) {
-    if (status == '0') {
-      _isStartAble = true;
-    } else {
-      _isStartAble = false;
-    }
-  }
-
-  //checking is the end button able
-  void isEndAble(String status) {
-    if (status == '1') {
-      _isEndAble = true;
-    } else {
-      _isEndAble = false;
+  //check change location or end shift
+  void changeEnd() {
+    _isStartAble = true;
+    _isEndAble = false;
+    _isChange = true;
+    for(int i=0; i < selectedArea.length; i++) {
+      if(selfKey.toString()== selectedArea[i]['GuardKey']) {
+        _isEndAble = true;
+        _isStartAble = false;
+      }
     }
   }
 
   //start shift function
   void startShiftImpl() async {
+    //if onshift security guard want to change location, needs to end the old shift first
+    if(_isChange) {
+      DateTime now = DateTime.now();
+      String formattedDate = DateFormat('ddMMM,yyyy kk:mm:ss').format(now);
+
+      var url = 'http://' +
+          globals.GLOBAL_IP +
+          '/frith/connection/updateShiftDetail.php';
+      var json = {
+        "TimeFinished" : formattedDate,
+        "Status" : "0",
+        "GuardKey" : selfKey.toString(),
+      };
+      print(json);
+      var response = await http.post(Uri.parse(url),
+        headers: {
+          ///'Content-Type': 'application/x-www-form-urlencoded',
+          ///'Accept': 'application/json'
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(json),
+      );
+
+      if (response.statusCode == 200) {
+        print("successfully end shift first");
+      }
+    }
     dynamic guardKey = await SessionManager().get("GuardKey");
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('ddMMM,yyyy kk:mm:ss').format(now);
@@ -304,14 +347,16 @@ class _BusinessDetailsState extends State<BusinessDetails> {
   void endShiftImpl() async {
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('ddMMM,yyyy kk:mm:ss').format(now);
+
     var url = 'http://' +
         globals.GLOBAL_IP +
         '/frith/connection/updateShiftDetail.php';
     var json = {
       "TimeFinished" : formattedDate,
       "Status" : "0",
-      "ShiftID" : selectedArea[0]['ShiftID'].toString(),
+      "GuardKey" : selfKey.toString(),
     };
+    print(json);
     var response = await http.post(Uri.parse(url),
       headers: {
         ///'Content-Type': 'application/x-www-form-urlencoded',

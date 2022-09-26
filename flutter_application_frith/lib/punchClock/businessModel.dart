@@ -39,14 +39,14 @@ class BusinessModel extends ChangeNotifier {
       var data = jsonDecode(response.body);
       //print(guardKey); //testing
       for (var i=0 ;i< data.length;i++) {
-        if(guardKey == int.parse(data[i]['PoolID'])){
+        //if(guardKey == int.parse(data[i]['PoolID'])){
           add(
               Business(id: data[i]['businessID'],
                   name: data[i]['BusinessName'],
                   phone: data[i]['PhoneNumber'],
                   email: data[i]['EmailAddress'])
           );
-        }
+        //}
       }
     }
   }

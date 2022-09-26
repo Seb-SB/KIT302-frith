@@ -34,7 +34,7 @@ class _GuardClockDetailsState extends State<GuardClockDetails> {
   VoidCallback cancalFuncImpl = () async{
     var url = 'http://' +
         globals.GLOBAL_IP +
-        '/frith-backend/connection/updateShipDetail.php';
+        '/frith/connection/updateShipDetail.php';
     var json = {
       "status" : "0",
       "ShiftID" : data[selectedGuard - 1]['ShiftID'],
@@ -55,7 +55,7 @@ class _GuardClockDetailsState extends State<GuardClockDetails> {
   VoidCallback sureFuncImpl = () async {
     var url = 'http://' +
         globals.GLOBAL_IP +
-        '/frith-backend/connection/updateShipDetail.php';
+        '/frith/connection/updateShipDetail.php';
     var json = {
       "status" : "1",
       "ShiftID" : data[selectedGuard - 1]['ShiftID'],
@@ -198,22 +198,28 @@ class _GuardClockDetailsState extends State<GuardClockDetails> {
 
                         Row(
                           children: <Widget>[
-                            ElevatedButton(
-                              onPressed: cancelFunc,
-                              child: Text('End Shift'),
-                              style: ButtonStyle(
-                                  backgroundColor:
+                            Container(
+                              width: MediaQuery.of(context).size.width/3,
+                                child: ElevatedButton(
+                                  onPressed: cancelFunc,
+                                  child: Text('End Shift'),
+                                  style: ButtonStyle(
+                                      backgroundColor:
                                       MaterialStateProperty.all(Colors.red)),
+                                ),
                             ),
                             SizedBox(
-                              width: 50,
+                              width: MediaQuery.of(context).size.width/3,
                             ),
-                            ElevatedButton(
-                              onPressed: sureFunc,
-                              child: Text('Start Shift'),
-                              style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all(Colors.green)),
+                            Container(
+                                width: MediaQuery.of(context).size.width/3,
+                              child: ElevatedButton(
+                                onPressed: sureFunc,
+                                child: Text('Start Shift'),
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                    MaterialStateProperty.all(Colors.green)),
+                              ),
                             ),
                           ],
                         ),
@@ -227,7 +233,7 @@ class _GuardClockDetailsState extends State<GuardClockDetails> {
   void initData(id) async {
     var url = 'http://' +
         globals.GLOBAL_IP +
-        '/frith-backend/connection/bussiness_gard_show.php?bussinessId=' + id;
+        '/frith/connection/bussiness_gard_show.php?bussinessId=' + id;
     var response = await http.get(Uri.parse(url),
         headers: {
           ///'Content-Type': 'application/x-www-form-urlencoded',
@@ -244,7 +250,7 @@ class _GuardClockDetailsState extends State<GuardClockDetails> {
 
     var url2 = 'http://' +
         globals.GLOBAL_IP +
-        '/frith-backend/connection/getArea.php';
+        '/frith/connection/getArea.php';
     response = await http.get(Uri.parse(url2),
         headers: {
           ///'Content-Type': 'application/x-www-form-urlencoded',

@@ -32,7 +32,7 @@ class PunchClockModel extends ChangeNotifier {
   initData() async {
     var url = 'http://' +
         globals.GLOBAL_IP +
-        '/frith/connection/bussiness_show.php';
+        '/frith-backend/connection/bussiness_show.php';
     final response = await http.post(Uri.parse(url),
         headers: {
           ///'Content-Type': 'application/x-www-form-urlencoded',

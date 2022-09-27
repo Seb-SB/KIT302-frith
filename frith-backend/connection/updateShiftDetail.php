@@ -5,7 +5,7 @@ require 'db_conn.php';
 $json2 = file_get_contents('php://input');
 //convert file contents to PHP object
 $input = json_decode($json2, true);
-$sql = "update shiftdetails set Status = '$input[Status]', TimeFinished = '$input[TimeFinished]' where ShiftID = '$input[ShiftID]'";
+$sql = "DELETE FROM shiftdetails WHERE GuardKey = '$input[GuardKey]'";
 
 $res = mysqli_query($conn, $sql);
 if(!$res) {

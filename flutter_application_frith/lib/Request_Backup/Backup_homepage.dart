@@ -12,6 +12,10 @@ class BackupPage extends StatefulWidget {
 
 class _BackupPageState extends State<BackupPage> {
 
+   int cnt = 0;
+  int cnt_new = 0;
+  bool boolReq = true;
+  Color buttonColor = Colors.green;
   
   @override
   Widget build(BuildContext context) {
@@ -58,34 +62,63 @@ class _BackupPageState extends State<BackupPage> {
                           },
                           itemCount: backupModel.items.length)),
                 )),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    ElevatedButton(
-                      onPressed: () => {
-                        //Navigator.push(context, MaterialPageRoute(builder: ((context) => SecurityGuards)))
-                        Navigator.pop(context)
-                      },
-                      
-                      child: const Text('Delete Request'),
-                      style: ButtonStyle(
-                          fixedSize: MaterialStateProperty.all(Size(80, 40)),
-                          minimumSize:
-                              MaterialStateProperty.all(Size(200, 100)),
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.red)),
-                    ),
-                  ],
-                ),
-                SizedBox(
+                Container(
+              alignment: Alignment.center,
+              height: 30,
+              child: (Text(
+                  "Attention:  There are now $cnt_new people on the way. ",
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blueAccent))),
+            ),
+            SizedBox(height: 30),
+            Column(
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  color: buttonColor,
                   height: 80,
+                  width: 180,
+                  child: InkWell(
+                      enableFeedback: boolReq,
+                      child: Text('On my way',
+                          style: TextStyle(fontSize: 26, color: Colors.white)),
+                      onTap: () {
+                        print("Request Backup");
+                        setState(() {
+                          cnt_new = cnt + 1;
+                          boolReq = false;
+                          buttonColor = Colors.grey;
+                        });
+                      }),
                 ),
-              ]),
-        ));
+                SizedBox(height: 40),
+                Container(
+                  alignment: Alignment.center,
+                  height: 80,
+                  width: 180,
+                  color: Colors.redAccent,
+                  child: InkWell(
+                      child: Text('Unable',
+                          style: TextStyle(fontSize: 26, color: Colors.white)),
+                      onTap: () {
+                        //print("Request Backup");
+                        //Navigator.of(context).push(MaterialPageRoute(builder: (context) => RequestPage(title: "title")));
+                      }),
+                ),
+              ],
+            ),
+            SizedBox(height: 30),
+          ],
+        ),
+      ),
+    );
   }
-   // PopupMenuButton _popupMenuButton(BuildContext context){
-     // return PopupMenuButton(
-    //    itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>
-    //  )
-   // }
+  // PopupMenuButton _popupMenuButton(BuildContext context){
+  // return PopupMenuButton(
+  //    itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>
+  //  )
+  // }
 }
+              

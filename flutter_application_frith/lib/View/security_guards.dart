@@ -13,6 +13,14 @@ import '../report/new_report.dart';
 import '../report/Report_Draft_Page.dart';
 import 'package:flutter_application_frith/Request_Backup/Backup_homepage.dart';
 
+//EFFY ADDED, IF HAVE ERROR, DELETE THE FOLLOWING PACKAGES
+import 'package:http/http.dart' as http;
+import 'package:flutter_application_frith/global_ip.dart' as globals;
+import 'dart:convert';
+import '../Request_Backup/backup_success.dart';
+
+
+
 class SecurityGuards extends StatefulWidget {
   const SecurityGuards({Key? key}) : super(key: key);
 
@@ -272,31 +280,63 @@ class _SecurityGuardsState extends State<SecurityGuards> {
               Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
                 GestureDetector(
                   onTap: () {
-                    AlertDialog alert = AlertDialog(
-                      title: Text('Are you sure you want to request back up'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const SecurityGuards(),
-                              )),
-                          child: const Text('Cancel'),
-                        ),
-                        TextButton(
-                          onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const BackupPage(),
-                              )),
-                          child: const Text('Yes'),
-                        ),
-                      ],
-                    );
+                    // popup window
                     showDialog(
                       context: context,
-                      builder: (BuildContext context) {
-                        return alert;
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text("Notice"),
+                          content:
+                              Text("Are you sure you want to Request Backup?"),
+                          actions: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Container(
+                                  color: Colors.white,
+                                  width: 100,
+                                  height: 50,
+                                  alignment: Alignment.center,
+                                  child: InkWell(
+                                      child: Text(
+                                        "Decline",
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.blueAccent),
+                                      ),
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      }),
+                                ),
+                                Container(
+                                  color: Colors.blueAccent,
+                                  width: 100,
+                                  height: 50,
+                                  alignment: Alignment.center,
+                                  child: InkWell(
+                                      child: Text(
+                                        "Yes",
+                                        style: TextStyle(
+                                            fontSize: 22,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      //send name, location and time to database
+                                      onTap: () {
+                                        _pushdata("test", "currunt location",
+                                            "2022-09-27 10:00:22");
+
+                                        // Navigator.of(context).push(
+                                        //     MaterialPageRoute(
+                                        //         builder: (context) =>
+                                        //             SuccessfulResponsePage(
+                                        //                 title: "title")));
+                                      }),
+                                ),
+                              ],
+                            )
+                          ],
+                        );
                       },
                     );
                   },
@@ -380,5 +420,35 @@ class _SecurityGuardsState extends State<SecurityGuards> {
         ),
       ],
     );
+  }
+  //EFFY ADDED
+  //send username to request backup db
+  Future<void> _pushdata(String name, String location, String time) async {
+    var url = 'http://' +
+        globals.GLOBAL_IP +'/frith/connection/backup.php'; 
+    Map data = {'name': name, 'location': location, 'time': time};
+
+    var jsonData = null;
+
+    final response = await http.post(Uri.parse(url),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data),
+        encoding: Encoding.getByName("utf-8"));
+    if (response.statusCode == 200) {
+      jsonData = await jsonDecode(response.body);
+      print(jsonData);
+      if (jsonData["error"] == true) {
+        print('fail');
+      } else {
+        //success
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => SuccessfulResponsePage(title: "title")));
+      }
+    } else {
+      
+       //print(jsonData["errmsg"]);
+    }
   }
 }

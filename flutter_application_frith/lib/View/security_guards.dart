@@ -19,8 +19,6 @@ import 'package:flutter_application_frith/global_ip.dart' as globals;
 import 'dart:convert';
 import '../Request_Backup/backup_success.dart';
 
-
-
 class SecurityGuards extends StatefulWidget {
   const SecurityGuards({Key? key}) : super(key: key);
 
@@ -421,11 +419,11 @@ class _SecurityGuardsState extends State<SecurityGuards> {
       ],
     );
   }
+
   //EFFY ADDED
   //send username to request backup db
   Future<void> _pushdata(String name, String location, String time) async {
-    var url = 'http://' +
-        globals.GLOBAL_IP +'/frith/connection/backup.php'; 
+    var url = 'http://' + globals.GLOBAL_IP + '/frith/connection/backup.php';
     Map data = {'name': name, 'location': location, 'time': time};
 
     var jsonData = null;
@@ -447,8 +445,7 @@ class _SecurityGuardsState extends State<SecurityGuards> {
             builder: (context) => SuccessfulResponsePage(title: "title")));
       }
     } else {
-      
-       //print(jsonData["errmsg"]);
+      //print(jsonData["errmsg"]);
     }
   }
 }

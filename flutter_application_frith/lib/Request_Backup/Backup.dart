@@ -28,7 +28,10 @@ class BackupModel extends ChangeNotifier {
     add(Backup(
         title: "Guard4", name: "Draco", location: "Launceston", status: "NA"));
     add(Backup(
-        title: "Guard5", name: "Neville", location: "Launceston", status: "NA"));
+        title: "Guard5",
+        name: "Neville",
+        location: "Launceston",
+        status: "NA"));
   }
 
   void add(Backup item) {

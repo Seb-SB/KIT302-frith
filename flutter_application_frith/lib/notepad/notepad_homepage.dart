@@ -72,7 +72,9 @@ class _NotepadPageState extends State<NotepadPage> {
                     var notepad = notepadModel.items[index];
                     return ListTile(
                       title: Text(notepad.title),
-                      subtitle: Text(DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.parse(notepad.date)).toString() +
+                      subtitle: Text(DateFormat("yyyy-MM-dd HH:mm:ss")
+                              .format(DateTime.parse(notepad.date))
+                              .toString() +
                           " - " +
                           notepad.details.toString() +
                           " ..."),

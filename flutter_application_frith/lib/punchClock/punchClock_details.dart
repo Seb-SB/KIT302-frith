@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:flutter_application_frith/global_ip.dart' as globals;
 import 'package:http/http.dart' as http;
 
-
 class GuardClockDetails extends StatefulWidget {
   const GuardClockDetails({Key? key, required this.id}) : super(key: key);
   final int id; //Add this line
@@ -29,23 +28,22 @@ class _GuardClockDetailsState extends State<GuardClockDetails> {
   VoidCallback? cancelFunc = null;
   VoidCallback? sureFunc = null;
 
-
-
-  VoidCallback cancalFuncImpl = () async{
+  VoidCallback cancalFuncImpl = () async {
     var url = 'http://' +
         globals.GLOBAL_IP +
-        '/frith-backend/connection/updateShipDetail.php';
+        '/frith/connection/updateShipDetail.php';
     var json = {
-      "status" : "0",
-      "ShiftID" : data[selectedGuard - 1]['ShiftID'],
+      "status": "0",
+      "ShiftID": data[selectedGuard - 1]['ShiftID'],
     };
-    var response = await http.post(Uri.parse(url),
-        headers: {
-          ///'Content-Type': 'application/x-www-form-urlencoded',
-          ///'Accept': 'application/json'
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(json),
+    var response = await http.post(
+      Uri.parse(url),
+      headers: {
+        ///'Content-Type': 'application/x-www-form-urlencoded',
+        ///'Accept': 'application/json'
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(json),
     );
     if (response.statusCode == 200) {
       _this.updateUi('0');
@@ -55,12 +53,13 @@ class _GuardClockDetailsState extends State<GuardClockDetails> {
   VoidCallback sureFuncImpl = () async {
     var url = 'http://' +
         globals.GLOBAL_IP +
-        '/frith-backend/connection/updateShipDetail.php';
+        '/frith/connection/updateShipDetail.php';
     var json = {
-      "status" : "1",
-      "ShiftID" : data[selectedGuard - 1]['ShiftID'],
+      "status": "1",
+      "ShiftID": data[selectedGuard - 1]['ShiftID'],
     };
-    var response = await http.post(Uri.parse(url),
+    var response = await http.post(
+      Uri.parse(url),
       headers: {
         ///'Content-Type': 'application/x-www-form-urlencoded',
         ///'Accept': 'application/json'
@@ -85,14 +84,13 @@ class _GuardClockDetailsState extends State<GuardClockDetails> {
     dateController.text = bussiness.date.toString();
     detailsController.text = bussiness.address;
 
-    if(_isLoading){
+    if (_isLoading) {
       initData(bussiness.id);
       _isLoading = false;
     }
     // load guards
 
     return Consumer<PunchClockModel>(builder: (context, notepadModel, _) {
-
       return Scaffold(
           appBar: AppBar(
             title: const Text("detail"),
@@ -126,15 +124,14 @@ class _GuardClockDetailsState extends State<GuardClockDetails> {
                                 itemBuilder: (_, index) {
                                   return ListTile(
                                     title: Text(
-                                          'guard name: ${data[index]['FirstName']} ${data[index]['LastName']} location: ${data[index]['areaName']}',
+                                      'guard name: ${data[index]['FirstName']} ${data[index]['LastName']} location: ${data[index]['areaName']}',
                                       style: TextStyle(fontSize: 20),
                                     ),
                                     //leading: Image.network(image),
                                     //added this line, this should be familiar from last week:
                                   );
                                 },
-                                itemCount: data.length)
-                        ),
+                                itemCount: data.length)),
                         DropdownButton<String>(
                           style: TextStyle(color: Colors.green),
                           items: location.map((item) {
@@ -149,7 +146,9 @@ class _GuardClockDetailsState extends State<GuardClockDetails> {
                               selectedLocation = value!;
                             });
                             final result = data
-                                .where((item) => (item['areaID'] as String) == value.toString())
+                                .where((item) =>
+                                    (item['areaID'] as String) ==
+                                    value.toString())
                                 .toList();
                             print('result=' + result.toString());
                             setState(() {
@@ -172,13 +171,18 @@ class _GuardClockDetailsState extends State<GuardClockDetails> {
                                 itemBuilder: (_, index) {
                                   return ListTile(
                                     selected: selectedGuard == index + 1,
-                                    title: Text('guard name:' + locationAndGuard[index]['FirstName'] + ' ' + locationAndGuard[index]['LastName']),
+                                    title: Text('guard name:' +
+                                        locationAndGuard[index]['FirstName'] +
+                                        ' ' +
+                                        locationAndGuard[index]['LastName']),
                                     onTap: () {
                                       setState(() {
                                         selectedGuard = index + 1;
                                       });
                                       // set button status
-                                      if (locationAndGuard[selectedGuard - 1]['status'] == '0') {
+                                      if (locationAndGuard[selectedGuard - 1]
+                                              ['status'] ==
+                                          '0') {
                                         setState(() {
                                           sureFunc = sureFuncImpl;
                                           cancelFunc = null;
@@ -191,35 +195,38 @@ class _GuardClockDetailsState extends State<GuardClockDetails> {
                                       }
                                     },
                                     //leading: Image.network(image),
-                                    //added this line, this should be familiar from last week:
                                   );
                                 },
                                 itemCount: locationAndGuard.length)),
-
                         Row(
                           children: <Widget>[
-                            ElevatedButton(
-                              onPressed: cancelFunc,
-                              child: Text('End Shift'),
-                              style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all(Colors.red)),
+                            Container(
+                              width: MediaQuery.of(context).size.width / 3,
+                              child: ElevatedButton(
+                                onPressed: cancelFunc,
+                                child: Text('End Shift'),
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all(Colors.red)),
+                              ),
                             ),
                             SizedBox(
-                              width: 50,
+                              width: MediaQuery.of(context).size.width / 3,
                             ),
-                            ElevatedButton(
-                              onPressed: sureFunc,
-                              child: Text('Start Shift'),
-                              style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all(Colors.green)),
+                            Container(
+                              width: MediaQuery.of(context).size.width / 3,
+                              child: ElevatedButton(
+                                onPressed: sureFunc,
+                                child: Text('Start Shift'),
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                        Colors.green)),
+                              ),
                             ),
                           ],
                         ),
                       ],
                     )
-                    //Display movie id
                   ])));
     });
   }
@@ -227,13 +234,13 @@ class _GuardClockDetailsState extends State<GuardClockDetails> {
   void initData(id) async {
     var url = 'http://' +
         globals.GLOBAL_IP +
-        '/frith-backend/connection/bussiness_gard_show.php?bussinessId=' + id;
-    var response = await http.get(Uri.parse(url),
-        headers: {
-          ///'Content-Type': 'application/x-www-form-urlencoded',
-          ///'Accept': 'application/json'
-          'Content-Type': 'application/json; charset=UTF-8',
-        });
+        '/frith/connection/bussiness_gard_show.php?bussinessId=' +
+        id;
+    var response = await http.get(Uri.parse(url), headers: {
+      ///'Content-Type': 'application/x-www-form-urlencoded',
+      ///'Accept': 'application/json'
+      'Content-Type': 'application/json; charset=UTF-8',
+    });
     if (response.statusCode == 200) {
       var ret = jsonDecode(response.body);
       print(ret);
@@ -242,15 +249,12 @@ class _GuardClockDetailsState extends State<GuardClockDetails> {
       });
     }
 
-    var url2 = 'http://' +
-        globals.GLOBAL_IP +
-        '/frith-backend/connection/getArea.php';
-    response = await http.get(Uri.parse(url2),
-        headers: {
-          ///'Content-Type': 'application/x-www-form-urlencoded',
-          ///'Accept': 'application/json'
-          'Content-Type': 'application/json; charset=UTF-8',
-        });
+    var url2 = 'http://' + globals.GLOBAL_IP + '/frith/connection/getArea.php';
+    response = await http.get(Uri.parse(url2), headers: {
+      ///'Content-Type': 'application/x-www-form-urlencoded',
+      ///'Accept': 'application/json'
+      'Content-Type': 'application/json; charset=UTF-8',
+    });
 
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
@@ -260,13 +264,13 @@ class _GuardClockDetailsState extends State<GuardClockDetails> {
       });
 
       final result = data
-          .where((item) => (item['areaID'] as String) == location[0]['AreaID'].toString())
+          .where((item) =>
+              (item['areaID'] as String) == location[0]['AreaID'].toString())
           .toList();
       setState(() {
         locationAndGuard = result;
       });
     }
-
   }
 
   void updateUi(status) {
@@ -284,9 +288,5 @@ class _GuardClockDetailsState extends State<GuardClockDetails> {
     setState(() {
       data[selectedGuard - 1]['status'] = status;
     });
-
   }
-
-
-
 }

@@ -6,4 +6,4 @@
 //Ted 192.168.1.21
 library my_project.globals;
 
-const String GLOBAL_IP = "10.0.0.80";
+const String GLOBAL_IP = "192.168.1.21";

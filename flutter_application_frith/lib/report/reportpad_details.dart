@@ -37,7 +37,6 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
     var reportpad = reportpads[widget.id];
 
     specificAreaController.text = reportpad.specificArea;
-    //dateController.text = reportpad.date;
     severityController.text = reportpad.severity;
     descriptionController.text = reportpad.description;
     reportFiledController = reportpad.reportFiled;
@@ -49,147 +48,120 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
           ),
           body: Padding(
               padding: const EdgeInsets.all(8),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text("Report Index ${widget.id}"),
-                    Form(
-                      key: _formKey,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: <Widget>[
-                            TextFormField(
-                              decoration:
-                                  const InputDecoration(labelText: "Location"),
-                              controller: specificAreaController,
-                              autofocus: true,
-                            ),
-                            // TextFormField(
-                            //   decoration:
-                            //       const InputDecoration(labelText: "Date"),
-                            //   controller: dateController,
-                            // ),
-                            TextFormField(
-                              decoration:
-                                  const InputDecoration(labelText: "Severity"),
-                              controller: severityController,
-                            ),
-                            TextFormField(
-                              decoration: const InputDecoration(
-                                  labelText: "Description"),
-                              controller: descriptionController,
-                            ),
-                            Row(
-                              children: [
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      primary: Colors.blue,
-                                      onPrimary: Colors.white,
-                                    ),
-                                    onPressed: () {
-                                      reportpad.specificArea =
-                                          specificAreaController.text;
-                                      reportpad.date = DateTime.now();
-                                      reportpad.severity =
-                                          severityController.text;
-                                      reportpad.description =
-                                          descriptionController.text;
-                                      reportpad.reportFiled =
-                                          reportFiledController;
-                                      _deleteFromList(
-                                          reportpad.specificArea,
-                                          reportpad.date,
-                                          reportpad.severity,
-                                          reportpad.description,
-                                          reportpad.reportFiled,
-                                          context,
-                                          reportpads);
-                                      var timeNow = new DateTime.now();
-                                      var formatter =
-                                          new DateFormat('yyyy-MM-dd HH:mm:ss');
-                                      String formatted = formatter
-                                          .format(timeNow); // Save this to DB
-                                      var guardKey = 1;
-                                      _submit(
-                                          guardKey.toString(),
-                                          formatted,
-                                          reportpad.severity,
-                                          reportpad.specificArea,
-                                          reportpad.description,
-                                          reportpad.reportFiled);
+              child: SingleChildScrollView(
+                  padding: EdgeInsets.all(32),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text("Report Index ${widget.id}"),
+                        Form(
+                          key: _formKey,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: <Widget>[
+                                TextFormField(
+                                  decoration: const InputDecoration(
+                                      labelText: "Location"),
+                                  controller: specificAreaController,
+                                  autofocus: true,
+                                ),
+                                // TextFormField(
+                                //   decoration:
+                                //       const InputDecoration(labelText: "Date"),
+                                //   controller: dateController,
+                                // ),
+                                TextFormField(
+                                  decoration: const InputDecoration(
+                                      labelText: "Severity"),
+                                  controller: severityController,
+                                ),
+                                TextFormField(
+                                  decoration: const InputDecoration(
+                                      labelText: "Description"),
+                                  controller: descriptionController,
+                                ),
+                                Row(
+                                  children: [
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Colors.blue,
+                                          onPrimary: Colors.white,
+                                        ),
+                                        onPressed: () {
+                                          reportpad.specificArea =
+                                              specificAreaController.text;
+                                          reportpad.date = DateTime.now();
+                                          reportpad.severity =
+                                              severityController.text;
+                                          reportpad.description =
+                                              descriptionController.text;
+                                          reportpad.reportFiled =
+                                              reportFiledController;
+                                          reportpads.remove(reportpad);
+                                          var timeNow = new DateTime.now();
+                                          var formatter = new DateFormat(
+                                              'yyyy-MM-dd HH:mm:ss');
+                                          String formatted = formatter.format(
+                                              timeNow); // Save this to DB
+                                          var guardKey = 1;
+                                          _submit(
+                                              guardKey.toString(),
+                                              formatted,
+                                              reportpad.severity,
+                                              reportpad.specificArea,
+                                              reportpad.description,
+                                              reportpad.reportFiled);
 
-                                      Provider.of<ReportpadModel>(context,
-                                              listen: false)
-                                          .update();
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text('Submit')),
+                                          Provider.of<ReportpadModel>(context,
+                                                  listen: false)
+                                              .update();
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text('Submit')),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: ElevatedButton.icon(
+                                          onPressed: () {
+                                            reportpad.specificArea =
+                                                specificAreaController.text;
+                                            reportpad.date = DateTime.now();
+                                            reportpad.severity =
+                                                severityController.text;
+                                            reportpad.description =
+                                                descriptionController.text;
+                                            reportpad.reportFiled =
+                                                reportFiledController;
+
+                                            //update the model
+
+                                            Provider.of<ReportpadModel>(context,
+                                                    listen: false)
+                                                .update();
+                                            //return to previous screen
+                                            Navigator.pop(context);
+                                          },
+                                          icon: const Icon(Icons.save),
+                                          label: const Text("Save Values")),
+                                    ),
+                                    ElevatedButton(
+                                      child: const Text('Delete'),
+                                      onPressed: () {
+                                        reportpads.remove(reportpad);
+                                        Provider.of<ReportpadModel>(context,
+                                                listen: false)
+                                            .update();
+                                        Navigator.pop(context);
+                                      },
+                                    )
+                                  ],
+                                ),
                               ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ElevatedButton.icon(
-                                  onPressed: () {
-                                    reportpad.specificArea =
-                                        specificAreaController.text;
-                                    reportpad.date = DateTime.now();
-                                    reportpad.severity =
-                                        severityController.text;
-                                    reportpad.description =
-                                        descriptionController.text;
-                                    reportpad.reportFiled =
-                                        reportFiledController;
-
-                                    //update the model
-
-                                    Provider.of<ReportpadModel>(context,
-                                            listen: false)
-                                        .update();
-                                    //return to previous screen
-                                    Navigator.pop(context);
-                                  },
-                                  icon: const Icon(Icons.save),
-                                  label: const Text("Save Values")),
-                            ),
-                            ElevatedButton(
-                              child: const Text('Delete'),
-                              onPressed: () {
-                                Navigator.pop(context);
-                                /* TESTING
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SecurityGuards(guard: null,)),
-                    );*/
-                              },
-                            )
-
-                            //we will add form fields etc here
-                          ],
-                        ),
-                      ),
-                    )
-                  ])));
+                          ),
+                        )
+                      ]))));
     });
-  }
-
-  void _deleteFromList(
-      String specificAreaOfReport,
-      DateTime dateOfReport,
-      String severityOfReport,
-      String detailsOfReport,
-      String reportFiledOfReport,
-      BuildContext context,
-      List<Reportpad> reportpads) {
-    Reportpad report = Reportpad(
-        specificArea: specificAreaOfReport,
-        date: dateOfReport,
-        severity: severityOfReport,
-        description: detailsOfReport,
-        reportFiled: reportFiledOfReport);
-
-    reportpads.remove(report);
   }
 
   Future<void> _submit(String guardKey, timeSubmitted, String incidentType,

@@ -21,7 +21,6 @@ class SecLogin extends StatefulWidget {
   _SecLoginState createState() => _SecLoginState();
 }
 
-//login
 class _SecLoginState extends State<SecLogin> {
   GlobalKey<FormState> formkey =
       GlobalKey<FormState>(); //keep track of form state

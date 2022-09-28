@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 /**
  * successful request backup
  *
@@ -16,10 +15,8 @@ class SuccessfulResponsePage extends StatefulWidget {
 class _SuccessfulResponsePageState extends State<SuccessfulResponsePage> {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-
         title: Text("Successful"),
       ),
       //body: Center(child: Text("Your request for backup has been received.", style:TextStyle(fontSize: 30,color: Colors.black),),),
@@ -38,15 +35,18 @@ class _SuccessfulResponsePageState extends State<SuccessfulResponsePage> {
                   alignment: Alignment.center,
                   color: Colors.white,
                   child: InkWell(
-                    //child: Text('Request Backup', style: TextStyle(fontSize: 26),),
-                    //child: Text("SOS", style: TextStyle(color: Colors.white, fontSize: 50),),
-                      child: Icon(Icons.check_circle_outline, color: Colors.green,size: 80,),
-                      onTap:(){
+                      //child: Text('Request Backup', style: TextStyle(fontSize: 26),),
+                      //child: Text("SOS", style: TextStyle(color: Colors.white, fontSize: 50),),
+                      child: Icon(
+                        Icons.check_circle_outline,
+                        color: Colors.green,
+                        size: 80,
+                      ),
+                      onTap: () {
                         //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RequestPage(title: "title")));
-                       // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>()));
+                        // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>()));
                         //Navigator.of(context).push(MaterialPageRoute(builder: (context)=securityguards(title: "title")));
-                      }
-                  ),
+                      }),
                 ),
               ],
             ),
@@ -58,7 +58,11 @@ class _SuccessfulResponsePageState extends State<SuccessfulResponsePage> {
                   width: 100,
                   alignment: Alignment.center,
                   color: Colors.white,
-                  child: Text("Hi, Joe.", style:TextStyle(fontSize:20 ,color: Colors.black),),),
+                  child: Text(
+                    "Hi, Joe.",
+                    style: TextStyle(fontSize: 20, color: Colors.black),
+                  ),
+                ),
               ],
             ),
             Row(
@@ -69,11 +73,13 @@ class _SuccessfulResponsePageState extends State<SuccessfulResponsePage> {
                   width: 400,
                   alignment: Alignment.center,
                   color: Colors.white,
-                  child: Text("Your request for backup has been received.", style:TextStyle(fontSize:20 ,color: Colors.black),),),
-
+                  child: Text(
+                    "Your request for backup has been received.",
+                    style: TextStyle(fontSize: 20, color: Colors.black),
+                  ),
+                ),
               ],
             ),
-
           ],
         ),
       ),

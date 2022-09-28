@@ -10,7 +10,11 @@ class Business {
   String phone;
   String email;
 
-  Business({required this.id,required this.name, required this.phone, required this.email});
+  Business(
+      {required this.id,
+      required this.name,
+      required this.phone,
+      required this.email});
 }
 
 class BusinessModel extends ChangeNotifier {
@@ -38,14 +42,13 @@ class BusinessModel extends ChangeNotifier {
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       //print(guardKey); //testing
-      for (var i=0 ;i< data.length;i++) {
+      for (var i = 0; i < data.length; i++) {
         //if(guardKey == int.parse(data[i]['PoolID'])){
-          add(
-              Business(id: data[i]['businessID'],
-                  name: data[i]['BusinessName'],
-                  phone: data[i]['PhoneNumber'],
-                  email: data[i]['EmailAddress'])
-          );
+        add(Business(
+            id: data[i]['businessID'],
+            name: data[i]['BusinessName'],
+            phone: data[i]['PhoneNumber'],
+            email: data[i]['EmailAddress']));
         //}
       }
     }
@@ -55,12 +58,13 @@ class BusinessModel extends ChangeNotifier {
     items.clear();
     update();
   }
+
   void add(Business item) {
     items.add(item);
     update();
   }
+
   void update() {
     notifyListeners();
   }
 }
-

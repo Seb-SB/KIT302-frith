@@ -5,6 +5,7 @@ import 'package:flutter_application_frith/Model/securityGuard.dart';
 import 'package:flutter_application_frith/View/security_login.dart';
 import 'package:flutter_application_frith/punchClock/newPunchClockHomepage.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../Request_Backup/backup_list.dart';
 import '../emergency/emergencyphone.dart';
 import '../notepad/notepad_homepage.dart';
 import 'package:torch_light/torch_light.dart';
@@ -13,14 +14,13 @@ import '../report/new_report.dart';
 import '../report/Report_Draft_Page.dart';
 import 'package:flutter_application_frith/Request_Backup/Backup_homepage.dart';
 
-//EFFY ADDED, IF HAVE ERROR, DELETE THE FOLLOWING PACKAGES
 import 'package:http/http.dart' as http;
 import 'package:flutter_application_frith/global_ip.dart' as globals;
 import 'dart:convert';
 import '../Request_Backup/backup_success.dart';
 
 class SecurityGuards extends StatefulWidget {
-  const SecurityGuards({Key? key}) : super(key: key);
+  const SecurityGuards({Key? key, required String title}) : super(key: key);
 
   ///const SecurityGuards({key, required this.guard});
 
@@ -57,6 +57,61 @@ class _SecurityGuardsState extends State<SecurityGuards> {
     } on Exception catch (_) {
       print("unable to turn off light");
     }
+  }
+
+  popupWindow() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Notice"),
+          content: Text("Are you sure you want to Request Backup?"),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  color: Colors.white,
+                  width: 100,
+                  height: 50,
+                  alignment: Alignment.center,
+                  child: InkWell(
+                      child: Text(
+                        "Decline",
+                        style:
+                            TextStyle(fontSize: 18, color: Colors.blueAccent),
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                      }),
+                ),
+                InkWell(
+                  onTap: () {
+                    _pushdata(
+                        "test", "currunt location", "2022-09-27 10:00:22");
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    color: Colors.blueAccent,
+                    width: 100,
+                    height: 50,
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Yes",
+                      style: TextStyle(
+                          fontSize: 22,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    //send name, location and time to database
+                  ),
+                ),
+              ],
+            )
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -154,11 +209,12 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   GestureDetector(
+                      //button
                       onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const BackupPage(),
+                              builder: (context) => backup_list(),
                             ));
                       },
                       child: Container(
@@ -279,64 +335,7 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                 GestureDetector(
                   onTap: () {
                     // popup window
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: Text("Notice"),
-                          content:
-                              Text("Are you sure you want to Request Backup?"),
-                          actions: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Container(
-                                  color: Colors.white,
-                                  width: 100,
-                                  height: 50,
-                                  alignment: Alignment.center,
-                                  child: InkWell(
-                                      child: Text(
-                                        "Decline",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.blueAccent),
-                                      ),
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                      }),
-                                ),
-                                Container(
-                                  color: Colors.blueAccent,
-                                  width: 100,
-                                  height: 50,
-                                  alignment: Alignment.center,
-                                  child: InkWell(
-                                      child: Text(
-                                        "Yes",
-                                        style: TextStyle(
-                                            fontSize: 22,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      //send name, location and time to database
-                                      onTap: () {
-                                        _pushdata("test", "currunt location",
-                                            "2022-09-27 10:00:22");
-
-                                        // Navigator.of(context).push(
-                                        //     MaterialPageRoute(
-                                        //         builder: (context) =>
-                                        //             SuccessfulResponsePage(
-                                        //                 title: "title")));
-                                      }),
-                                ),
-                              ],
-                            )
-                          ],
-                        );
-                      },
-                    );
+                    popupWindow();
                   },
                   child: Container(
                     // alignment: Alignment.centerLeft,
@@ -426,26 +425,18 @@ class _SecurityGuardsState extends State<SecurityGuards> {
     var url = 'http://' + globals.GLOBAL_IP + '/frith/connection/backup.php';
     Map data = {'name': name, 'location': location, 'time': time};
 
-    var jsonData = null;
-
     final response = await http.post(Uri.parse(url),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(data),
         encoding: Encoding.getByName("utf-8"));
+    print(response.statusCode);
     if (response.statusCode == 200) {
-      jsonData = await jsonDecode(response.body);
-      print(jsonData);
-      if (jsonData["error"] == true) {
-        print('fail');
-      } else {
-        //success
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => SuccessfulResponsePage(title: "title")));
-      }
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => SuccessfulResponsePage(title: "title")));
     } else {
-      //print(jsonData["errmsg"]);
+      print(response.statusCode);
     }
   }
 }

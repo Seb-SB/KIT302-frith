@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_frith/Model/securityGuard.dart';
 
 /**
  * successful request backup
@@ -43,9 +44,8 @@ class _SuccessfulResponsePageState extends State<SuccessfulResponsePage> {
                         size: 80,
                       ),
                       onTap: () {
-                        //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>RequestPage(title: "title")));
-                        // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>()));
-                        //Navigator.of(context).push(MaterialPageRoute(builder: (context)=securityguards(title: "title")));
+                        
+                        //Navigator.of(context).push(MaterialPageRoute(builder: (s(title: "title")));
                       }),
                 ),
               ],
@@ -59,7 +59,7 @@ class _SuccessfulResponsePageState extends State<SuccessfulResponsePage> {
                   alignment: Alignment.center,
                   color: Colors.white,
                   child: Text(
-                    "Hi, Joe.",
+                    "Thank you. ",
                     style: TextStyle(fontSize: 20, color: Colors.black),
                   ),
                 ),

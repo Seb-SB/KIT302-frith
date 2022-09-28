@@ -408,7 +408,7 @@ class _NewReportState extends State<NewReport> {
           _isLoading = false;
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SecurityGuards()),
+            MaterialPageRoute(builder: (context) => SecurityGuards(title: '',)),
           );
           errorMessage = "";
         });

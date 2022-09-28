@@ -13,22 +13,6 @@ $receieved = false;
 
 $json["error"] = false;
 
-//check if email value has been received 
-// if (empty($data['email'])) {
-//     $json["errmsg1"] = "Did not get email";
-// } else {
-//     $email = $data['email'];
-//     $received = true;
-// }
-
-// //check if password value has been received 
-// if (empty($data['password'])) {
-//     $json["errmsg2"] = "Did not get password";
-// } else {
-//     $password = $data['password'];
-//     $received = true;
-// }
-
 
 if($data['name']) {
 	$json1 = file_get_contents('php://input');
@@ -36,7 +20,8 @@ if($data['name']) {
 //convert file contents to PHP object
    $data = json_decode($json1, true);
 
-    $name=$data['name'];
+    $firstname=$data['firstname'];
+    $lasttname=$data['lastname'];
     $location=$data['location'];
     $times=date('y-m-d');
     $sql="INSERT INTO `backupdetails`(`location`,`Time`) VALUES ('$location','$times')";
@@ -57,7 +42,6 @@ if($data['name']) {
     $json["error"] = true;
     $json["errmsg"] = "Failure to connect";
 }
-
 
 
 mysqli_close($conn);

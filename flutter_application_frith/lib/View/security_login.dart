@@ -203,7 +203,7 @@ class _SecLoginState extends State<SecLogin> {
           _isLoading = false;
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const SecurityGuards()),
+            MaterialPageRoute(builder: (context) => const SecurityGuards(title: '',)),
           );
         });
       }

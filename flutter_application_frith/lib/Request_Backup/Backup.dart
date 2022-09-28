@@ -9,7 +9,7 @@ class Backup {
   String Firstname;
   String Lastname;
   String Location;
-  String Time;  
+  String Time;
   String test;
   String id;
 
@@ -27,30 +27,14 @@ class BackupModel extends ChangeNotifier {
   List<Backup> items = [];
   //Normally a model would get from a database here, we are just hardcoding some data for this week
   BackupModel() {
-    // items= _getbackdata() as List<Backup>;
-    // for (var item in items) {
-    //   print("item :" + item.name.toString());
-    //   // add(Backup(
-    //   //     title: item.title,
-    //   //     name: item.name,
-    //   //     location: item.location,
-    //   //     status: item.status));
-    // }
+   
     add(Backup(
-        Firstname: "Guard1", Lastname: "Ron", Location: "Launceston", Time: "NA", test: "", id: ""));
-    // add(Backup(
-    //     title: "Guard2", name: "Harry", location: "Launceston", status: "NA"));
-    // add(Backup(
-    //     title: "Guard3", name: "Dobbyy", location: "Launceston", status: "NA"));
-    // add(Backup(
-    //     title: "Guard4", name: "Draco", location: "Launceston", status: "NA"));
-    // add(Backup(
-    //     title: "Guard5",
-    //     name: "Neville",
-    //     location: "Launceston",
-    //     status: "NA"));
-
-
+        Firstname: "Guard1",
+        Lastname: "Ron",
+        Location: "Launceston",
+        Time: "NA",
+        test: "",
+        id: ""));
     
   }
 
@@ -67,6 +51,6 @@ class BackupModel extends ChangeNotifier {
   //update any listeners
   // This call tells the widgets that are listening to this model to rebuild.
   void update() {
-    notifyListeners();
+    // notifyListeners();
   }
 }

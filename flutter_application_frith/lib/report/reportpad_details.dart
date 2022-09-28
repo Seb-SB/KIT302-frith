@@ -213,7 +213,7 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
           _isLoading = false;
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SecurityGuards()),
+            MaterialPageRoute(builder: (context) => SecurityGuards(title: '',)),
           );
           errorMessage = "";
         });

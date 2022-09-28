@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../View/security_guards.dart';
 import 'Backup.dart';
+import 'dart:convert';
+
+// import 'package:flutter/material.dart';
+import 'package:flutter_application_frith/global_ip.dart' as globals;
+import 'package:http/http.dart' as http;
 
 class BackupPage extends StatefulWidget {
   const BackupPage({Key? key}) : super(key: key);
@@ -15,13 +20,134 @@ class _BackupPageState extends State<BackupPage> {
   int cnt_new = 0;
   bool boolReq = true;
   Color buttonColor = Colors.green;
+  // List<Backup> items = [];
+  List<Backup> backupList = [];
+  //  BackupModel backupModel;
+
+  /// 获取列表数据
+  Future<void> _getbackdata() async {
+    // Future<List<Backup>?> _getbackdata() async {
+    var url =
+        'http://' + globals.GLOBAL_IP + '/frith/connection/backup_list.php';
+
+    // List<Backup> backupList;
+    // Map data = {'name': name, 'location': location, 'time': time};
+
+    var jsonData = null;
+
+    final response = await http.post(Uri.parse(url),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        // body: jsonEncode(data),
+        encoding: Encoding.getByName("utf-8"));
+    if (response.statusCode == 200) {
+      //  print('request: '+ response.body.toString() + 'request success data');
+      jsonData = await jsonDecode(response.body.toString());
+      Map<String, dynamic> map = await json.decode(response.body.toString());
+
+
+
+        // Map mapres = map['arr'];
+
+        // _backupList = (jsonData as List<dynamic>)
+        //     .map((e) => Backup.fromJSON(e as Map<String, dynamic>))
+        //     .toList();
+        // print(_backupList.toString() + 'request success data');
+
+        // print('JsonData: ' + jsonData.toString() + 'jsonData success data');
+        print('arr: ' + map['arr'].runtimeType.toString() + ' arr success data');
+        print('arr[0]: ' + map['arr'][0].toString() + ' arr success data');
+        // Map map2 = map['arr'][0];
+        // print("map['First'] = "+map2['Firstname'].toString());
+        for(var i=0; i<3; i++){
+          Map maptemp = map['arr'][i];
+          print("maptemp: "+maptemp.toString());
+          backupList.add(Backup(
+              Firstname: maptemp['Firstname'].toString(),
+              Lastname: maptemp['Lastname'].toString(),
+              Location:maptemp['Location'].toString(),
+              Time:maptemp['Time'].toString(),
+              test:maptemp['test'].toString(),
+              id:maptemp['id'].toString(),
+          ));
+
+        }
+
+
+
+        // listMap.forEach((element) {
+        //
+        //     Backup b = new Backup(
+        //         Firstname: element['Firstname'],
+        //         Lastname: element['Lastname'],
+        //         Location: element['Location'],
+        //         Time: element['Time'],
+        //         test: element['test'],
+        //         id: element['id']);
+        //     backupList.add(b);
+        // });
+        // backupList = List<Backup>.from(map['arr']);
+        // List<Backup> res =json.decode(mapres.toString());
+        // List<Backup> res =map['arr'];
+        // for(var i = 0; i<3; i++) {
+        //   Backup b = map['arr'][i];
+        //   // Backup b = new Backup(
+        //   //     Firstname: i.Firstname,
+        //   //     Lastname: i.Lastname,
+        //   //     Location: i.Location,
+        //   //     Time: i.Time,
+        //   //     test: i.test,
+        //   //     id: i.id);
+        //   backupList.add(b);
+        // }
+        // backupList = json.decode(map['arr'].toString());
+        // map = json.decode(jsonData);
+        //  map = jsonData;
+        // String arr = map['arr'];
+        // _backupList = json.decode(arr);
+        // for (var i; i < _backupList.length;i++)
+        // print("backup List $i:" + _backupList[i].toString());
+        // return backupList;
+
+
+
+
+    } else {
+      print(jsonData["errmsg"]);
+    }
+    // return null;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getbackdata();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<BackupModel>(builder: buildScaffold);
   }
 
-  Scaffold buildScaffold(BuildContext context, BackupModel backupModel, _) {
+  Scaffold buildScaffold(BuildContext context, BackupModel backupModel1, _) {
+    for (var item in backupList) {
+      print("item :" + item.Lastname.toString());
+      backupModel1.add(Backup(
+          Firstname: item.Firstname,
+          Lastname: item.Lastname,
+          Location: item.Location,
+          test: item.test,
+          id: item.id,
+          Time: item.Time));
+    }
+    // setState(() {
+    //      backupModel. add(Backup(
+    // Firstname: "Guard22", Lastname: "Ron", Location: "Launceston", Time: "NA", test: "", id: ""));
+
+    // });
+    print("Navigator to backup page!");
     return Scaffold(
       appBar: AppBar(
         title: Text('Back up requested'),
@@ -52,20 +178,20 @@ class _BackupPageState extends State<BackupPage> {
                   ),
                   child: ListView.builder(
                       itemBuilder: (_, index) {
-                        var notepad = backupModel.items[index];
+                        var backupOne = backupModel1.items[index];
                         return ListTile(
-                          title: Text(notepad.title +
+                          title: Text(backupOne.Firstname +
                               "  " +
-                              notepad.name +
+                              backupOne.Lastname +
                               "   " +
-                              notepad.location +
+                              backupOne.Location +
                               "   " +
-                              notepad.status),
+                              backupOne.Time),
                           //leading: Image.network(image),
                           //added this line, this should be familiar from last week:
                         );
                       },
-                      itemCount: backupModel.items.length)),
+                      itemCount: backupModel1.items.length)),
             )),
             Container(
               alignment: Alignment.center,

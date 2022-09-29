@@ -23,7 +23,6 @@ class backup_listState extends State<backup_list> {
     _getbackdata();
   }
 
-  
   Future<void> _getbackdata() async {
     // Future<List<Backup>?> _getbackdata() async {
     var url =
@@ -52,6 +51,14 @@ class backup_listState extends State<backup_list> {
           id: maptemp['id'].toString(),
         ));
       }
+
+      backupList.sort(((a, b) {
+        DateTime today = DateTime.now();
+        String str = today.year.toString().substring(0, 2);
+        DateTime t1 = DateTime.parse('$str${a.Time} 00:00:00.000');
+        DateTime t2 = DateTime.parse('$str${b.Time} 00:00:00.000');
+        return t1.isBefore(t2) ? 1 : -1;
+      }));
 
       setState(() {});
     } else {
@@ -84,6 +91,7 @@ class backup_listState extends State<backup_list> {
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return BackupPage(backupList[index]);
+            //return BackupPage(backupList[index]);
           }));
         },
         child: Container(

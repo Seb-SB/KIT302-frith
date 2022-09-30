@@ -1,14 +1,14 @@
-#Fri Sep 30 00:57:01 AEST 2022
+#Fri Sep 30 14:01:23 AEST 2022
 path.4=8/classes.dex
 path.3=1/classes.dex
 path.2=0/classes.dex
 path.1=0/classes.dex
 path.0=classes.dex
-base.4=D\:\\development\\KIT302-frith\\flutter_application_frith\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\8\\classes.dex
-base.3=D\:\\development\\KIT302-frith\\flutter_application_frith\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
-base.2=D\:\\development\\KIT302-frith\\flutter_application_frith\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.1=D\:\\development\\KIT302-frith\\flutter_application_frith\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
-base.0=D\:\\development\\KIT302-frith\\flutter_application_frith\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+base.4=M\:\\Utas\\KIT302\\KIT302-frith\\flutter_application_frith\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\8\\classes.dex
+base.3=M\:\\Utas\\KIT302\\KIT302-frith\\flutter_application_frith\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
+base.2=M\:\\Utas\\KIT302\\KIT302-frith\\flutter_application_frith\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.1=M\:\\Utas\\KIT302\\KIT302-frith\\flutter_application_frith\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
+base.0=M\:\\Utas\\KIT302\\KIT302-frith\\flutter_application_frith\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 renamed.3=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex

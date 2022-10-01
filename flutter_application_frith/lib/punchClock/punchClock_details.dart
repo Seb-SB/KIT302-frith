@@ -127,8 +127,6 @@ class _GuardClockDetailsState extends State<GuardClockDetails> {
                                       'guard name: ${data[index]['FirstName']} ${data[index]['LastName']} location: ${data[index]['areaName']}',
                                       style: TextStyle(fontSize: 20),
                                     ),
-                                    //leading: Image.network(image),
-                                    //added this line, this should be familiar from last week:
                                   );
                                 },
                                 itemCount: data.length)),
@@ -194,7 +192,6 @@ class _GuardClockDetailsState extends State<GuardClockDetails> {
                                         });
                                       }
                                     },
-                                    //leading: Image.network(image),
                                   );
                                 },
                                 itemCount: locationAndGuard.length)),

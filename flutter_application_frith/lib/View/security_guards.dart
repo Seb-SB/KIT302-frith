@@ -22,10 +22,6 @@ import '../Request_Backup/backup_success.dart';
 class SecurityGuards extends StatefulWidget {
   const SecurityGuards({Key? key, required String title}) : super(key: key);
 
-  ///const SecurityGuards({key, required this.guard});
-
-  //final SecurityGuard guard;
-
   @override
   State<SecurityGuards> createState() => _SecurityGuardsState();
 }
@@ -167,10 +163,7 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => NotepadPage(
-
-                                    ///title: '',
-                                    )));
+                                builder: (context) => NotepadPage()));
                       },
                       child: Container(
                           color: Colors.blueAccent,
@@ -246,7 +239,7 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                           size: 80,
                         )),
                   ),
-                  //end emergency call function
+                  //end of emergency call function
                 ],
               ),
               SizedBox(height: 10),
@@ -280,7 +273,6 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                             ));
                       },
                       child: Container(
-                          // alignment: Alignment.centerLeft,
                           color: Colors.blueAccent,
                           width: 140,
                           height: 90,
@@ -338,7 +330,6 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                     popupWindow();
                   },
                   child: Container(
-                    // alignment: Alignment.centerLeft,
                     color: Colors.red,
                     width: 200,
                     height: 90,

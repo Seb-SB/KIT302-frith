@@ -14,10 +14,6 @@ import '../View/security_guards.dart';
 class NewReport extends StatefulWidget {
   const NewReport({Key? key}) : super(key: key);
 
-  ///const NewReport({key, required this.guard});
-
-  ///final SecurityGuard guard;
-
   @override
   _NewReportState createState() => _NewReportState();
 }
@@ -65,35 +61,6 @@ class _NewReportState extends State<NewReport> {
       ],
     );
   }
-
-  // Widget _buildDateOfReportTextField() {
-  //   return Column(
-  //     crossAxisAlignment: CrossAxisAlignment.center,
-  //     children: <Widget>[
-  //       const SizedBox(height: 10.0),
-  //       Container(
-  //         alignment: Alignment.center,
-  //         height: 60.0,
-  //         child: TextFormField(
-  //           controller: dateOfReport,
-  //           keyboardType: TextInputType.text,
-  //           validator: (value) {
-  //             if (value == null || value.isEmpty) {
-  //               return "Please enter a date";
-  //             }
-  //             return null;
-  //           },
-  //           decoration: const InputDecoration(
-  //             contentPadding: EdgeInsets.symmetric(vertical: 15),
-  //             border: InputBorder.none,
-  //             hintText: 'Date:',
-  //             prefixIcon: Icon(Icons.date_range),
-  //           ),
-  //         ),
-  //       )
-  //     ],
-  //   );
-  // }
 
   Widget _buildseverityOfReportTextField() {
     return Column(
@@ -203,18 +170,13 @@ class _NewReportState extends State<NewReport> {
                         reportFiledOfReport,
                         context,
                         reportpads);
-                    //DateTime timeNow = DateTime.now();
-                    //String timeNow =
-                    //DateFormat('yyyy-MM-dd – kk:mm:ss').format(now);
+
                     var timeNow = new DateTime.now();
                     var formatter = new DateFormat('yyyy-MM-dd HH:mm:ss');
                     String formatted =
                         formatter.format(timeNow); // Save this to DB
                     var guardKey = 1;
-                    //print(formatted); // Output: 2021-05-11 08:52:45
-                    //print(formatter.parse(formatted)); // Convert back to DateTime object
 
-                    //reportFiledOfReport = 'y';
                     _submit(
                         guardKey.toString(),
                         formatted,
@@ -334,12 +296,6 @@ class _NewReportState extends State<NewReport> {
                   child: const Text('Delete'),
                   onPressed: () {
                     Navigator.pop(context);
-                    /* TESTING
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SecurityGuards(guard: null,)),
-                    );*/
                   },
                 )
               ],
@@ -377,8 +333,6 @@ class _NewReportState extends State<NewReport> {
 
     var jsonData = null;
 
-    ///print(data.entries);
-
     final response = await http.post(Uri.parse(url),
         headers: {
           // 'Content-Type': 'application/x-www-form-urlencoded',
@@ -408,7 +362,10 @@ class _NewReportState extends State<NewReport> {
           _isLoading = false;
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SecurityGuards(title: '',)),
+            MaterialPageRoute(
+                builder: (context) => SecurityGuards(
+                      title: '',
+                    )),
           );
           errorMessage = "";
         });

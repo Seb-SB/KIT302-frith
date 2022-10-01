@@ -36,9 +36,6 @@ class _EmergencyPhoneState extends State<EmergencyPhone> {
                 child: Text("Yes"),
                 onPressed: () {
                   launch(url);
-                  //Navigator.push(
-                  //   context,
-                  //    MaterialPageRoute(builder: (context) => const (SecLogin))); //go back to security login page SecLogin
                 },
               ),
             ],

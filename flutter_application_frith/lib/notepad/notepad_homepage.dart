@@ -44,9 +44,6 @@ class _NotepadPageState extends State<NotepadPage> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          ///print("----");
-                          ///print(widget.guard.getGuardValue().FirstName);
-                          //
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -78,9 +75,6 @@ class _NotepadPageState extends State<NotepadPage> {
                           " - " +
                           notepad.details.toString() +
                           " ..."),
-                      //leading: Image.network(image),
-
-                      //added this line, this should be familiar from last week:
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
@@ -91,13 +85,6 @@ class _NotepadPageState extends State<NotepadPage> {
                   },
                   itemCount: notepadModel.items.length),
             )
-            //ListTile(
-            //  title: Text("Notepad one"),
-            //subtitle: Text("one subtitle"),
-            //   onTap: () {
-
-            // },
-            //),
           ],
         ),
       ),

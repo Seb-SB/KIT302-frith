@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_frith/global_ip.dart' as globals;
 import 'package:http/http.dart' as http;
-// import 'package:mysql1/mysql1.dart';
 
 class Backup {
   String Firstname;
@@ -25,9 +24,8 @@ class Backup {
 class BackupModel extends ChangeNotifier {
   /// Internal, private state of the list.
   List<Backup> items = [];
-  //Normally a model would get from a database here, we are just hardcoding some data for this week
+  //Normally a model would get from a database here, we are just hardcoding some data for this prototype
   BackupModel() {
-   
     add(Backup(
         Firstname: "Guard1",
         Lastname: "Ron",
@@ -35,7 +33,6 @@ class BackupModel extends ChangeNotifier {
         Time: "NA",
         test: "",
         id: ""));
-    
   }
 
   void add(Backup item) {
@@ -51,6 +48,6 @@ class BackupModel extends ChangeNotifier {
   //update any listeners
   // This call tells the widgets that are listening to this model to rebuild.
   void update() {
-    // notifyListeners();
+    notifyListeners();
   }
 }

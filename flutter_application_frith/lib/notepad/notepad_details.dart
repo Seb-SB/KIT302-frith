@@ -49,19 +49,11 @@ class _NotepadDetailsState extends State<NotepadDetails> {
                               controller: titleController,
                               autofocus: true,
                             ),
-                            /*
-                            TextFormField(
-                              decoration:
-                                  const InputDecoration(labelText: "Date"),
-                              controller: dateController,
-                            ),
-                            */
                             TextFormField(
                               decoration:
                                   const InputDecoration(labelText: "Details"),
                               controller: detailsController,
                             ),
-
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: ElevatedButton.icon(
@@ -69,18 +61,12 @@ class _NotepadDetailsState extends State<NotepadDetails> {
                                     if (_formKey.currentState?.validate() ??
                                         false) {
                                       notepad.title = titleController.text;
-                                      //notepad.date = int.parse(dateController
-                                      //.text); //good code would validate these
                                       notepad.date = DateTime.now().toString();
-                                      notepad.details = detailsController
-                                          .text; //good code would validate these
-
+                                      notepad.details = detailsController.text;
                                       //update the model
-
                                       Provider.of<NotepadModel>(context,
                                               listen: false)
                                           .update();
-
                                       //return to previous screen
                                       Navigator.pop(context);
                                     }
@@ -88,8 +74,6 @@ class _NotepadDetailsState extends State<NotepadDetails> {
                                   icon: const Icon(Icons.save),
                                   label: const Text("Save Values")),
                             )
-
-                            //we will add form fields etc here
                           ],
                         ),
                       ),

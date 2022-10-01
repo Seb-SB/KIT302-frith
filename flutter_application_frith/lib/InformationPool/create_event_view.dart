@@ -42,7 +42,6 @@ class _CreateEventState extends State<CreateEvent> {
               height: 60.0,
               child: const Text("Select Severity Level:   "),
             ),
-            //const SizedBox(width: 20),
             Container(
               alignment: Alignment.center,
               height: 60.0,

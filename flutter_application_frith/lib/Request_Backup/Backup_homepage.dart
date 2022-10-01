@@ -123,7 +123,8 @@ class _BackupPageState extends State<BackupPage> {
                           style: TextStyle(fontSize: 26, color: Colors.white)),
                       onTap: () {
                         //print("Request Backup");
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => backup_list ()));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => backup_list()));
                       }),
                 ),
               ],
@@ -134,5 +135,4 @@ class _BackupPageState extends State<BackupPage> {
       ),
     );
   }
-
 }

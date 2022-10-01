@@ -44,7 +44,6 @@ class _SuccessfulResponsePageState extends State<SuccessfulResponsePage> {
                         size: 80,
                       ),
                       onTap: () {
-                        
                         //Navigator.of(context).push(MaterialPageRoute(builder: (s(title: "title")));
                       }),
                 ),

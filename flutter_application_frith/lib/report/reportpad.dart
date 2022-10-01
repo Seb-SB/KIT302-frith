@@ -19,7 +19,7 @@ class ReportpadModel extends ChangeNotifier {
   /// Internal, private state of the list.
   final List<Reportpad> reportItems = [];
 
-  //Normally a model would get from a database here, we are just hardcoding some data for this week
+  //Normally a model would get from a database here, we are just hardcoding some data for this prototype
   ReportpadModel() {
     add(Reportpad(
         specificArea: "lobby",

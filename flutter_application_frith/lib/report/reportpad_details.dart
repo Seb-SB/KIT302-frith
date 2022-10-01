@@ -66,11 +66,6 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                                   controller: specificAreaController,
                                   autofocus: true,
                                 ),
-                                // TextFormField(
-                                //   decoration:
-                                //       const InputDecoration(labelText: "Date"),
-                                //   controller: dateController,
-                                // ),
                                 TextFormField(
                                   decoration: const InputDecoration(
                                       labelText: "Severity"),
@@ -103,7 +98,7 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
                                           var formatter = new DateFormat(
                                               'yyyy-MM-dd HH:mm:ss');
                                           String formatted = formatter.format(
-                                              timeNow); // Save this to DB
+                                              timeNow); // Save this to database
                                           var guardKey = 1;
                                           _submit(
                                               guardKey.toString(),
@@ -213,7 +208,10 @@ class _ReportpadDetailsState extends State<ReportpadDetails> {
           _isLoading = false;
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SecurityGuards(title: '',)),
+            MaterialPageRoute(
+                builder: (context) => SecurityGuards(
+                      title: '',
+                    )),
           );
           errorMessage = "";
         });

@@ -11,7 +11,7 @@ class Guard {
 class GardListModel extends ChangeNotifier {
   final List<Guard> items = [];
 
-  //Normally a model would get from a database here, we are just hardcoding some data for this week
+  //Normally a model would get from a database here, we are just hardcoding some data for this prototype
   GardListModel() {
     add(Guard(title: "guard1", date: 2022, address: "address 1"));
     add(Guard(title: "guard2", date: 2022, address: "address 2"));

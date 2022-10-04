@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_frith/report/reportpad.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
@@ -9,7 +8,6 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_application_frith/global_ip.dart' as globals;
 import '../View/security_guards.dart';
-import 'reportpad.dart';
 
 GlobalKey<FormState> formkey = GlobalKey<FormState>();
 

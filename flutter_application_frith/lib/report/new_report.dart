@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_frith/report/Report_Draft_Page.dart';
 import 'package:flutter_application_frith/report/reportpad.dart';

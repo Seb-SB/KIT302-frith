@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter/src/material/bottom_navigation_bar.dart';
 import 'package:flutter_application_frith/View/business_login.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_application_frith/InformationPool/event_information_pool.dart';
 import 'package:flutter_application_frith/InformationPool/information_homepage.dart';
-import 'package:flutter_session_manager/flutter_session_manager.dart';
 
 class BusinessOwners extends StatefulWidget {
   const BusinessOwners({Key? key}) : super(key: key);

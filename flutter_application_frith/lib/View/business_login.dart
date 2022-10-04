@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_frith/InformationPool/event_information_pool.dart';
 import 'package:flutter_application_frith/View/home_page.dart';
 import 'signup_business.dart';
 import 'business_owners.dart';

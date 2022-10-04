@@ -1,8 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_application_frith/global_ip.dart' as globals;
-import 'package:http/http.dart' as http;
 
 class Backup {
   String Firstname;

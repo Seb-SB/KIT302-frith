@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_frith/Request_Backup/backup_list.dart';
-import 'package:provider/provider.dart';
-import '../View/security_guards.dart';
+
 import 'Backup.dart';
 import 'dart:convert';
 
 // import 'package:flutter/material.dart';
-import 'package:flutter_application_frith/global_ip.dart' as globals;
 import 'package:http/http.dart' as http;
 
 class BackupPage extends StatefulWidget {

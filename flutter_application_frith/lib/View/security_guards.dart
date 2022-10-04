@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter/src/material/bottom_navigation_bar.dart';
-import 'package:flutter_application_frith/Model/securityGuard.dart';
+
 import 'package:flutter_application_frith/View/security_login.dart';
-import 'package:flutter_application_frith/punchClock/newPunchClockHomepage.dart';
+import 'package:flutter_application_frith/shiftClock/newShiftClockHomepage.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Request_Backup/backup_list.dart';
-import '../emergency/emergencyphone.dart';
+
 import '../notepad/notepad_homepage.dart';
 import 'package:torch_light/torch_light.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import '../report/new_report.dart';
-import '../report/Report_Draft_Page.dart';
-import 'package:flutter_application_frith/Request_Backup/Backup_homepage.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:flutter_application_frith/global_ip.dart' as globals;
@@ -84,7 +80,7 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                 InkWell(
                   onTap: () {
                     _pushdata(
-                        "test", "currunt location", "2022-09-27 10:00:22");
+                        "test", "current location", "2022-09-27 10:00:22");
                     Navigator.pop(context);
                   },
                   child: Container(
@@ -287,7 +283,7 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const NewPunchClockPage(),
+                            builder: (context) => const NewShiftClockPage(),
                           ));
                     },
                     child: Container(

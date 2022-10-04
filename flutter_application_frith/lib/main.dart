@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_frith/InformationPool/event_information_pool.dart';
-import 'package:flutter_application_frith/InformationPool/information_homepage.dart';
 import 'package:flutter_application_frith/View/home_page.dart';
-import 'package:flutter_application_frith/View/security_login.dart';
-import 'package:flutter_application_frith/View/business_login.dart';
 import 'package:flutter_application_frith/notepad/notepad.dart';
-import 'package:flutter_application_frith/punchClock/businessDetail.dart';
-import 'package:flutter_application_frith/punchClock/businessModel.dart';
-import 'package:flutter_application_frith/punchClock/guard_list.dart';
-import 'package:flutter_application_frith/punchClock/punchClock.dart';
+import 'package:flutter_application_frith/shiftClock/businessModel.dart';
+import 'package:flutter_application_frith/shiftClock/guard_list.dart';
 import 'package:flutter_application_frith/report/reportpad.dart';
 import 'package:provider/provider.dart';
 import 'Request_Backup/Backup.dart';

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'signup_business.dart';
-import 'business_owners.dart';
 import 'dart:convert';
-import 'package:flutter_application_frith/Model/business_owner.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application_frith/View/business_login.dart';
 import 'package:flutter_application_frith/global_ip.dart' as globals;

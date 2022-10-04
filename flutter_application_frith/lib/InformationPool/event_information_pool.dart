@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'information_homepage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_application_frith/global_ip.dart' as globals;

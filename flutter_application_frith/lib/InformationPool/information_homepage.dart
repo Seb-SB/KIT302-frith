@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_frith/InformationPool/create_event_view.dart';
 import 'package:flutter_application_frith/InformationPool/event_details.dart';
 import 'package:flutter_application_frith/View/business_owners.dart';
-import 'package:provider/provider.dart';
 import 'event_information_pool.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:http/http.dart' as http;

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_application_frith/InformationPool/event_information_pool.dart';
-import 'package:provider/provider.dart';
 
 class EventDetailsPanel extends StatefulWidget {
   const EventDetailsPanel({Key? key, required this.event}) : super(key: key);

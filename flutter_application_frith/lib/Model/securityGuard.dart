@@ -1,7 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-
 //SecurityGuard securityGuardModelFromMap(String str) =>
 //SecurityGuard.fromMap(json.decode(str));
 ///SecurityGuard guard = SecurityGuard.fromJSON(json);

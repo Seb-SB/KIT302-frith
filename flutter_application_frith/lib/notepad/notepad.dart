@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'notepad_details.dart';
-import 'notepad_homepage.dart';
 
 class Notepad {
   String title;

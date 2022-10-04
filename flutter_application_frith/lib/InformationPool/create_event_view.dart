@@ -1,13 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_frith/InformationPool/event_details.dart';
 import 'package:flutter_application_frith/InformationPool/information_homepage.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-import 'event_information_pool.dart';
 import 'package:flutter_session_manager/flutter_session_manager.dart';
 import 'package:http/http.dart' as http;
-import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter_application_frith/global_ip.dart' as globals;
 
 class CreateEvent extends StatefulWidget {

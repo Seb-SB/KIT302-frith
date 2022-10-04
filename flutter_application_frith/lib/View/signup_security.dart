@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:flutter_application_frith/Model/securityGuard.dart';
 import 'package:flutter_application_frith/View/security_login.dart';
-import 'signup_security.dart';
-import 'security_guards.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application_frith/global_ip.dart' as globals;
 

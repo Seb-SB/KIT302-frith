@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'notepad.dart';
-import 'notepad_homepage.dart';
 
 class NotepadDetails extends StatefulWidget {
   const NotepadDetails({Key? key, required this.id}) : super(key: key);

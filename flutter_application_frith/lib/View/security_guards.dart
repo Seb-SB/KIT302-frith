@@ -207,7 +207,6 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                             ));
                       },
                       child: Container(
-                        // alignment: Alignment.centerLeft,
                         color: Colors.blueAccent,
                         width: 150,
                         height: 100,
@@ -225,7 +224,6 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                       launch('tel:000');
                     },
                     child: Container(
-                        //alignment: Alignment.centerLeft,
                         color: Colors.blueAccent,
                         width: 140,
                         height: 90,
@@ -287,8 +285,6 @@ class _SecurityGuardsState extends State<SecurityGuards> {
                           ));
                     },
                     child: Container(
-                        //alignment: Alignment.centerRight,
-
                         width: 140,
                         height: 90,
                         color: Colors.blueAccent,
@@ -406,7 +402,6 @@ class _SecurityGuardsState extends State<SecurityGuards> {
     );
   }
 
-  //EFFY ADDED
   //send username to request backup db
   Future<void> _pushdata(String name, String location, String time) async {
     var url = 'http://' + globals.GLOBAL_IP + '/frith/connection/backup.php';

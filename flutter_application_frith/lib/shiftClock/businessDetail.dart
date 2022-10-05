@@ -92,45 +92,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                       },
                     ),
                   ),
-                  //Listview version of Locations
-                  /*Center(
-                      child:
-                      Text('Location',
-                        style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    Container(
-                      height: MediaQuery.of(context).size.height/5,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.red.withOpacity(0),
-                        ),
-                      ),
-                      child: ListView.builder(
-                          itemBuilder: (_, index) {
-                            return ListTile(
-                              title: Text(location[index]['AreaName']),
-                              selected: index == _selectedIndex,
-                              onTap: () {
-                                setState(() {
-                                  _isStartAble = false;
-                                  _isEndAble = false;
-                                  selectedListValue = location[index]['AreaID'].toString();
-                                  selectedArea = data.where((item) => (item['areaID'] as String) == selectedListValue.toString()).toList();
-                                  print(selectedListValue.toString());
-                                  _selectedIndex = index;
-                                  if(selectedArea.isEmpty){
-                                    _isStartAble = true;
-                                  }else{
-                                    _isEndAble = true;
-                                  }
-                                    });
-                                  },
-                            );
-                          },
-                          itemCount: location.length),
-                    ),*/
+                  
                   Container(
                     height: MediaQuery.of(context).size.height / 5,
                     child: DropdownButton<String>(
@@ -169,33 +131,7 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                     ),
                   ),
 
-                  /*Container(
-                      width: double.infinity,
-                      height: MediaQuery.of(context).size.height/5,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey,
-                          width: 5,
-                        ),
-                      ),
-                        child: ListView.builder(
-                            itemBuilder: (_, index) {
-                              return ListTile(
-                                selected: selectedGuard == index + 1,
-                                title: Text(selectedArea[index]['FirstName'] + ' ' + selectedArea[index]['LastName']),
-                                onTap: () {
-                                  setState(() {
-                                    selectedGuard = index + 1;
-                                    isStartAble(selectedArea[selectedGuard - 1]['Status']);
-                                    isEndAble(selectedArea[selectedGuard - 1]['Status']);
-                                  });
-                                  print(selectedArea[selectedGuard - 1]['Status']);
-                                },
-                              );
-                            },
-                            itemCount: selectedArea.length)
-                    ),*/
+                  
                   Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -216,6 +152,9 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                             height: MediaQuery.of(context).size.height / 6,
                             child: ElevatedButton(
                                 onPressed: _isEndAble ? endShiftImpl : null,
+                                style: ElevatedButton.styleFrom( 
+                                  primary: Colors.red),
+                                )
                                 child: new Text(
                                   'End Shift',
                                   style: new TextStyle(fontSize: 20.0),

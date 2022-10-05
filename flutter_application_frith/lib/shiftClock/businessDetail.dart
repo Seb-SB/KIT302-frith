@@ -154,11 +154,12 @@ class _BusinessDetailsState extends State<BusinessDetails> {
                                 onPressed: _isEndAble ? endShiftImpl : null,
                                 style: ElevatedButton.styleFrom( 
                                   primary: Colors.red),
-                                )
                                 child: new Text(
-                                  'End Shift',
-                                  style: new TextStyle(fontSize: 20.0),
-                                ))),
+                                    'End Shift',
+                                    style: new TextStyle(fontSize: 20.0),
+                                  )
+                                )
+                                ),
                       ])
                 ])));
   }

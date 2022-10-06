@@ -46,35 +46,6 @@ class _NewNoteState extends State<NewNote> {
       ],
     );
   }
-  /*
-  Widget _buildDateOfNoteTextField() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const SizedBox(height: 10.0),
-        Container(
-          alignment: Alignment.center,
-          height: 60.0,
-          child: TextFormField(
-            controller: dateOfNote,
-            keyboardType: TextInputType.datetime,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "Please enter a date";
-              }
-              return null;
-            },
-            decoration: const InputDecoration(
-              contentPadding: EdgeInsets.symmetric(vertical: 15),
-              border: InputBorder.none,
-              hintText: 'Date',
-              prefixIcon: Icon(Icons.date_range),
-            ),
-          ),
-        )
-      ],
-    );
-  }*/
 
   Widget _buildDetailsOfNoteTextField() {
     return Column(
@@ -167,7 +138,6 @@ class _NewNoteState extends State<NewNote> {
               key: formkey,
               child: Column(children: <Widget>[
                 _buildtitleOfNoteTextField(),
-                //_buildDateOfNoteTextField(),
                 _buildDetailsOfNoteTextField(),
                 _onSubmit(context, notepads)
               ]),

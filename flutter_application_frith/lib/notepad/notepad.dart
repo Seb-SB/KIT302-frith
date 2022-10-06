@@ -15,25 +15,17 @@ class NotepadModel extends ChangeNotifier {
   //Normally a model would get from a database here, we are just hardcoding some data for this prototype
   NotepadModel() {
     add(Notepad(
-        title: "Notepad1",
-        date: "2021-05-23 12:00:02.000",
-        details: "The first note is ..."));
+        title: "Sunday Shift incident",
+        date: "2021-05-23 08:00:02.000",
+        details: "Talk to boss about shift swap"));
     add(Notepad(
-        title: "Notepad2",
-        date: "2021-07-25 12:00:02.000",
-        details: "The second note is ..."));
+        title: "Bar fight Friday",
+        date: "2021-09-25 02:45:09.000",
+        details: "2 young males, no contact, verbal assault"));
     add(Notepad(
-        title: "Notepad3",
-        date: "2021-07-20 12:00:02.000",
-        details: "The third note is ..."));
-    add(Notepad(
-        title: "Notepad4",
-        date: "2021-04-23 12:00:02.000",
-        details: "The 4th note is ..."));
-    add(Notepad(
-        title: "Notepad5",
-        date: "2021-09-23 12:00:02.000",
-        details: "The 5th note is ..."));
+        title: "Stolen Vodka",
+        date: "2021-11-20 12:00:02.000",
+        details: "review security camera tape at main bar for stolen vodka"));
   }
 
   void add(Notepad item) {

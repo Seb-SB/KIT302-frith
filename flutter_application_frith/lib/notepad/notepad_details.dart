@@ -5,7 +5,7 @@ import 'notepad.dart';
 
 class NotepadDetails extends StatefulWidget {
   const NotepadDetails({Key? key, required this.id}) : super(key: key);
-  final int id; //Add this line
+  final int id;
   @override
   _NotepadDetailsState createState() => _NotepadDetailsState();
 }

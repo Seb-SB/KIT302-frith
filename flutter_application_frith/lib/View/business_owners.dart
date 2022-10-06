@@ -14,7 +14,7 @@ class _BusinessOwnersState extends State<BusinessOwners> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Business Owner"),
+          title: const Text("Business Owner"),
           actions: [_popupMenuButton(context)],
           centerTitle: true,
         ),
@@ -38,7 +38,7 @@ class _BusinessOwnersState extends State<BusinessOwners> {
                           color: Colors.blueAccent,
                           width: 140,
                           height: 90,
-                          child: Icon(
+                          child: const Icon(
                             //change informationpoolpool icon
                             Icons.insert_comment,
                             color: Colors.white,
@@ -46,23 +46,14 @@ class _BusinessOwnersState extends State<BusinessOwners> {
                           ))),
                 ],
               ),
-              SizedBox(height: 60),
+              const SizedBox(height: 10),
               Row(
-                //"Business Event",
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  const SizedBox(width: 125),
                   Container(
-                    //alignment: Alignment.centerLeft,
-                    color: Colors.blueAccent,
-                    width: 150,
-                    height: 100,
-                    child: Icon(
-                      //change business event icon
-                      Icons.event_available,
-                      color: Colors.white,
-                      size: 80,
-                    ),
-                  ),
+                      width: 150,
+                      alignment: Alignment.center,
+                      child: const Text('EVENT LOG')),
                 ],
               ),
             ],
@@ -76,6 +67,7 @@ class _BusinessOwnersState extends State<BusinessOwners> {
         PopupMenuItem(
           onTap: () {
             //
+            // ignore: avoid_print
             print("Logout");
           },
           child: Row(
@@ -87,16 +79,16 @@ class _BusinessOwnersState extends State<BusinessOwners> {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: Text("Notice"),
-                            content:
-                                Text("Are you sure you would like to Logout?"),
+                            title: const Text("Notice"),
+                            content: const Text(
+                                "Are you sure you would like to Logout?"),
                             actions: <Widget>[
                               TextButton(
-                                child: Text("No"),
+                                child: const Text("No"),
                                 onPressed: () => Navigator.of(context).pop(),
                               ),
                               TextButton(
-                                child: Text("Yes"),
+                                child: const Text("Yes"),
                                 onPressed: () {
                                   Navigator.pushReplacement(
                                       context,
@@ -109,7 +101,7 @@ class _BusinessOwnersState extends State<BusinessOwners> {
                           );
                         });
                   },
-                  child: new Text('Logout')),
+                  child: const Text('Logout')),
             ],
           ),
           //value: 'logout',

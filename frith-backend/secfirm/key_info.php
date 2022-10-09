@@ -9,13 +9,14 @@ $sql = "select * from accountsecurityguard where GuardKey=".$userid;
 $result = mysqli_query($conn,$sql);
 while( $row = mysqli_fetch_array($result) ){
         //checks whether the key is assigned to a security guard
-        if(empty($result)) {
+        if(!$result) {
 
             ?>
             <table border='0' width='100%'>
                 <tr>
                     <td>
-                        <h1>No assigned guard</h1>
+                        <label for="fname">Assigned Guard: </label>
+                        <p id="fname" style="display:inline" > No assigned guard</p>
                     </td>
                 </tr>
             </table>

@@ -9,6 +9,7 @@ $error = "";
 
 $email = stripcslashes($email);
 $password = stripcslashes($password);
+$password = md5($password, $binary = false);
 
 
 $sql = "select * from accountsecurityfirm where EmailAddress = '$email' and Password = '$password'";
